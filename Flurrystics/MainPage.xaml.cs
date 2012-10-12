@@ -48,6 +48,7 @@ namespace Flurrystics
                        };
 
             progressBar1.Visibility = System.Windows.Visibility.Collapsed;
+            progressBar1.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
 
             MainListBox.ItemsSource = data;
 

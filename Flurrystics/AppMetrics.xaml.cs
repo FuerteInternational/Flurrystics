@@ -32,7 +32,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("apikey", out apikey);
         }
 
-        private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart)
+        private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now);
             string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-60));
@@ -55,7 +55,9 @@ namespace Flurrystics
                                Label = (string)query.Attribute("date")
                            };
 
-                // progressBar1.Visibility = System.Windows.Visibility.Collapsed;
+                progressBar.Visibility = System.Windows.Visibility.Collapsed;
+                progressBar.IsIndeterminate = false;
+
                 targetChart.DataSource = data;
                 // MainListBox.ItemsSource = data;
             });
@@ -71,28 +73,28 @@ namespace Flurrystics
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
-                    LoadUpXML("ActiveUsers", chart1);
+                    LoadUpXML("ActiveUsers", chart1, progressBar1);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    LoadUpXML("ActiveUsersByWeek", chart2);
+                    LoadUpXML("ActiveUsersByWeek", chart2, progressBar2);
                     break;
                 case 2:     //ActiveUsers
-                    LoadUpXML("ActiveUsersByMonth", chart3);
+                    LoadUpXML("ActiveUsersByMonth", chart3, progressBar3);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    LoadUpXML("NewUsers", chart4);
+                    LoadUpXML("NewUsers", chart4, progressBar4);
                     break;
                 case 4:     //ActiveUsers
-                    LoadUpXML("MedianSessionLength", chart5);
+                    LoadUpXML("MedianSessionLength", chart5, progressBar5);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    LoadUpXML("AvgSessionLength", chart6);
+                    LoadUpXML("AvgSessionLength", chart6, progressBar6);
                     break;
                 case 6:     //ActiveUsers
-                    LoadUpXML("Sessions", chart7);
+                    LoadUpXML("Sessions", chart7, progressBar7);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    LoadUpXML("RetainedUsers", chart8);
+                    LoadUpXML("RetainedUsers", chart8, progressBar8);
                     break;
 
             } // switch

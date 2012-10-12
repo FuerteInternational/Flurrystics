@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:amq="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
@@ -42,6 +43,16 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar1"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
+
                 </Grid>
             </controls:PivotItem>
 
@@ -60,6 +71,16 @@
                             <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
+
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar2"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
 
                 </Grid>
 
@@ -81,6 +102,16 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar3"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
+
                 </Grid>
             </controls:PivotItem>
 
@@ -99,6 +130,16 @@
                             <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
+
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar4"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
 
                 </Grid>
 
@@ -120,6 +161,16 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar5"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
+
                 </Grid>
             </controls:PivotItem>
 
@@ -138,6 +189,16 @@
                             <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
+
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar6"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
 
                 </Grid>
 
@@ -159,6 +220,16 @@
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar7"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
+
                 </Grid>
             </controls:PivotItem>
 
@@ -177,6 +248,16 @@
                             <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
+
+                    <toolkit:PerformanceProgressBar 
+                        x:Name="progressBar8"
+                        Width="400"
+                        Height="40"
+                        IsIndeterminate="True" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Visibility="Visible" 
+                        />
 
                 </Grid>
 
