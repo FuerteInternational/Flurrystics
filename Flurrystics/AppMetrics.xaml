@@ -23,7 +23,7 @@
 
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="50" Margin="0,50,0,0" />
+                    <TextBlock Text="{Binding}" FontSize="50" Margin="0,40,0,0" />
                 </DataTemplate>
             </controls:Pivot.HeaderTemplate>
 

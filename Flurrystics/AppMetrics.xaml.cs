@@ -20,6 +20,7 @@ namespace Flurrystics
     {
 
         string apikey = ""; // initial apikey of the app
+        string appName = ""; // appName
         WebClient w;
 
         public PivotPage1()
@@ -32,6 +33,9 @@ namespace Flurrystics
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {          
             NavigationContext.QueryString.TryGetValue("apikey", out apikey);
+            NavigationContext.QueryString.TryGetValue("appName", out appName);
+            MainPivot.Title = "FLURRYSTICS - " + appName; 
+
         }
 
         private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
