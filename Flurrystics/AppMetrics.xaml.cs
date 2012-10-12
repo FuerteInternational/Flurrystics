@@ -20,10 +20,12 @@ namespace Flurrystics
     {
 
         string apikey = ""; // initial apikey of the app
+        WebClient w;
 
         public PivotPage1()
         {
             InitializeComponent();
+            w = new WebClient();
         }
 
                 // When page is navigated to set data context to selected item in list
@@ -34,10 +36,10 @@ namespace Flurrystics
 
         private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
-            string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now);
-            string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-60));
+            string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
+            string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
-            var w = new WebClient();
+            
 
             Observable
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")

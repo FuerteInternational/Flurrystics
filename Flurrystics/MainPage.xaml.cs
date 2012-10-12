@@ -25,10 +25,8 @@ namespace Flurrystics
 
             // Set the data context of the listbox control to the sample data
             //DataContext = App.ViewModel;
-            //this.Loaded += new RoutedEventHandler(MainPage_Loaded);
-
+            //this.Loaded += new RoutedEventHandler(MainPage_Loaded)
             var w = new WebClient();
-
             Observable
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
             .Subscribe(r =>
@@ -53,21 +51,16 @@ namespace Flurrystics
             MainListBox.ItemsSource = data;
 
              });
-            w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
-            w.DownloadStringAsync(
-                new Uri("http://api.flurry.com/appInfo/getAllApplications?apiAccessCode=DJBUBP9NE5YBQB5CQKH3")
-                );
 
-        }
+            if (Util.InternetIsAvailable()) // if Internet is available - go download and process our feed
+            {           
+                w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
+                w.DownloadStringAsync(
+                    new Uri("http://api.flurry.com/appInfo/getAllApplications?apiAccessCode=DJBUBP9NE5YBQB5CQKH3")
+                    );
 
-        private bool InternetIsAvailable()
-        {
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                MessageBox.Show("Internet connection not available. Please try again later.");
-                return false;
             }
-            return true;
+
         }
 
         // Handle selection changed on ListBox
