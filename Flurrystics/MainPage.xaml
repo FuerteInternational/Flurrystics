@@ -57,9 +57,9 @@
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.feature.settings.rest.png" Text="Settings"/>
+            <shell:ApplicationBarIconButton x:Name="SettingsOption" Click="SettingsOption_Click" IconUri="/Images/appbar.feature.settings.rest.png" Text="Settings" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="About"/>
+                <shell:ApplicationBarMenuItem Text="About" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

@@ -81,13 +81,20 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)MainListBox.Items[MainListBox.SelectedIndex];
-            NavigationService.Navigate(new Uri("/AppMetrics.xaml?apikey=" + selected.LineFour + " &appName=" + selected.LineOne , UriKind.Relative));
+            NavigationService.Navigate(new Uri("/AppMetrics.xaml?apikey=" + selected.LineFour + " &appName=" + selected.LineOne, UriKind.Relative));
                 
                 // .SelectedIndex, UriKind.Relative));
 
             // Reset selected index to -1 (no selection)
             MainListBox.SelectedIndex = -1;
         }
+
+        private void SettingsOption_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+            //Do work for your application here.
+        }
+        
 
         // Load data for the ViewModel Items
         /*
