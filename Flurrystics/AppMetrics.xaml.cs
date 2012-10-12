@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Reactive;
 using System.Xml.Linq;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Flurrystics
 {
@@ -21,12 +23,11 @@ namespace Flurrystics
 
         string apikey = ""; // initial apikey of the app
         string appName = ""; // appName
-        WebClient w;
+        bool tryAgain = false;
 
         public PivotPage1()
         {
             InitializeComponent();
-            w = new WebClient();
         }
 
                 // When page is navigated to set data context to selected item in list
@@ -38,35 +39,59 @@ namespace Flurrystics
 
         }
 
+        private void Perform(Action myMethod, int delayInMilliseconds)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+
+            worker.DoWork += (s, e) => Thread.Sleep(delayInMilliseconds);
+
+            worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
+
+            worker.RunWorkerAsync();
+        }
+
         private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
             string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
-            
 
-            Observable
-            .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
-            .Subscribe(r =>
-            {
+            WebClient w = new WebClient();
 
-                XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
-                //XDocument loadedData = XDocument.Load("getAllApplications.xml");
+                Observable
+                .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
+                .Subscribe(r =>
+                {
+                    try
+                    {
+                        XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
+                        //XDocument loadedData = XDocument.Load("getAllApplications.xml");
 
-                // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
-                var data = from query in loadedData.Descendants("day")
-                           select new ChartDataPoint
-                           {
-                               Value = (double)query.Attribute("value"),
-                               Label = (string)query.Attribute("date")
-                           };
+                    // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
+                    var data = from query in loadedData.Descendants("day")
+                               select new ChartDataPoint
+                               {
+                                   Value = (double)query.Attribute("value"),
+                                   Label = (string)query.Attribute("date")
+                               };
 
-                progressBar.Visibility = System.Windows.Visibility.Collapsed;
-                progressBar.IsIndeterminate = false;
+                    progressBar.Visibility = System.Windows.Visibility.Collapsed;
+                    progressBar.IsIndeterminate = false;
 
-                targetChart.DataSource = data;
-                // MainListBox.ItemsSource = data;
-            });
+                    targetChart.DataSource = data;
+                    // MainListBox.ItemsSource = data;
+
+                    }
+                        catch (NotSupportedException e) // it's not XML - probably API overload
+                    {
+                        //MessageBox.Show("Flurry API overload, please try again later.");
+                        tryAgain = true;
+                    }
+
+                });
+
+
+
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
             w.DownloadStringAsync(
                 new Uri("http://api.flurry.com/appMetrics/"+metrics+"?apiAccessCode=DJBUBP9NE5YBQB5CQKH3&apiKey=" + apikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
@@ -79,34 +104,32 @@ namespace Flurrystics
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
-                    LoadUpXML("ActiveUsers", chart1, progressBar1);
+                    this.Perform(() => LoadUpXML("ActiveUsers", chart1, progressBar1), 1000);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    LoadUpXML("ActiveUsersByWeek", chart2, progressBar2);
+                    this.Perform(() => LoadUpXML("ActiveUsersByWeek", chart2, progressBar2), 1000);
                     break;
                 case 2:     //ActiveUsers
-                    LoadUpXML("ActiveUsersByMonth", chart3, progressBar3);
+                    this.Perform(() => LoadUpXML("ActiveUsersByMonth", chart3, progressBar3), 1000);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    LoadUpXML("NewUsers", chart4, progressBar4);
+                    this.Perform(() => LoadUpXML("NewUsers", chart4, progressBar4), 1000);
                     break;
                 case 4:     //ActiveUsers
-                    LoadUpXML("MedianSessionLength", chart5, progressBar5);
+                    this.Perform(() => LoadUpXML("MedianSessionLength", chart5, progressBar5), 1000);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    LoadUpXML("AvgSessionLength", chart6, progressBar6);
+                    this.Perform(() => LoadUpXML("AvgSessionLength", chart6, progressBar6), 1000);
                     break;
                 case 6:     //ActiveUsers
-                    LoadUpXML("Sessions", chart7, progressBar7);
+                    this.Perform(() => LoadUpXML("Sessions", chart7, progressBar7), 1000);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    LoadUpXML("RetainedUsers", chart8, progressBar8);
+                    this.Perform(() => LoadUpXML("RetainedUsers", chart8, progressBar8), 1000);
                     break;
 
             } // switch
         }
-
-
 
     } // class
 

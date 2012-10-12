@@ -32,23 +32,32 @@ namespace Flurrystics
             .Subscribe(r =>
              {
 
-            XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
-            //XDocument loadedData = XDocument.Load("getAllApplications.xml");
+                 try
+                 {
 
-            PageTitle.Text = (string)loadedData.Root.Attribute("companyName");
+                     XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
+                     //XDocument loadedData = XDocument.Load("getAllApplications.xml");
 
-            var data = from query in loadedData.Descendants("application")
-                       select new AppViewModel
-                       {
-                           LineOne = (string)query.Attribute("name"),
-                           LineTwo = (string)query.Attribute("platform") + ", created: " + (string)query.Attribute("createdDate"),
-                           LineFour = (string)query.Attribute("apiKey")
-                       };
+                     PageTitle.Text = (string)loadedData.Root.Attribute("companyName");
 
-            progressBar1.Visibility = System.Windows.Visibility.Collapsed;
-            progressBar1.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
+                     var data = from query in loadedData.Descendants("application")
+                                select new AppViewModel
+                                {
+                                    LineOne = (string)query.Attribute("name"),
+                                    LineTwo = (string)query.Attribute("platform") + ", created: " + (string)query.Attribute("createdDate"),
+                                    LineFour = (string)query.Attribute("apiKey")
+                                };
 
-            MainListBox.ItemsSource = data;
+                     progressBar1.Visibility = System.Windows.Visibility.Collapsed;
+                     progressBar1.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
+
+                     MainListBox.ItemsSource = data;
+
+                 }
+                 catch (NotSupportedException e)
+                 {
+                     MessageBox.Show("Flurry API overload, please try again later.");
+                 }
 
              });
 
