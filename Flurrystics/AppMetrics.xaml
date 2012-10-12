@@ -50,8 +50,7 @@
                         IsIndeterminate="True" 
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                        Visibility="Visible" 
-                        />
+                        Visibility="Visible" />
 
                 </Grid>
             </controls:PivotItem>
