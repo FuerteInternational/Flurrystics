@@ -25,7 +25,7 @@ namespace Flurrystics
         string apiKey;
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
-        string[] EventMetrics = { "usersLastWeek", "usersLastMonth", "usersLastDay", "totalSessions", "totalCount", "eventName", "avgUsersLastWeek", "avgUsersLastMonth", "avgUsersLastDay" };
+        string[] EventMetrics = { "usersLastDay", "usersLastWeek", "usersLastMonth", "avgUsersLastDay", "avgUsersLastWeek", "avgUsersLastMonth", "totalSessions", "totalCount" };
 
         public PivotPage1()
         {
