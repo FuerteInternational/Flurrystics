@@ -15,6 +15,8 @@ using Microsoft.Phone.Reactive;
 using System.Xml.Linq;
 using System.IO.IsolatedStorage;
 using System.Windows.Navigation;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Flurrystics
 {
@@ -22,6 +24,7 @@ namespace Flurrystics
     {
 
         string apiKey;
+        long lastRequest = 0; // timestamp of lastrequest
 
         // Constructor
         public MainPage()
@@ -43,6 +46,12 @@ namespace Flurrystics
             // Set the data context of the listbox control to the sample data
             //DataContext = App.ViewModel;
             //this.Loaded += new RoutedEventHandler(MainPage_Loaded)
+            this.Perform(() => LoadUpXML(), 1000);
+        }
+
+        private void LoadUpXML()
+        {
+            lastRequest = Util.getCurrentTimestamp();
             var w = new WebClient();
             Observable
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
@@ -93,6 +102,25 @@ namespace Flurrystics
 
             }
         }
+
+        private void Perform(Action myMethod, int delayInMilliseconds)
+        {
+
+            long diff = Util.getCurrentTimestamp() - lastRequest;
+            int throttledDelay = 0;
+
+            if (diff < delayInMilliseconds) // if delay between requests is less then second then count time we need to wait before firing up next request
+            {
+                throttledDelay = (int)diff;
+            }
+
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.DoWork += (s, e) => Thread.Sleep(throttledDelay);
+            worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
+            worker.RunWorkerAsync();
+
+        }
+
 
         // Handle selection changed on ListBox
         private void MainListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

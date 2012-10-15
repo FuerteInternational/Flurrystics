@@ -105,8 +105,6 @@ namespace Flurrystics
 
                 });
 
-
-
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
             w.DownloadStringAsync(
                 new Uri("http://api.flurry.com/appMetrics/"+metrics+"?apiAccessCode="+apiKey+"&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
