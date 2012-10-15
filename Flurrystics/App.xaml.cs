@@ -18,6 +18,8 @@ namespace Flurrystics
     public partial class App : Application
     {
 
+        public static long lastRequest = 0; // timestamp of lastrequest through the app
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>

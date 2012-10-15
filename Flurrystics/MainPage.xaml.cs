@@ -24,7 +24,6 @@ namespace Flurrystics
     {
 
         string apiKey;
-        long lastRequest = 0; // timestamp of lastrequest
 
         // Constructor
         public MainPage()
@@ -51,7 +50,7 @@ namespace Flurrystics
 
         private void LoadUpXML()
         {
-            lastRequest = Util.getCurrentTimestamp();
+            App.lastRequest = Util.getCurrentTimestamp();
             var w = new WebClient();
             Observable
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
@@ -106,7 +105,7 @@ namespace Flurrystics
         private void Perform(Action myMethod, int delayInMilliseconds)
         {
 
-            long diff = Util.getCurrentTimestamp() - lastRequest;
+            long diff = Util.getCurrentTimestamp() - App.lastRequest;
             int throttledDelay = 0;
 
             if (diff < delayInMilliseconds) // if delay between requests is less then second then count time we need to wait before firing up next request
