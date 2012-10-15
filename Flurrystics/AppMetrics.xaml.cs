@@ -25,6 +25,7 @@ namespace Flurrystics
         string apiKey;
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
+        string[] EventMetrics = { "usersLastWeek", "usersLastMonth", "usersLastDay", "totalSessions", "totalCount", "eventName", "avgUsersLastWeek", "avgUsersLastMonth", "avgUsersLastDay" };
 
         public PivotPage1()
         {
@@ -145,11 +146,11 @@ namespace Flurrystics
 
                     // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
                     var data = from query in loadedData.Descendants("event")
-                               orderby (int)query.Attribute("totalCount") descending
+                               orderby (int)query.Attribute(EventMetrics[EventsMetricsListPicker.SelectedIndex]) descending
                                select new AppViewModel
                                {
                                    LineOne = (string)query.Attribute("eventName"),
-                                   LineTwo = (string)query.Attribute("totalCount")
+                                   LineTwo = (string)query.Attribute(EventMetrics[EventsMetricsListPicker.SelectedIndex])
                                };
 
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;
@@ -209,6 +210,18 @@ namespace Flurrystics
         private void EventsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private int count = 1;
+
+        private void EventsMetricsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        { // change event metrics
+            if (count > 1) // do not execute for the first time
+            {
+                progressBar9.Visibility = System.Windows.Visibility.Visible;
+                this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
+            }
+            else count=2;
         }
 
     } // class
