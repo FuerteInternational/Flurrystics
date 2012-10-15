@@ -16,6 +16,7 @@ using System.Xml.Linq;
 using System.ComponentModel;
 using System.Threading;
 using System.IO.IsolatedStorage;
+using System.Collections.ObjectModel;
 
 namespace Flurrystics
 {
@@ -28,6 +29,19 @@ namespace Flurrystics
         public PivotPage1()
         {
             InitializeComponent();
+
+            var EventMetricsNames = new ObservableCollection<AppViewModel>();
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Day" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Week" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Month" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Avg Users Last Day" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Avg Users Last Week" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Avg Users Last Month" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Total Counts" });
+            EventMetricsNames.Add(new AppViewModel { LineOne = "Total Sessions" });
+
+            EventsMetricsListPicker.ItemsSource = EventMetricsNames;
+
         }
 
         // When page is navigated to set data context to selected item in list
@@ -44,6 +58,8 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             MainPivot.Title = "FLURRYSTICS - " + appName; 
+
+
         }
 
         private void Perform(Action myMethod, int delayInMilliseconds)
@@ -129,6 +145,7 @@ namespace Flurrystics
 
                     // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
                     var data = from query in loadedData.Descendants("event")
+                               orderby (int)query.Attribute("totalCount") descending
                                select new AppViewModel
                                {
                                    LineOne = (string)query.Attribute("eventName"),
@@ -201,5 +218,15 @@ namespace Flurrystics
         public string Label { get; set; }
         public double Value { get; set; }
     }
+
+   public class EventMetricsName
+   {
+       public string MetricsName
+       {
+           get;
+           set;
+       }
+
+   }
 
 }

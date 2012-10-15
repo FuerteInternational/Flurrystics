@@ -9,12 +9,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:amq="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    xmlns:local="clr-namespace:Flurrystics"
+    local:TiltEffect.IsTiltEnabled="True"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -268,7 +269,24 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel9" Grid.Row="1" Margin="12,0,12,0">
 
-                    <toolkit:ListPicker>
+                    <toolkit:ListPicker x:Name="EventsMetricsListPicker"
+                                        SelectedIndex="1"
+                                        Header="Select Event Metric"
+                                        >
+                        
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LineOne}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                        
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LineOne}" FontSize="40" Margin="0,0,0,12" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
+
+                        <!--
                         <toolkit:ListPickerItem Content="Users Last Day" />
                         <toolkit:ListPickerItem Content="Users Last Week" />
                         <toolkit:ListPickerItem Content="Users Last Month" />
@@ -277,15 +295,17 @@
                         <toolkit:ListPickerItem Content="Avg Users Last Month" />
                         <toolkit:ListPickerItem Content="Total Counts" />
                         <toolkit:ListPickerItem Content="Total Sessions" />
+                        -->
+                        
                     </toolkit:ListPicker>
 
-                    <ListBox x:Name="EventsListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="EventsListBox_SelectionChanged">
+                    <ListBox x:Name="EventsListBox" Margin="0,127,-12,0" ItemsSource="{Binding Items}" SelectionChanged="EventsListBox_SelectionChanged" Height="469">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,17" Width="432" Height="78">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
+                                <Grid Margin="0,0,0,17" Width="432" Height="50">
+                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="0,0,12,0" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
