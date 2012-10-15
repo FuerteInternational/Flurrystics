@@ -28,16 +28,16 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-        	<TextBox Margin="20,66,25,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-        	<TextBlock Margin="34,39,25,0" TextWrapping="Wrap" Text="Application Flurry API key:" VerticalAlignment="Top"/>
-        	<TextBlock Margin="34,152,25,186" TextWrapping="Wrap"><Run Text="Where to get your Flurry API key?"/><LineBreak/><Run/><LineBreak/><Run Text="Login to Flurry, click on manage, make sure you have enabled API access and enter your Flurry API key above."/><LineBreak/><Run/></TextBlock></Grid>
+        	<TextBox Name="apiKeyTextBox" Margin="0,90,6,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="450" />
+        	<TextBlock Margin="12,44,0,0" TextWrapping="Wrap" Text="Application Flurry API key:" VerticalAlignment="Top"/>
+        	<TextBlock Margin="12,182,17,156" TextWrapping="Wrap"><Run Text="Where to get your Flurry API key?"/><LineBreak/><Run/><LineBreak/><Run Text="Login to Flurry, click on manage, make sure you have enabled API access and enter your Flurry API key above."/><LineBreak/><Run/></TextBlock></Grid>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Text="Confirm"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Text="Cancel"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Click="SettingsSave_Click" Text="Confirm"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Click="SettingsCancel_Click" Text="Cancel"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

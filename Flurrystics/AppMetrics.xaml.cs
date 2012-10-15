@@ -15,43 +15,59 @@ using Microsoft.Phone.Reactive;
 using System.Xml.Linq;
 using System.ComponentModel;
 using System.Threading;
+using System.IO.IsolatedStorage;
 
 namespace Flurrystics
 {
     public partial class PivotPage1 : PhoneApplicationPage
     {
-
-        string apikey = ""; // initial apikey of the app
+        string apiKey;
+        string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
-        bool tryAgain = false;
+        long lastRequest = 0; // timestamp of lastrequest
 
         public PivotPage1()
         {
             InitializeComponent();
         }
 
-                // When page is navigated to set data context to selected item in list
+        // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
-        {          
-            NavigationContext.QueryString.TryGetValue("apikey", out apikey);
+        {
+            try
+            {
+                apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
+            }
+            catch (KeyNotFoundException)
+            {
+                NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+            }
+            NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             MainPivot.Title = "FLURRYSTICS - " + appName; 
-
         }
 
         private void Perform(Action myMethod, int delayInMilliseconds)
         {
+
+            long diff = Util.getCurrentTimestamp() - lastRequest;
+            int throttledDelay = 0;
+
+            if (diff < delayInMilliseconds) // if delay between requests is less then second then count time we need to wait before firing up next request
+            {
+                throttledDelay = (int)diff;
+            }
+
             BackgroundWorker worker = new BackgroundWorker();
-
-            worker.DoWork += (s, e) => Thread.Sleep(delayInMilliseconds);
-
+            worker.DoWork += (s, e) => Thread.Sleep(throttledDelay);
             worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
-
-            worker.RunWorkerAsync();
+            worker.RunWorkerAsync();        
+        
         }
 
         private void LoadUpXML(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
+            lastRequest = Util.getCurrentTimestamp();
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
             string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
@@ -85,7 +101,6 @@ namespace Flurrystics
                         catch (NotSupportedException e) // it's not XML - probably API overload
                     {
                         //MessageBox.Show("Flurry API overload, please try again later.");
-                        tryAgain = true;
                     }
 
                 });
@@ -94,7 +109,7 @@ namespace Flurrystics
 
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
             w.DownloadStringAsync(
-                new Uri("http://api.flurry.com/appMetrics/"+metrics+"?apiAccessCode=DJBUBP9NE5YBQB5CQKH3&apiKey=" + apikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
+                new Uri("http://api.flurry.com/appMetrics/"+metrics+"?apiAccessCode="+apiKey+"&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
                 );
         }
 

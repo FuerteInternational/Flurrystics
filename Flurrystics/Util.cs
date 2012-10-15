@@ -15,6 +15,14 @@ namespace Flurrystics
     public static class Util
     {
 
+        public static long getCurrentTimestamp()
+        {
+            DateTime unixEpoch = new DateTime(1970, 1, 1);
+            DateTime currentDate = DateTime.Now;
+            long totalMiliSecond = (currentDate.Ticks - unixEpoch.Ticks) / 10000;
+            return totalMiliSecond;
+        }
+
         public static bool InternetIsAvailable()
         {
             if (!NetworkInterface.GetIsNetworkAvailable())
