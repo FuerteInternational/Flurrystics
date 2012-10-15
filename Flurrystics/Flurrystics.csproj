@@ -87,7 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiltEffect.cs" />
     <Compile Include="ViewModels\AppViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

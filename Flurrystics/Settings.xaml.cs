@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
 using System.IO.IsolatedStorage;
 
 namespace Flurrystics
@@ -43,6 +44,16 @@ namespace Flurrystics
         private void SettingsCancel_Click(object sender, EventArgs e)
         { // do not store anything - just go backj
             NavigationService.GoBack();
+        }
+
+        private void FlurryWebJump_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new Microsoft.Phone.Tasks.WebBrowserTask
+            {
+                URL = "https://dev.flurry.com/form.do"
+            };
+
+            task.Show();
         }
 
     }
