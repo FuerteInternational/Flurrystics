@@ -79,6 +79,7 @@ namespace Flurrystics
                                        LineOne = (string)query.Attribute("name"),
                                        LineTwo = (string)query.Attribute("platform"),
                                        LineThree = (string)query.Attribute("createdDate"),
+                                       LineFive = getIconFileForPlatform((string)query.Attribute("platform")),
                                        LineFour = (string)query.Attribute("apiKey")
                                    };
                         progressBar1.Visibility = System.Windows.Visibility.Collapsed;
@@ -101,6 +102,31 @@ namespace Flurrystics
                     );
 
             }
+        }
+
+        private string getIconFileForPlatform(string input) {
+            string output = "Images/flurryst_iconapple.png";
+            switch (input)
+            {
+                case "iPhone":
+                case "iPad":
+                    output = "Images/flurryst_iconapple.png";
+                    break;
+                case "Android":
+                    output = "Images/flurryst_iconandroid.png";
+                    break;
+                case "WindowsPhone":
+                    output = "Images/flurrst_iconwindows.png";
+                    break;
+                case "BlackberrySDK": // not sure about this one
+                    output = "Images/flurryst_iconblackberry.png";
+                    break;
+                case "JavaMESDK": // not sure about this one
+                    output = "Images/flurryst_iconjava.png";
+                    break;
+
+            }
+        return output;
         }
 
         private void Perform(Action myMethod, int delayInMilliseconds)

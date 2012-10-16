@@ -99,6 +99,27 @@ namespace Flurrystics
             }
         }
 
+        private string _lineFive;
+        /// <summary>
+        /// Sample ViewModel property; this property is used in the view to display its value using a Binding.
+        /// </summary>
+        /// <returns></returns>
+        public string LineFive
+        {
+            get
+            {
+                return _lineFive;
+            }
+            set
+            {
+                if (value != _lineFive)
+                {
+                    _lineFive = value;
+                    NotifyPropertyChanged("LineFive");
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {

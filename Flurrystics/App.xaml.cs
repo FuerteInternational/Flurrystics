@@ -40,6 +40,8 @@ namespace Flurrystics
             // Phone-specific initialization
             InitializePhoneApplication();
 
+            ThemeManager.ToDarkTheme();
+
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
             {
