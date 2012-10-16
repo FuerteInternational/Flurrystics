@@ -18,7 +18,10 @@
     shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/b2.png" />
+        </Grid.Background>
         <!--Pivot Control-->
         <controls:Pivot x:Name="MainPivot" Title="FLURRYSTICS" SelectionChanged="MainPivot_SelectionChanged">
 
@@ -37,10 +40,14 @@
                     <amq:SerialChart x:Name="chart1" LegendVisibility="Collapsed"
                             CategoryValueMemberPath="Label"
                             AxisForeground="White"
-                            PlotAreaBackground="Black"
+                            PlotAreaBackground="Transparent"
                             GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -63,12 +70,16 @@
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
 
                     <amq:SerialChart x:Name="chart2" LegendVisibility="Collapsed" 
-                                        CategoryValueMemberPath="Label"
-                                        AxisForeground="White"
-                                        PlotAreaBackground="Black"
-                                        GridStroke="DarkGray">
+                            CategoryValueMemberPath="Label"
+                            AxisForeground="White"
+                            PlotAreaBackground="Transparent"
+                            GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -95,10 +106,14 @@
                     <amq:SerialChart x:Name="chart3" LegendVisibility="Collapsed"
                             CategoryValueMemberPath="Label"
                             AxisForeground="White"
-                            PlotAreaBackground="Black"
+                            PlotAreaBackground="Transparent"
                             GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -123,11 +138,15 @@
 
                     <amq:SerialChart x:Name="chart4" LegendVisibility="Collapsed" 
                                         CategoryValueMemberPath="Label"
-                                        AxisForeground="White"
-                                        PlotAreaBackground="Black"
-                                        GridStroke="DarkGray">
+                            AxisForeground="White"
+                            PlotAreaBackground="Transparent"
+                            GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -154,10 +173,14 @@
                     <amq:SerialChart x:Name="chart5" LegendVisibility="Collapsed"
                             CategoryValueMemberPath="Label"
                             AxisForeground="White"
-                            PlotAreaBackground="Black"
+                            PlotAreaBackground="Transparent"
                             GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -182,11 +205,15 @@
 
                     <amq:SerialChart x:Name="chart6" LegendVisibility="Collapsed" 
                                         CategoryValueMemberPath="Label"
-                                        AxisForeground="White"
-                                        PlotAreaBackground="Black"
-                                        GridStroke="DarkGray">
+                            AxisForeground="White"
+                            PlotAreaBackground="Transparent"
+                            GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -213,10 +240,14 @@
                     <amq:SerialChart x:Name="chart7" LegendVisibility="Collapsed"
                             CategoryValueMemberPath="Label"
                             AxisForeground="White"
-                            PlotAreaBackground="Black"
+                            PlotAreaBackground="Transparent"
                             GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
@@ -241,11 +272,15 @@
 
                     <amq:SerialChart x:Name="chart8" LegendVisibility="Collapsed" 
                                         CategoryValueMemberPath="Label"
-                                        AxisForeground="White"
-                                        PlotAreaBackground="Black"
-                                        GridStroke="DarkGray">
+                            AxisForeground="White"
+                            PlotAreaBackground="Transparent"
+                            GridStroke="DarkGray">
                         <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value" Brush="#8000FF00" />
+                            <amq:AreaGraph ValueMemberPath="Value">
+                                <amq:AreaGraph.Brush>
+                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
+                                </amq:AreaGraph.Brush>
+                            </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
 
