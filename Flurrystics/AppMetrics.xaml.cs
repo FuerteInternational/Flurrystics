@@ -26,12 +26,11 @@ namespace Flurrystics
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
         string[] EventMetrics = { "usersLastDay", "usersLastWeek", "usersLastMonth", "avgUsersLastDay", "avgUsersLastWeek", "avgUsersLastMonth", "totalSessions", "totalCount" };
+        ObservableCollection<AppViewModel> EventMetricsNames = new ObservableCollection<AppViewModel>();
 
         public PivotPage1()
         {
-            InitializeComponent();
-
-            var EventMetricsNames = new ObservableCollection<AppViewModel>();
+            InitializeComponent();            
             EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Day" });
             EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Week" });
             EventMetricsNames.Add(new AppViewModel { LineOne = "Users Last Month" });
@@ -209,7 +208,18 @@ namespace Flurrystics
 
         private void EventsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // If selected index is -1 (no selection) do nothing
+            if (EventsListBox.SelectedIndex == -1)
+                return;
 
+            // Navigate to the new page
+            AppViewModel selected = (AppViewModel)EventsListBox.Items[EventsListBox.SelectedIndex];
+            NavigationService.Navigate(new Uri("/EventMetrics.xaml?apikey=" + appapikey + "&appName=" + appName + "&eventName=" + selected.LineOne, UriKind.Relative));
+
+            // .SelectedIndex, UriKind.Relative));
+
+            // Reset selected index to -1 (no selection)
+            EventsListBox.SelectedIndex = -1;
         }
 
         private int count = 1;
@@ -226,10 +236,14 @@ namespace Flurrystics
 
     } // class
 
-   public class ChartDataPoint
+    public class ChartDataPoint
     {
         public string Label { get; set; }
-        public double Value { get; set; }
+        public double Value { get; set; } // appmetrics
+        public double Value1 { get; set; } // Unique Users
+        public double Value2 { get; set; } // Total Sessions
+        public double Value3 { get; set; } //
+        public double Value4 { get; set; }
     }
 
    public class EventMetricsName

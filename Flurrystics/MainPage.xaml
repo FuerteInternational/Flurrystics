@@ -38,7 +38,7 @@
                     <DataTemplate>
                       <StackPanel Margin="0,0,0,10" Width="432" Height="110">
                           <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
+                            <StackPanel Orientation="Horizontal" Margin="2,-2,0,0">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="Platform:" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
                                     <TextBlock Text="Created:" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>                                 

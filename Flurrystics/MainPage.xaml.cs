@@ -74,11 +74,12 @@ namespace Flurrystics
                         //XDocument loadedData = XDocument.Load("getAllApplications.xml");
                         PageTitle.Text = (string)loadedData.Root.Attribute("companyName");
                         var data = from query in loadedData.Descendants("application")
+                                   orderby (string)query.Attribute("name")
                                    select new AppViewModel
                                    {
                                        LineOne = (string)query.Attribute("name"),
                                        LineTwo = (string)query.Attribute("platform"),
-                                       LineThree = (string)query.Attribute("createdDate"),
+                                       LineThree = DateTime.Parse((string)query.Attribute("createdDate")).ToLongDateString(),
                                        LineFive = getIconFileForPlatform((string)query.Attribute("platform")),
                                        LineFour = (string)query.Attribute("apiKey")
                                    };
@@ -118,10 +119,10 @@ namespace Flurrystics
                 case "WindowsPhone":
                     output = "Images/flurrst_iconwindows.png";
                     break;
-                case "BlackberrySDK": // not sure about this one
+                case "BlackberrySDK":
                     output = "Images/flurryst_iconblackberry.png";
                     break;
-                case "JavaMESDK": // not sure about this one
+                case "JavaMESDK":
                     output = "Images/flurryst_iconjava.png";
                     break;
 
@@ -157,7 +158,7 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)MainListBox.Items[MainListBox.SelectedIndex];
-            NavigationService.Navigate(new Uri("/AppMetrics.xaml?apikey=" + selected.LineFour + " &appName=" + selected.LineOne, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/AppMetrics.xaml?apikey=" + selected.LineFour + "&appName=" + selected.LineOne, UriKind.Relative));
                 
                 // .SelectedIndex, UriKind.Relative));
 
