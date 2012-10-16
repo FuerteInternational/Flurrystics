@@ -265,7 +265,7 @@
             </controls:PivotItem>
 
             <!--Pivot item eight-->
-            <controls:PivotItem Header="Retained Users">
+            <controls:PivotItem Header="Retained Users"> 
 
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel8" Grid.Row="1" Margin="12,0,12,0">
