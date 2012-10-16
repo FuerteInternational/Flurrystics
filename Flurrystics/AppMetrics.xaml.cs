@@ -104,7 +104,7 @@ namespace Flurrystics
                                select new ChartDataPoint
                                {
                                    Value = (double)query.Attribute("value"),
-                                   Label = (string)query.Attribute("date")
+                                   Label = Util.stripOffYear(DateTime.Parse((string)query.Attribute("date")))
                                };
 
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;

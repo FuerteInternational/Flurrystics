@@ -33,5 +33,16 @@ namespace Flurrystics
             return true;
         }
 
+        public static String stripOffYear(DateTime inDateTime) {
+        
+        String temp = inDateTime.ToShortDateString();
+        String tempYear = String.Format("{0:yyyy}",inDateTime);
+        temp = temp.Replace(tempYear, " ");
+        char[] tempRemove =  {'-','/',' '};
+        temp = temp.TrimEnd(tempRemove).TrimStart(tempRemove);
+        return temp;
+
+        }
+
     }
 }

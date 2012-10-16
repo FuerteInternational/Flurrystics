@@ -77,7 +77,8 @@ namespace Flurrystics
                                    select new AppViewModel
                                    {
                                        LineOne = (string)query.Attribute("name"),
-                                       LineTwo = (string)query.Attribute("platform") + ", created: " + (string)query.Attribute("createdDate"),
+                                       LineTwo = (string)query.Attribute("platform"),
+                                       LineThree = (string)query.Attribute("createdDate"),
                                        LineFour = (string)query.Attribute("apiKey")
                                    };
                         progressBar1.Visibility = System.Windows.Visibility.Collapsed;
