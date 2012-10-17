@@ -27,6 +27,8 @@ namespace Flurrystics
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
         string eventName = ""; // eventName
+        XDocument loadedData;
+        ObservableCollection<AppViewModel> ParamKeys = new ObservableCollection<AppViewModel>();
 
         public PivotPage2()
         {
@@ -49,7 +51,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
             MainPivot.Title = "FLURRYSTICS - " + appName + " - " + eventName;
 
-            this.Perform(() => LoadUpXMLEventMetrics(progressBar1), 1000);
+            this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 
         }
 
@@ -71,7 +73,38 @@ namespace Flurrystics
         
         }
 
-        private void LoadUpXMLEventMetrics(Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
+        private void LoadUpXMLEventParameters(XDocument loadedData) {
+             // parse data for parameters
+                    var dataParam = from query in loadedData.Descendants("key")
+                                    select new Data
+                                    {
+                                        key = (string)query.Attribute("name"),
+                                        content = (IEnumerable<XElement>)query.Elements("value")
+                                    };
+                    
+                    IEnumerator<Data> enumerator = dataParam.GetEnumerator();
+                    while (enumerator.MoveNext())
+                    {
+                        Data dataParamValues = enumerator.Current;
+                            Debug.WriteLine("iterating dataParam");
+                            ParamKeys.Add(new AppViewModel { LineOne = dataParamValues.key });
+                            dataParamValues.children = from query in dataParamValues.content.Descendants("value")
+                                                       select new AppViewModel
+                                                       {
+                                                           LineOne = (string)query.Attribute("name"),
+                                                           LineTwo = (string)query.Attribute("totalCount")
+                                                       };
+
+                            //dataParamValues.children;
+                            
+                    }
+            ParametersListBox.ItemsSource = dataParam.ElementAtOrDefault<Data>(0).children;
+            ParametersMetricsListPicker.ItemsSource = ParamKeys; 
+            progressBar1.Visibility = System.Windows.Visibility.Collapsed;
+            progressBar1.IsIndeterminate = false;
+        }
+
+        private void LoadUpXMLEventMetrics()
         {
             App.lastRequest = Util.getCurrentTimestamp();
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
@@ -86,10 +119,11 @@ namespace Flurrystics
                 {
                     try
                     {
-                        XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
+                        loadedData = XDocument.Parse(r.EventArgs.Result);
                         //XDocument loadedData = XDocument.Load("getAllApplications.xml");
 
                     // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
+                    // parse data for charts
                     var data = from query in loadedData.Descendants("day")
                                select new ChartDataPoint
                                {
@@ -100,15 +134,12 @@ namespace Flurrystics
                                    // Value4 = (double)query.Attribute("duration"),
                                    Label = Util.stripOffYear(DateTime.Parse((string)query.Attribute("date")))
                                };
-
-                    progressBar.Visibility = System.Windows.Visibility.Collapsed;
-                    progressBar.IsIndeterminate = false;
+                   
+                    LoadUpXMLEventParameters(loadedData);                    
 
                     chart1.DataSource = data;
                     chart2.DataSource = data;
                     chart3.DataSource = data;
-                    //chart4.DataSource = data;
-                    // MainListBox.ItemsSource = data;
 
                     }
                         catch (NotSupportedException e) // it's not XML - probably API overload
@@ -126,16 +157,32 @@ namespace Flurrystics
                 );
         }
 
+        private int count = 1;
         private void ParametersMetricsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-        private void ParametersListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            
+            if (count > 1) // do not execute for the first time
+            {
+                //progressBar1.Visibility = System.Windows.Visibility.Visible;
+                //this.Perform(() => LoadUpXMLEventParameters(loadedData), 1000);
+            }
+            else count = 2;
         }
 
     } // class
+
+    public class Child // parameter values
+    {
+        public string Name { get; set; } // parameter value
+        public double totalCount { get; set;}
+    }
+
+    public class Data // all parameters w/ keys
+    {
+        public string key { get; set; }
+        public IEnumerable<XElement> content { get; set; }
+        public System.Collections.IEnumerable children { get; set; }
+    }
+
 
 }
