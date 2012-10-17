@@ -36,20 +36,12 @@
             <ListBox x:Name="MainListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainListBox_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                      <StackPanel Margin="0,0,0,10" Width="432" Height="110">
+                      <StackPanel Margin="0,0,0,10" Width="432" Height="85">
                           <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            <StackPanel Orientation="Horizontal" Margin="2,-2,0,0">
-                                <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
                                     <TextBlock Text="Platform:" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                    <TextBlock Text="Created:" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>                                 
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                        <Image Source="{Binding LineFive}" Margin="-5,0,0,0" HorizontalAlignment="Left" Stretch="None" VerticalAlignment="Center" />
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
+                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="-3,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                                    <Image Source="{Binding LineFive}" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="None" VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
@@ -75,7 +67,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="SettingsOption" Click="SettingsOption_Click" IconUri="/Images/appbar.feature.settings.rest.png" Text="Settings" />
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="About" />
+                <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

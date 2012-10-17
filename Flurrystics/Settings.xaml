@@ -33,7 +33,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
         	<TextBox Name="apiKeyTextBox" Margin="0,90,6,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="450" />
-        	<TextBlock Margin="12,44,0,0" TextWrapping="Wrap" Text="Application Flurry API key:" VerticalAlignment="Top"/>
+            <TextBlock Margin="12,44,0,0" TextWrapping="Wrap" Text="Application Flurry API key:" VerticalAlignment="Top" />
         	<TextBlock Margin="12,182,17,199" TextWrapping="Wrap"><Run Text="Where to get your Flurry API key?"/><LineBreak/><Run/><LineBreak/><Run Text="Login to Flurry, click on manage, make sure you have enabled API access and enter your Flurry API key above."/><LineBreak/><Run/></TextBlock>
         	<Button Name="FlurryWebJump" Click="FlurryWebJump_Click" Content="Visit Flurry Website" Margin="90,0,90,92" VerticalAlignment="Bottom" /></Grid>
     </Grid>

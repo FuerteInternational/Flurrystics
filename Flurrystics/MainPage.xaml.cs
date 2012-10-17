@@ -171,6 +171,11 @@ namespace Flurrystics
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             //Do work for your application here.
         }
+
+        private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         
 
         // Load data for the ViewModel Items
