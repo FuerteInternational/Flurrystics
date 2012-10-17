@@ -90,7 +90,8 @@ namespace Flurrystics
                             ParamKeys.Add(new AppViewModel { LineOne = dataParamValues.key });
                         }
                             var dataParams = from query in dataParamValues.content
-                                                       select new AppViewModel
+                                                        orderby (int)query.Attribute("totalCount") descending
+                                                        select new AppViewModel
                                                        {
                                                            LineOne = (string)query.Attribute("name"),
                                                            LineTwo = (string)query.Attribute("totalCount")

@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Flurrystics"
@@ -15,41 +16,53 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
-    <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
+    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush ImageSource="Images/b2.png" />
         </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <!--Pivot Control-->
+        <controls:Pivot x:Name="MainPivot">
+            
+            <controls:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
+                        <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                    </StackPanel>
+                </DataTemplate>
+            </controls:Pivot.TitleTemplate>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="FLURRYSTICS" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="loading..." Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+            <controls:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Margin="0,0,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+                </DataTemplate>
+            </controls:Pivot.HeaderTemplate>
 
-        <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox x:Name="MainListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainListBox_SelectionChanged">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                      <StackPanel Margin="0,0,0,10" Width="432" Height="85">
-                          <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                            <StackPanel Orientation="Horizontal" Margin="2,0,0,0">
-                                    <TextBlock Text="Platform:" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="-3,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" Foreground="{StaticResource PhoneAccentBrush}"/>
-                                    <Image Source="{Binding LineFive}" Margin="0,0,0,0" HorizontalAlignment="Left" Stretch="None" VerticalAlignment="Center" />
-                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+            <!--Pivot item one-->
+            <controls:PivotItem Header="loading...">
 
-            </ListBox>
+                <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
+                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                    <ListBox x:Name="MainListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainListBox_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,10" Width="432" Height="80">
+                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    <Image Source="{Binding LineFive}" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Right" Stretch="None" />
+                                    <StackPanel Orientation="Horizontal" Margin="12,40,0,0">
+                                        <TextBlock Text="Created: " TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                        <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" />
+                                    </StackPanel>
 
-            <toolkit:PerformanceProgressBar 
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                    <toolkit:PerformanceProgressBar 
                 x:Name="progressBar1"
                 Width="400"
                 Height="40"
@@ -59,13 +72,17 @@
                 Visibility="Visible" 
                 />
 
-        </Grid>
+                </Grid>
+            </controls:PivotItem>
+        </controls:Pivot>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBarIconButton x:Name="SettingsOption" Click="SettingsOption_Click" IconUri="/Images/appbar.feature.settings.rest.png" Text="Settings" />
+            <shell:ApplicationBarIconButton x:Name="DeleteOption" IconUri="/Images/appbar.delete.rest.png" Text="Delete" />
+            <shell:ApplicationBarIconButton x:Name="AddOption" IconUri="/Images/appbar.add.rest.png" Text="Add" />
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>

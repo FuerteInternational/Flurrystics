@@ -72,7 +72,8 @@ namespace Flurrystics
                     {
 
                         //XDocument loadedData = XDocument.Load("getAllApplications.xml");
-                        PageTitle.Text = (string)loadedData.Root.Attribute("companyName");
+                        PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
+                        item.Header = (string)loadedData.Root.Attribute("companyName");
                         var data = from query in loadedData.Descendants("application")
                                    orderby (string)query.Attribute("name")
                                    select new AppViewModel
@@ -80,7 +81,7 @@ namespace Flurrystics
                                        LineOne = (string)query.Attribute("name"),
                                        LineTwo = (string)query.Attribute("platform"),
                                        LineThree = DateTime.Parse((string)query.Attribute("createdDate")).ToLongDateString(),
-                                       LineFive = getIconFileForPlatform((string)query.Attribute("platform")),
+                                       LineFive = getIconFileForPlatform(((String)query.Attribute("platform")).Trim()),
                                        LineFour = (string)query.Attribute("apiKey")
                                    };
                         progressBar1.Visibility = System.Windows.Visibility.Collapsed;
@@ -121,7 +122,7 @@ namespace Flurrystics
                     output = "Images/flurryst_iconandroid.png";
                     break;
                 case "WindowsPhone":
-                    output = "Images/flurrst_iconwindows.png";
+                    output = "Images/flurryst_iconwindows.png";
                     break;
                 case "BlackberrySDK":
                     output = "Images/flurryst_iconblackberry.png";

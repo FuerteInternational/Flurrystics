@@ -15,7 +15,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480">
+    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -34,11 +34,20 @@
                         Visibility="Visible" />
 
         <!--Pivot Control-->
-        <controls:Pivot x:Name="MainPivot" Title="FLURRYSTICS">
+        <controls:Pivot x:Name="MainPivot">
+
+            <controls:Pivot.TitleTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
+                        <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                    </StackPanel>
+                </DataTemplate>
+            </controls:Pivot.TitleTemplate>
 
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" FontSize="50" Margin="0,40,0,0" />
+                    <TextBlock Text="{Binding}" FontSize="40" Margin="0,40,0,0" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                 </DataTemplate>
             </controls:Pivot.HeaderTemplate>
 
@@ -183,16 +192,13 @@
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton x:Name="timeRangeOption" IconUri="/Images/flurryst_icon_bar_date.png" Text="Time Range"/>
+            <shell:ApplicationBarIconButton x:Name="compareOption" IconUri="/Images/flurryst_icon_bar_compare.png" Text="Compare"/>
+            <shell:ApplicationBarIconButton x:Name="pinOption" IconUri="/Images/flurryst_icon_bar_pin.png" Text="Pin"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!-- Animated page transition -->
     <toolkit:TransitionService.NavigationInTransition>
