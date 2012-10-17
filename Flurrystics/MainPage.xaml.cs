@@ -174,7 +174,7 @@ namespace Flurrystics
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
         
 
