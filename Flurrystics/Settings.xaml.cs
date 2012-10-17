@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.IO.IsolatedStorage;
+using System.Windows.Navigation;
 
 namespace Flurrystics
 {
@@ -19,6 +20,7 @@ namespace Flurrystics
     {
 
         string apiKey;
+        string error;
 
         public Settings()
         {
@@ -32,6 +34,15 @@ namespace Flurrystics
                 apiKey = "no-api-key";
             }
             apiKeyTextBox.Text = apiKey;
+        }
+
+        // When page is navigated to set data context to selected item in list
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            NavigationContext.QueryString.TryGetValue("error", out error);
+
+            if (error!=null) { ErrorBox.Visibility = System.Windows.Visibility.Visible; } else
+                ErrorBox.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void SettingsSave_Click(object sender, EventArgs e)

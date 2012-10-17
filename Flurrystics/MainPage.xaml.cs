@@ -65,7 +65,7 @@ namespace Flurrystics
                     }
                     catch (WebException) // load failed, probably wrong apiKey - goto settings
                     {
-                        NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+                        NavigationService.Navigate(new Uri("/Settings.xaml?error=yes", UriKind.Relative));
                     }
 
                     if (loadedData != null)
@@ -102,6 +102,10 @@ namespace Flurrystics
                     new Uri("http://api.flurry.com/appInfo/getAllApplications?apiAccessCode=" + apiKey)
                     );
 
+            }
+            else
+            {
+                throw new Util.ExitException();
             }
         }
 

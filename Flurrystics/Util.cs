@@ -44,5 +44,7 @@ namespace Flurrystics
 
         }
 
+        public class ExitException : Exception { }
+
     }
 }
