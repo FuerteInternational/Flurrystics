@@ -73,32 +73,37 @@ namespace Flurrystics
         
         }
 
-        private void LoadUpXMLEventParameters(XDocument loadedData) {
+        private void LoadUpXMLEventParameters(XDocument loadedData, int selectedIndex, bool addParam) {
              // parse data for parameters
                     var dataParam = from query in loadedData.Descendants("key")
                                     select new Data
                                     {
                                         key = (string)query.Attribute("name"),
-                                        content = (IEnumerable<XElement>)query.Elements("value")
-                                    };
-                    
+                                        content = (IEnumerable<XElement>)query.Descendants("value"),
+                                    };              
                     IEnumerator<Data> enumerator = dataParam.GetEnumerator();
+                    int index = 0;
                     while (enumerator.MoveNext())
                     {
                         Data dataParamValues = enumerator.Current;
-                            Debug.WriteLine("iterating dataParam");
+                        if (addParam) {  
                             ParamKeys.Add(new AppViewModel { LineOne = dataParamValues.key });
-                            dataParamValues.children = from query in dataParamValues.content.Descendants("value")
+                        }
+                            var dataParams = from query in dataParamValues.content
                                                        select new AppViewModel
                                                        {
                                                            LineOne = (string)query.Attribute("name"),
                                                            LineTwo = (string)query.Attribute("totalCount")
                                                        };
-
-                            //dataParamValues.children;
-                            
+                            if (index == selectedIndex)
+                            {
+                                Debug.WriteLine("Setting parameter values list");
+                                ParametersListBox.ItemsSource = dataParams; // dataParamValues.children;
+                            }
+                            Debug.WriteLine("Processing line: " + index);
+                            index = index + 1;                            
                     }
-            ParametersListBox.ItemsSource = dataParam.ElementAtOrDefault<Data>(0).children;
+            
             ParametersMetricsListPicker.ItemsSource = ParamKeys; 
             progressBar1.Visibility = System.Windows.Visibility.Collapsed;
             progressBar1.IsIndeterminate = false;
@@ -135,7 +140,7 @@ namespace Flurrystics
                                    Label = Util.stripOffYear(DateTime.Parse((string)query.Attribute("date")))
                                };
                    
-                    LoadUpXMLEventParameters(loadedData);                    
+                    LoadUpXMLEventParameters(loadedData,0,true);                    
 
                     chart1.DataSource = data;
                     chart2.DataSource = data;
@@ -157,25 +162,18 @@ namespace Flurrystics
                 );
         }
 
-        private int count = 1;
+        private bool first = true;
         private void ParametersMetricsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            if (count > 1) // do not execute for the first time
+            if (!first) // do not execute for the first time
             {
-                //progressBar1.Visibility = System.Windows.Visibility.Visible;
-                //this.Perform(() => LoadUpXMLEventParameters(loadedData), 1000);
+                LoadUpXMLEventParameters(loadedData, ParametersMetricsListPicker.SelectedIndex,false);
             }
-            else count = 2;
+            else first = false;
         }
 
     } // class
-
-    public class Child // parameter values
-    {
-        public string Name { get; set; } // parameter value
-        public double totalCount { get; set;}
-    }
 
     public class Data // all parameters w/ keys
     {
@@ -183,6 +181,5 @@ namespace Flurrystics
         public IEnumerable<XElement> content { get; set; }
         public System.Collections.IEnumerable children { get; set; }
     }
-
 
 }

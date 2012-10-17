@@ -142,11 +142,12 @@
             <controls:PivotItem Header="Parameters">
 
                 <!--ContentPanel contains details text. Place additional content here-->
-                <Grid x:Name="ContentPanel9" Grid.Row="1" Margin="12,0,12,0">
+                <StackPanel x:Name="ContentPanel9" Margin="12,0,12,0">
 
                     <toolkit:ListPicker x:Name="ParametersMetricsListPicker"
                                         Header="Select Parameter Key"
                                         SelectionChanged="ParametersMetricsListPicker_SelectionChanged"
+                                        SelectedIndex="1"
                                         >
                         
                         <toolkit:ListPicker.ItemTemplate>
@@ -163,7 +164,7 @@
                         
                     </toolkit:ListPicker>
 
-                    <ListBox x:Name="ParametersListBox" Margin="0,127,-12,0" ItemsSource="{Binding Items}" Height="469">
+                    <ListBox x:Name="ParametersListBox" Margin="0,40,-12,0" ItemsSource="{Binding Items}" Height="469">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,0,0,17" Width="432" Height="50">
@@ -174,7 +175,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
 
-                </Grid>
+                </StackPanel>
 
             </controls:PivotItem>
 
