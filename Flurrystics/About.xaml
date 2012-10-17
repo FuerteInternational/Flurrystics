@@ -36,7 +36,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="Developed with love by:" HorizontalAlignment="Center" Margin="0,107,6,459" Style="{StaticResource PhoneTextNormalStyle}"/>
-        	<Image x:Name="FuerteLogo" Margin="0,169,6,295" Source="Images/fuertelogo.png" Stretch="None" />
+        	<Image x:Name="FuerteLogo" Margin="0,146,6,254" Source="Images/fuertelogo.png" Stretch="None" />
             <Button Name="FuerteWebJump" Click="FuerteWebJump_Click" Content="Visit Fuerteint.com" Margin="90,0,90,92" VerticalAlignment="Bottom" />
         </Grid>
     </Grid>

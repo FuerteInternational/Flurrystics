@@ -17,6 +17,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
+using Telerik.Windows.Controls;
+using Telerik.Charting;
 
 namespace Flurrystics
 {
@@ -80,7 +82,7 @@ namespace Flurrystics
         
         }
 
-        private void LoadUpXMLAppMetrics(string metrics, AmCharts.Windows.QuickCharts.SerialChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
+        private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
             App.lastRequest = Util.getCurrentTimestamp();
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
@@ -109,7 +111,11 @@ namespace Flurrystics
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;
                     progressBar.IsIndeterminate = false;
 
-                    targetChart.DataSource = data;
+                    //targetChart.DataContext = data;
+                    targetChart.Series[0].ItemsSource = data;
+                    //targetChart.Series[0].ItemsSource = new double[] { 20, 30, 50, 10, 60, 40, 20, 80 };
+
+                    //targetChart.DataSource = data;
                     // MainListBox.ItemsSource = data;
 
                     }
@@ -179,25 +185,25 @@ namespace Flurrystics
                     this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1), 1000);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2), 1000);
                     break;
                 case 2:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3), 1000);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4), 1000);
                     break;
                 case 4:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5), 1000);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6), 1000);
                     break;
                 case 6:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7), 1000);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8), 1000);
+                    //this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8), 1000);
                     break;
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
@@ -232,6 +238,22 @@ namespace Flurrystics
                 this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
             }
             else count=2;
+        }
+
+        private void ChartTrackBallBehavior_TrackInfoUpdated(object sender, Telerik.Windows.Controls.TrackBallInfoEventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            /*
+            foreach (DataPointInfo info in e.Context.DataPointInfos)
+            {
+                CategoricalDataPoint dataPoint = info.DataPoint as CategoricalDataPoint;
+                date = (DateTime)dataPoint.Category;
+                info.DisplayHeader = info.Series.DisplayName + ": ";
+                info.DisplayContent = dataPoint.Value * 1000;
+            }
+
+            e.Header = date.ToString("MMMM-yyyy");
+            */
         }
 
     } // class

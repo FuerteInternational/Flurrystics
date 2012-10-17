@@ -9,6 +9,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:amq="clr-namespace:AmCharts.Windows.QuickCharts;assembly=AmCharts.Windows.QuickCharts.WP"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikChartSpecialized="clr-namespace:Telerik.Windows.Controls.Chart;assembly=Telerik.Windows.Controls.Chart"
     xmlns:local="clr-namespace:Flurrystics"
     local:TiltEffect.IsTiltEnabled="True"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -46,6 +49,7 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
+                    <!--
                     <amq:SerialChart x:Name="chart1" LegendVisibility="Collapsed"
                             CategoryValueMemberPath="Label"
                             AxisForeground="White"
@@ -59,6 +63,31 @@
                             </amq:AreaGraph>
                         </amq:SerialChart.Graphs>
                     </amq:SerialChart>
+-->
+
+                    <telerikChart:RadCartesianChart x:Name="chart1">
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5"
+                                                                />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"
+                                
+                                Stroke="Orange" StrokeThickness="5">
+ 
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
+
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar1"
