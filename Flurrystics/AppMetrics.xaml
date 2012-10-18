@@ -596,6 +596,7 @@
                      x:Name="EventsMetricsListPicker"
                                         Header="Select Event Metric"
                                         SelectionChanged="EventsMetricsListPicker_SelectionChanged"
+                                        SelectedIndex="6"
                                         >
 
                         <telerikInput:RadListPicker.ItemTemplate>
@@ -612,7 +613,7 @@
                         
                     </telerikInput:RadListPicker>
 
-                    <ListBox x:Name="EventsListBox" Margin="0,127,-12,0" ItemsSource="{Binding Items}" SelectionChanged="EventsListBox_SelectionChanged" Height="469">
+                    <ListBox x:Name="EventsListBox" Margin="0,127,-12,0" ItemsSource="{Binding Items}" SelectionChanged="EventsListBox_SelectionChanged" Height="390">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,0,0,17" Width="432" Height="50">
@@ -645,7 +646,7 @@
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="timeRangeOption" IconUri="/Images/flurryst_icon_bar_date.png" Text="Time Range"/>
+            <shell:ApplicationBarIconButton x:Name="timeRangeOption" Click="timeRangeOption_Click" IconUri="/Images/flurryst_icon_bar_date.png" Text="Time Range"/>
             <shell:ApplicationBarIconButton x:Name="compareOption" IconUri="/Images/flurryst_icon_bar_compare.png" Text="Compare"/>
             <shell:ApplicationBarIconButton x:Name="pinOption" IconUri="/Images/flurryst_icon_bar_pin.png" Text="Pin"/>
         </shell:ApplicationBar>

@@ -10,6 +10,18 @@
         <SolidColorBrush x:Key="flurry_green" Color="#66b240"/>
         <SolidColorBrush x:Key="flurry_blue" Color="#15a5d8"/>
         <SolidColorBrush x:Key="flurry_orange" Color="#fcaf17"/>
+        <Style x:Key="MyButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Rectangle Fill="{StaticResource flurry_orange}" Margin="0" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

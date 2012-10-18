@@ -1,0 +1,74 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Flurrystics.TimeRange"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="0"
+    shell:SystemTray.BackgroundColor="Transparent" UseLayoutRounding="True"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    >
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images/b2.png" />
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="SubTitle" Text="FLURRYSTICKS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,20,0,0" VerticalAlignment="Bottom" />
+            </StackPanel>
+            <TextBlock x:Name="PageTitle" Text="time range" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <TextBlock Margin="12,0,12,0" Text="Please select desired time range:" TextWrapping="Wrap" />
+            <Button Content="Last Week" Height="61" Name="button1_lastWeek" Click="button1_lastWeek_Click" BorderThickness="0" Foreground="White" Background="{StaticResource flurry_orange}" HorizontalContentAlignment="Left" FontWeight="Normal" FontFamily="Segoe WP Light" Padding="10,0,10,0" Margin="0,0,0,0" FontSize="20" />
+            <Button Content="Last Month" Height="61" Name="button2_lastMonth" Click="button2_lastMonth_Click" BorderThickness="0" Foreground="White" Background="{StaticResource flurry_orange}" HorizontalContentAlignment="Left" FontWeight="Normal" FontFamily="Segoe WP Light" Padding="10,0,10,0" Margin="0,0,0,0" FontSize="20" />
+            <Button Content="Last Quarter" Height="61" Name="button3_lastQuarter" Click="button3_lastQuarter_Click"  BorderThickness="0" Foreground="White" Background="{StaticResource flurry_orange}" HorizontalContentAlignment="Left" FontWeight="Normal" FontFamily="Segoe WP Light" Padding="10,0,10,0" Margin="0,0,0,0" FontSize="20" />
+            <Button Content="Last Six Months" Height="61" Name="button4_last6Months" Click="button4_last6Months_Click" BorderThickness="0" Foreground="White" Background="{StaticResource flurry_orange}" HorizontalContentAlignment="Left" FontWeight="Normal" FontFamily="Segoe WP Light" Padding="10,0,10,0" Margin="0,0,0,0" FontSize="20" />
+            <Button Content="Last Year" Height="61" Name="button5_lastYear" Click="button5_lastYear_Click" BorderThickness="0" Foreground="White" Background="{StaticResource flurry_orange}" HorizontalContentAlignment="Left" FontWeight="Normal" FontFamily="Segoe WP Light" Padding="10,0,10,0" Margin="0,0,0,0" FontSize="20" />
+            <TextBlock Margin="12,0,12,0" Text="Or specify custom time range from:" TextWrapping="Wrap" />
+            <telerikInput:RadDatePicker Grid.Row="1" x:Name="radDatePicker1" 
+                                        PopupHeader="From: "
+                                        EmptyContent="From: "
+                                        Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                        ValueChanged="radDatePicker1_ValueChanged"
+                                        />
+            <TextBlock Margin="12,0,12,0" Text="To:" VerticalAlignment="Center" TextWrapping="Wrap" />
+            <telerikInput:RadDatePicker Grid.Row="1" 
+                                        x:Name="radDatePicker2" Height="Auto" 
+                                        PopupHeader="To: "
+                                        EmptyContent="To: "
+                                        HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                        Background="{StaticResource flurry_green}" BorderBrush="#FFF21010" 
+                                        ValueChanged="radDatePicker2_ValueChanged"
+                                        />
+        </StackPanel>
+    
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.check.rest.png" Click="SettingsSave_Click" Text="Confirm"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.close.rest.png" Click="SettingsCancel_Click" Text="Cancel"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

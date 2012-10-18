@@ -27,6 +27,8 @@ namespace Flurrystics
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
         string eventName = ""; // eventName
+        string EndDate;
+        string StartDate;
         XDocument loadedData;
         ObservableCollection<AppViewModel> ParamKeys = new ObservableCollection<AppViewModel>();
 
@@ -46,11 +48,22 @@ namespace Flurrystics
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             }
+            try
+            {
+                EndDate = (string)IsolatedStorageSettings.ApplicationSettings["EndDate"];
+                StartDate = (string)IsolatedStorageSettings.ApplicationSettings["StartDate"];
+            }
+            catch (KeyNotFoundException) // setting default
+            {
+                EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
+                StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1).AddMonths(-1));
+            }            
+
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
             SubTitle.Text = "FLURRYSTICS - " + appName + " - " + eventName;
-
+            ParamKeys.Clear();
             this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 
         }
@@ -139,8 +152,6 @@ namespace Flurrystics
         private void LoadUpXMLEventMetrics()
         {
             App.lastRequest = Util.getCurrentTimestamp();
-            string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
-            string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
 
             WebClient w = new WebClient();
@@ -206,10 +217,13 @@ namespace Flurrystics
                     tile8.Count = (int)minim3;
                     tile9.Count = (int)maxim3;
                     total3.Text = totalCount3.ToString();
-
+                    int setInterval = Util.getLabelInterval(DateTime.Parse(StartDate), DateTime.Parse(EndDate));
                     chart1.Series[0].ItemsSource = data;
+                    chart1.HorizontalAxis.LabelInterval = setInterval;
                     chart2.Series[0].ItemsSource = data;
+                    chart2.HorizontalAxis.LabelInterval = setInterval;
                     chart3.Series[0].ItemsSource = data;
+                    chart3.HorizontalAxis.LabelInterval = setInterval;
 
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
@@ -236,6 +250,11 @@ namespace Flurrystics
                 LoadUpXMLEventParameters(loadedData, ParametersMetricsListPicker.SelectedIndex,false);
             }
             else first = false;
+        }
+
+        private void timeRangeOption_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TimeRange.xaml", UriKind.Relative));
         }
 
     } // class

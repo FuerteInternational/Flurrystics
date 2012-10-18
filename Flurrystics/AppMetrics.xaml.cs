@@ -19,6 +19,7 @@ using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
 using Telerik.Windows.Controls;
 using Telerik.Charting;
+using System.Diagnostics;
 
 namespace Flurrystics
 {
@@ -28,6 +29,10 @@ namespace Flurrystics
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
         string[] EventMetrics = { "usersLastDay", "usersLastWeek", "usersLastMonth", "avgUsersLastDay", "avgUsersLastWeek", "avgUsersLastMonth", "totalSessions", "totalCount" };
+        string EndDate;
+        string StartDate;
+        private int lastPivotItem = -1;
+        private bool firstTime = true;
         ObservableCollection<AppViewModel> EventMetricsNames = new ObservableCollection<AppViewModel>();
 
         public PivotPage1()
@@ -42,13 +47,14 @@ namespace Flurrystics
             EventMetricsNames.Add(new AppViewModel { LineOne = "Total Counts" });
             EventMetricsNames.Add(new AppViewModel { LineOne = "Total Sessions" });
 
-            EventsMetricsListPicker.ItemsSource = EventMetricsNames;
+            EventsMetricsListPicker.ItemsSource = EventMetricsNames;      
 
         }
 
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            Debug.WriteLine("OnNavigatedTo");
             try
             {
                 apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
@@ -57,9 +63,23 @@ namespace Flurrystics
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             }
+
+            try
+            {
+                EndDate = (string)IsolatedStorageSettings.ApplicationSettings["EndDate"];
+                StartDate = (string)IsolatedStorageSettings.ApplicationSettings["StartDate"];
+            }
+            catch (KeyNotFoundException) // setting default
+            {             
+                EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
+                StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1).AddMonths(-1));
+            }    
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             SubTitle.Text = "FLURRYSTICS - " + appName;
+
+            lastPivotItem = -1; // forcing to reset when returning from date settings
+            updatePivot();
             
         }
 
@@ -85,9 +105,9 @@ namespace Flurrystics
                                         RadHubTile t1, RadHubTile t2, RadHubTile t3, TextBlock tb)
         {
             App.lastRequest = Util.getCurrentTimestamp();
-            string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
-            string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
+
+            Debug.WriteLine("LoadUpXMLAppMetrics:"+queryURL);
 
             WebClient w = new WebClient();
 
@@ -112,6 +132,8 @@ namespace Flurrystics
                     progressBar.IsIndeterminate = false;
 
                     targetChart.Series[0].ItemsSource = data;
+                        
+                    targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));
                     
                         // count max,min,latest,total for display purposes
                     double latest = 0, minim = 9999999999999, maxim = 0, totalCount = 0;
@@ -157,8 +179,6 @@ namespace Flurrystics
         private void LoadUpXMLEvents(Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
         {
             App.lastRequest = Util.getCurrentTimestamp();
-            string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
-            string StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-31));
             String queryURL = StartDate + " - " + EndDate;
 
             WebClient w = new WebClient();
@@ -210,8 +230,10 @@ namespace Flurrystics
                 );
         }
 
-        private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+        private void updatePivot()
         {
+            if (lastPivotItem == MainPivot.SelectedIndex) { return; } // protection against calling this twice for the same thing
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
@@ -241,8 +263,13 @@ namespace Flurrystics
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
                     break;
-
             } // switch
+            lastPivotItem = MainPivot.SelectedIndex;
+        }
+
+        private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            updatePivot();  
         }
 
         private void EventsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -260,9 +287,7 @@ namespace Flurrystics
             // Reset selected index to -1 (no selection)
             EventsListBox.SelectedIndex = -1;
         }
-
-        private bool firstTime = true;
-
+   
         private void EventsMetricsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         { // change event metrics
             if (!firstTime) // do not execute for the first time
@@ -284,6 +309,11 @@ namespace Flurrystics
                 info.DisplayContent = dataPoint.Value * 1000;
             }
             e.Header = date.ToString("MMMM-yyyy");
+        }
+
+        private void timeRangeOption_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TimeRange.xaml", UriKind.Relative));
         }
 
     } // class
