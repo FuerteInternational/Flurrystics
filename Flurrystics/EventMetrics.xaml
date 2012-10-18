@@ -36,14 +36,13 @@
         <!--Pivot Control-->
         <controls:Pivot x:Name="MainPivot">
 
-            <controls:Pivot.TitleTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
-                        <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                    </StackPanel>
-                </DataTemplate>
-            </controls:Pivot.TitleTemplate>
+            <controls:Pivot.Title>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
+                    <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                    <TextBlock x:Name="SubTitle" Text="SUBTITLE" Style="{StaticResource PhoneTextNormalStyle}" Margin="4,0,0,11" VerticalAlignment="Bottom" />
+                </StackPanel>
+            </controls:Pivot.Title>
 
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>

@@ -39,7 +39,7 @@ namespace Flurrystics
             }
             catch (KeyNotFoundException)
             {
-                NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+                // NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             }
 
             // Set the data context of the listbox control to the sample data

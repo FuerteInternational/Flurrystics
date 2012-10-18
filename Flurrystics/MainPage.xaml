@@ -10,11 +10,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Flurrystics"
     local:TiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="Transparent"
+    shell:SystemTray.Opacity="0"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -23,15 +26,13 @@
         </Grid.Background>
         <!--Pivot Control-->
         <controls:Pivot x:Name="MainPivot">
-            
-            <controls:Pivot.TitleTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
-                        <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                    </StackPanel>
-                </DataTemplate>
-            </controls:Pivot.TitleTemplate>
+
+            <controls:Pivot.Title>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
+                    <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                </StackPanel>
+            </controls:Pivot.Title>
 
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
@@ -88,27 +89,5 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-
-    <!-- Animated page transition -->
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition             Mode="BackwardIn" />
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition             Mode="ForwardIn" />
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition             Mode="BackwardOut" />
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition             Mode="ForwardOut" />
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
 
 </phone:PhoneApplicationPage>

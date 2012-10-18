@@ -7,6 +7,9 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <SolidColorBrush x:Key="flurry_green" Color="#66b240"/>
+        <SolidColorBrush x:Key="flurry_blue" Color="#15a5d8"/>
+        <SolidColorBrush x:Key="flurry_orange" Color="#fcaf17"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

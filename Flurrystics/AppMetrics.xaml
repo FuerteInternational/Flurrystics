@@ -28,15 +28,14 @@
         <!--Pivot Control-->
         <controls:Pivot x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged">
 
-            <controls:Pivot.TitleTemplate>
-                <DataTemplate>
+            <controls:Pivot.Title>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
                         <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                        <TextBlock x:Name="SubTitle" Text="SUBTITLE" Style="{StaticResource PhoneTextNormalStyle}" Margin="4,0,0,11" VerticalAlignment="Bottom" />
                     </StackPanel>
-                </DataTemplate>
-            </controls:Pivot.TitleTemplate>
-
+            </controls:Pivot.Title>
+         
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" FontSize="40" Margin="0,40,0,0" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
@@ -66,9 +65,15 @@
 -->
 
                     <telerikChart:RadCartesianChart x:Name="chart1">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
-                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5"
-                                                                />
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
                         <telerikChart:RadCartesianChart.VerticalAxis>
@@ -79,9 +84,9 @@
                             <telerikChart:LineSeries 
                                 ItemsSource="{Binding}"
                                 ValueBinding="Value"
-                                CategoryBinding="Label"
-                                
-                                Stroke="Orange" StrokeThickness="5">
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
  
                             </telerikChart:LineSeries>
                         </telerikChart:RadCartesianChart.Series>
@@ -398,27 +403,5 @@
             <shell:ApplicationBarIconButton x:Name="pinOption" IconUri="/Images/flurryst_icon_bar_pin.png" Text="Pin"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
-
-    <!-- Animated page transition -->
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition             Mode="BackwardIn" />
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition             Mode="ForwardIn" />
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition             Mode="BackwardOut" />
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition             Mode="ForwardOut" />
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
 
 </phone:PhoneApplicationPage>

@@ -59,9 +59,9 @@ namespace Flurrystics
             }
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
-            MainPivot.Title = "FLURRYSTICS - " + appName; 
-
-
+            //SubTitle. = "FLURRYSTICS - " + appName;
+            SubTitle.Text = "- " + appName;
+            
         }
 
         private void Perform(Action myMethod, int delayInMilliseconds)
@@ -119,7 +119,7 @@ namespace Flurrystics
                     // MainListBox.ItemsSource = data;
 
                     }
-                        catch (NotSupportedException e) // it's not XML - probably API overload
+                        catch (NotSupportedException) // it's not XML - probably API overload
                     {
                         //MessageBox.Show("Flurry API overload, please try again later.");
                     }
@@ -163,7 +163,7 @@ namespace Flurrystics
                     EventsListBox.ItemsSource = data;
 
                 }
-                catch (NotSupportedException e) // it's not XML - probably API overload
+                catch (NotSupportedException) // it's not XML - probably API overload
                 {
                     //MessageBox.Show("Flurry API overload, please try again later.");
                 }

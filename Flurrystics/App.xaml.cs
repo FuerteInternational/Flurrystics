@@ -12,6 +12,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Telerik.Windows.Controls.Primitives;
+using Telerik.Windows.Controls;
 
 namespace Flurrystics
 {
@@ -24,7 +26,8 @@ namespace Flurrystics
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
-        public TransitionFrame RootFrame { get; private set; }
+        //public PhoneApplicationFrame RootFrame { get; private set; }
+        public RadPhoneApplicationFrame RootFrame { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -122,6 +125,17 @@ namespace Flurrystics
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
+            RadPhoneApplicationFrame frame = new RadPhoneApplicationFrame();
+            RootFrame = frame;
+            RootFrame.Navigated += CompleteInitializePhoneApplication;
+            // Handle navigation failures
+            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+            // Ensure we don't initialize again
+            phoneApplicationInitialized = true;
+            /*
+
+            // Create the frame but don't set it as RootVisual yet; this allows the splash
+            // screen to remain active until the application is ready to render.
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
@@ -130,6 +144,7 @@ namespace Flurrystics
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
+             * */
         }
 
         // Do not add any additional code to this method

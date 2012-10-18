@@ -49,7 +49,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
-            MainPivot.Title = "FLURRYSTICS - " + appName + " - " + eventName;
+            SubTitle.Text = "- " + appName + " - " + eventName;
 
             this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 
@@ -148,7 +148,7 @@ namespace Flurrystics
                     chart3.DataSource = data;
 
                     }
-                        catch (NotSupportedException e) // it's not XML - probably API overload
+                        catch (NotSupportedException) // it's not XML - probably API overload
                     {
                         //MessageBox.Show("Flurry API overload, please try again later.");
                     }
