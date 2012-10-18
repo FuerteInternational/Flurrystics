@@ -141,11 +141,49 @@ namespace Flurrystics
                                    Label = Util.stripOffYear(DateTime.Parse((string)query.Attribute("date")))
                                };
                    
-                    LoadUpXMLEventParameters(loadedData,0,true);                    
+                    LoadUpXMLEventParameters(loadedData,0,true);
 
-                    chart1.DataSource = data;
-                    chart2.DataSource = data;
-                    chart3.DataSource = data;
+                    // count max,min,latest,total for display purposes
+                    double latest = 0, minim = 9999999999999, maxim = 0, totalCount = 0;
+                    double latest2 = 0, minim2 = 9999999999999, maxim2 = 0, totalCount2 = 0;
+                    double latest3 = 0, minim3 = 9999999999999, maxim3 = 0, totalCount3 = 0;
+                    IEnumerator<ChartDataPoint> enumerator = data.GetEnumerator();
+                    while (enumerator.MoveNext())
+                    {
+                        ChartDataPoint oneValue = enumerator.Current;
+
+                        latest = oneValue.Value1;
+                        minim = Math.Min(minim, oneValue.Value1);
+                        maxim = Math.Max(maxim, oneValue.Value1);
+                        totalCount = totalCount + oneValue.Value1;
+                        
+                        latest2 = oneValue.Value2;
+                        minim2 = Math.Min(minim2, oneValue.Value2);
+                        maxim2 = Math.Max(maxim2, oneValue.Value2);
+                        totalCount2 = totalCount2 + oneValue.Value2;
+                        
+                        latest3 = oneValue.Value3;
+                        minim3 = Math.Min(minim, oneValue.Value3);
+                        maxim3 = Math.Max(maxim, oneValue.Value3);
+                        totalCount3 = totalCount3 + oneValue.Value3;
+                    }
+
+                    tile1.Count = (int)latest;
+                    tile2.Count = (int)minim;
+                    tile3.Count = (int)maxim;
+                    total1.Text = totalCount.ToString();
+                    tile4.Count = (int)latest2;
+                    tile5.Count = (int)minim2;
+                    tile6.Count = (int)maxim2;
+                    total2.Text = totalCount2.ToString();
+                    tile7.Count = (int)latest3;
+                    tile8.Count = (int)minim3;
+                    tile9.Count = (int)maxim3;
+                    total3.Text = totalCount3.ToString();
+
+                    chart1.Series[0].ItemsSource = data;
+                    chart2.Series[0].ItemsSource = data;
+                    chart3.Series[0].ItemsSource = data;
 
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
