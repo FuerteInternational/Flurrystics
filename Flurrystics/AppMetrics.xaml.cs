@@ -59,8 +59,7 @@ namespace Flurrystics
             }
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
-            //SubTitle. = "FLURRYSTICS - " + appName;
-            SubTitle.Text = "- " + appName;
+            SubTitle.Text = "FLURRYSTICS - " + appName;
             
         }
 
@@ -82,7 +81,8 @@ namespace Flurrystics
         
         }
 
-        private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
+        private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar, 
+                                        RadHubTile t1, RadHubTile t2, RadHubTile t3, TextBlock tb)
         {
             App.lastRequest = Util.getCurrentTimestamp();
             string EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
@@ -111,12 +111,24 @@ namespace Flurrystics
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;
                     progressBar.IsIndeterminate = false;
 
-                    //targetChart.DataContext = data;
                     targetChart.Series[0].ItemsSource = data;
-                    //targetChart.Series[0].ItemsSource = new double[] { 20, 30, 50, 10, 60, 40, 20, 80 };
+                    
+                        // count max,min,latest,total for display purposes
+                    double latest = 0, minim = 9999999999999, maxim = 0, totalCount = 0;
+                    IEnumerator<ChartDataPoint> enumerator = data.GetEnumerator();
+                    while (enumerator.MoveNext())
+                        {
+                            ChartDataPoint oneValue = enumerator.Current;
+                            latest = oneValue.Value;
+                            minim = Math.Min(minim, oneValue.Value);
+                            maxim = Math.Max(maxim, oneValue.Value);
+                            totalCount = totalCount + oneValue.Value;
+                        }
 
-                    //targetChart.DataSource = data;
-                    // MainListBox.ItemsSource = data;
+                    t1.Count = (int)latest;
+                    t2.Count = (int)minim;
+                    t3.Count = (int)maxim;
+                    tb.Text = totalCount.ToString();
 
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
@@ -182,28 +194,28 @@ namespace Flurrystics
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, tile1, tile2, tile3, total1), 1000);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    //this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, tile4, tile5, tile6, total2), 1000);
                     break;
                 case 2:     //ActiveUsers
-                    //this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, tile7, tile8, tile9, total3), 1000);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    //this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, tile10, tile11, tile12, total4), 1000);
                     break;
                 case 4:     //ActiveUsers
-                    //this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, tile13, tile14, tile15, total5), 1000);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    //this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, tile16, tile17, tile18, total6), 1000);
                     break;
                 case 6:     //ActiveUsers
-                    //this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, tile19, tile20, tile21, total7), 1000);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    //this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, tile22, tile23, tile24, total8), 1000);
                     break;
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
@@ -228,16 +240,16 @@ namespace Flurrystics
             EventsListBox.SelectedIndex = -1;
         }
 
-        private int count = 1;
+        private bool firstTime = true;
 
         private void EventsMetricsListPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         { // change event metrics
-            if (count > 1) // do not execute for the first time
+            if (!firstTime) // do not execute for the first time
             {
                 progressBar9.Visibility = System.Windows.Visibility.Visible;
                 this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
             }
-            else count=2;
+            else firstTime=false;
         }
 
         private void ChartTrackBallBehavior_TrackInfoUpdated(object sender, Telerik.Windows.Controls.TrackBallInfoEventArgs e)

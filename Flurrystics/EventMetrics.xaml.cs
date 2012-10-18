@@ -49,7 +49,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
-            SubTitle.Text = "- " + appName + " - " + eventName;
+            SubTitle.Text = "FLURRYSTICS - " + appName + " - " + eventName;
 
             this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 

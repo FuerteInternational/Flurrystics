@@ -12,13 +12,20 @@
     xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
     xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
     xmlns:telerikChartSpecialized="clr-namespace:Telerik.Windows.Controls.Chart;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    telerikCore:InteractionEffectManager.IsInteractionEnabled="True"
     xmlns:local="clr-namespace:Flurrystics"
     local:TiltEffect.IsTiltEnabled="True"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.BackgroundColor="Transparent"
+    shell:SystemTray.Opacity="0"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot">
@@ -26,13 +33,11 @@
             <ImageBrush ImageSource="Images/b2.png" />
         </Grid.Background>
         <!--Pivot Control-->
-        <controls:Pivot x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged">
+        <controls:Pivot x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged" >
 
             <controls:Pivot.Title>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
-                        <TextBlock Text="Flurrysticks" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                        <TextBlock x:Name="SubTitle" Text="SUBTITLE" Style="{StaticResource PhoneTextNormalStyle}" Margin="4,0,0,11" VerticalAlignment="Bottom" />
+                    <TextBlock x:Name="SubTitle" Text="FLURRYSTICKS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,20,0,0" VerticalAlignment="Bottom" />
                     </StackPanel>
             </controls:Pivot.Title>
          
@@ -41,30 +46,30 @@
                     <TextBlock Text="{Binding}" FontSize="40" Margin="0,40,0,0" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                 </DataTemplate>
             </controls:Pivot.HeaderTemplate>
-
+    
             <!--Pivot item one-->
             <controls:PivotItem Header="Active Users">
 
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-                    <!--
-                    <amq:SerialChart x:Name="chart1" LegendVisibility="Collapsed"
-                            CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
--->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile1" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile2" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile3" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart1">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total1" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0">
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -112,19 +117,50 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart2" LegendVisibility="Collapsed" 
-                            CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile4" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile5" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile6" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total2" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar2"
@@ -146,19 +182,50 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel3" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart3" LegendVisibility="Collapsed"
-                            CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile7" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile8" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile9" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total3" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar3"
@@ -179,19 +246,50 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel4" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart4" LegendVisibility="Collapsed" 
-                                        CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile10" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile11" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile12" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total4" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart4" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar4"
@@ -213,19 +311,51 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel5" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart5" LegendVisibility="Collapsed"
-                            CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile13" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile14" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile15" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total5" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart5" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
+
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar5"
@@ -246,19 +376,50 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel6" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart6" LegendVisibility="Collapsed" 
-                                        CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile16" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile17" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile18" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total6" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart6" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar6"
@@ -280,19 +441,50 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel7" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart7" LegendVisibility="Collapsed"
-                            CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile19" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile20" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile21" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total7" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart7" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar7"
@@ -313,19 +505,51 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel8" Grid.Row="1" Margin="12,0,12,0">
 
-                    <amq:SerialChart x:Name="chart8" LegendVisibility="Collapsed" 
-                                        CategoryValueMemberPath="Label"
-                            AxisForeground="White"
-                            PlotAreaBackground="Transparent"
-                            GridStroke="DarkGray">
-                        <amq:SerialChart.Graphs>
-                            <amq:AreaGraph ValueMemberPath="Value">
-                                <amq:AreaGraph.Brush>
-                                    <SolidColorBrush Color="{StaticResource PhoneAccentColor}" />
-                                </amq:AreaGraph.Brush>
-                            </amq:AreaGraph>
-                        </amq:SerialChart.Graphs>
-                    </amq:SerialChart>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <telerikPrimitives:RadHubTile Name="tile22" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
+                        <telerikPrimitives:RadHubTile Name="tile23" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
+                        <telerikPrimitives:RadHubTile Name="tile24" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+
+                        <TextBlock Name="total8" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                               />
+                    </StackPanel>
+
+                    <telerikChart:RadCartesianChart x:Name="chart8" Margin="0,200,10,0">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                                                             MajorLinesVisibility="Y"
+                                                             MajorYLinesRenderMode="All"                                                             
+                                                             />
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis />
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:RadCartesianChart.Series>
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_green}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+                        </telerikChart:RadCartesianChart.Series>
+
+                    </telerikChart:RadCartesianChart>
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar8"
@@ -346,26 +570,25 @@
 
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel9" Grid.Row="1" Margin="12,0,12,0">
-
-                    <toolkit:ListPicker x:Name="EventsMetricsListPicker"
-                                        SelectedIndex="6"
+                <telerikInput:RadListPicker 
+                     x:Name="EventsMetricsListPicker"
                                         Header="Select Event Metric"
                                         SelectionChanged="EventsMetricsListPicker_SelectionChanged"
                                         >
                         
-                        <toolkit:ListPicker.ItemTemplate>
+                        <telerikInput:RadListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding LineOne}" />
                             </DataTemplate>
-                        </toolkit:ListPicker.ItemTemplate>
-                        
-                        <toolkit:ListPicker.FullModeItemTemplate>
+                        </telerikInput:RadListPicker.ItemTemplate>
+
+                        <telerikInput:RadListPicker.PopupItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding LineOne}" FontSize="40" Margin="0,0,0,12" />
+                                <TextBlock Text="{Binding LineOne}" />
                             </DataTemplate>
-                        </toolkit:ListPicker.FullModeItemTemplate>
+                        </telerikInput:RadListPicker.PopupItemTemplate>
                         
-                    </toolkit:ListPicker>
+                    </telerikInput:RadListPicker>
 
                     <ListBox x:Name="EventsListBox" Margin="0,127,-12,0" ItemsSource="{Binding Items}" SelectionChanged="EventsListBox_SelectionChanged" Height="469">
                         <ListBox.ItemTemplate>
