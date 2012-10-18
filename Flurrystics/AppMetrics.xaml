@@ -68,7 +68,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -76,7 +79,6 @@
                                                              />
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
-
                             <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
@@ -91,7 +93,7 @@
                                 CategoryBinding="Label"         
                                 Stroke="{StaticResource flurry_green}" 
                                 StrokeThickness="6">
- 
+
                             </telerikChart:LineSeries>
                         </telerikChart:RadCartesianChart.Series>
 
@@ -132,7 +134,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -197,7 +202,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -261,7 +269,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart4" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart4" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -326,7 +337,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart5" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart5" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -391,7 +405,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart6" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart6" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -456,7 +473,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart7" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart7" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -521,7 +541,10 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart8" Margin="0,200,10,0">
+                    <telerikChart:RadCartesianChart x:Name="chart8" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                        <telerikChart:RadCartesianChart.Behaviors>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                        </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
                                                              MajorLinesVisibility="Y"
@@ -574,7 +597,7 @@
                                         Header="Select Event Metric"
                                         SelectionChanged="EventsMetricsListPicker_SelectionChanged"
                                         >
-                        
+
                         <telerikInput:RadListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding LineOne}" />
@@ -599,6 +622,8 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+
+                <TextBlock Name="NoEvents" Text="No Events Available" Visibility="Collapsed" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneAccentBrush}" />
 
                     <toolkit:PerformanceProgressBar 
                         x:Name="progressBar9"

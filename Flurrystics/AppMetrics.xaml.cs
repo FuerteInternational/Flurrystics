@@ -128,7 +128,17 @@ namespace Flurrystics
                     t1.Count = (int)latest;
                     t2.Count = (int)minim;
                     t3.Count = (int)maxim;
-                    tb.Text = totalCount.ToString();
+                    switch (metrics)
+                    {
+                        case "MedianSessionLength":
+                        case "AvgSessionLength":
+                            tb.Text = "N/A"; // makes no sense for these metrics
+                            break;
+                        default:
+                            tb.Text = totalCount.ToString();
+                            break;
+                    }
+                    
 
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
@@ -172,7 +182,18 @@ namespace Flurrystics
 
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;
                     progressBar.IsIndeterminate = false;
-                    EventsListBox.ItemsSource = data;
+                    List<AppViewModel> check = data.ToList();
+                    if (check.Count > 0)
+                    {
+                        EventsListBox.ItemsSource = data;
+                        NoEvents.Visibility = System.Windows.Visibility.Collapsed;
+                        EventsMetricsListPicker.IsEnabled = true;
+                    }
+                    else // show no events available
+                    {
+                        NoEvents.Visibility = System.Windows.Visibility.Visible;
+                        EventsMetricsListPicker.IsEnabled = false;
+                    }
 
                 }
                 catch (NotSupportedException) // it's not XML - probably API overload
@@ -255,7 +276,6 @@ namespace Flurrystics
         private void ChartTrackBallBehavior_TrackInfoUpdated(object sender, Telerik.Windows.Controls.TrackBallInfoEventArgs e)
         {
             DateTime date = DateTime.Now;
-            /*
             foreach (DataPointInfo info in e.Context.DataPointInfos)
             {
                 CategoricalDataPoint dataPoint = info.DataPoint as CategoricalDataPoint;
@@ -263,9 +283,7 @@ namespace Flurrystics
                 info.DisplayHeader = info.Series.DisplayName + ": ";
                 info.DisplayContent = dataPoint.Value * 1000;
             }
-
             e.Header = date.ToString("MMMM-yyyy");
-            */
         }
 
     } // class

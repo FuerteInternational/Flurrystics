@@ -83,13 +83,14 @@ namespace Flurrystics
                                     };              
                     IEnumerator<Data> enumerator = dataParam.GetEnumerator();
                     int index = 0;
+                    IEnumerable<AppViewModel> dataParams = null;
                     while (enumerator.MoveNext())
                     {
                         Data dataParamValues = enumerator.Current;
                         if (addParam) {  
                             ParamKeys.Add(new AppViewModel { LineOne = dataParamValues.key });
                         }
-                            var dataParams = from query in dataParamValues.content
+                            dataParams = from query in dataParamValues.content
                                                         orderby (int)query.Attribute("totalCount") descending
                                                         select new AppViewModel
                                                        {
@@ -104,8 +105,33 @@ namespace Flurrystics
                             Debug.WriteLine("Processing line: " + index);
                             index = index + 1;                            
                     }
-            
-            ParametersMetricsListPicker.ItemsSource = ParamKeys; 
+                    
+
+          if (ParamKeys.Count > 1)
+                    {
+                        ParametersMetricsListPicker.ItemsSource = ParamKeys;
+                        ParametersMetricsListPicker.IsEnabled = true;
+                        NoParameters.Visibility = System.Windows.Visibility.Collapsed;
+
+                        List<AppViewModel> check = dataParams.ToList();
+                        if (check.Count > 0)
+                        {
+                            NoParameters.Visibility = System.Windows.Visibility.Collapsed;
+                            ParametersMetricsListPicker.IsEnabled = true;
+                        }
+                        else // show no events available
+                        {
+                            NoParameters.Visibility = System.Windows.Visibility.Visible;
+                            ParametersMetricsListPicker.IsEnabled = false;
+                        }
+
+                    }
+                    else
+                    {
+                        ParametersMetricsListPicker.IsEnabled = false;
+                        NoParameters.Visibility = System.Windows.Visibility.Visible;
+                    }
+
             progressBar1.Visibility = System.Windows.Visibility.Collapsed;
             progressBar1.IsIndeterminate = false;
         }
