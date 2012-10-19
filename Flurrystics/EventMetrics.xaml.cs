@@ -223,7 +223,13 @@ namespace Flurrystics
                     tile8.Count = (int)minim3;
                     tile9.Count = (int)maxim3;
                     total3.Text = totalCount3.ToString();
-                    int setInterval = Util.getLabelInterval(DateTime.Parse(StartDate), DateTime.Parse(EndDate));
+                    List<ChartDataPoint> count = data.ToList();
+                    int setInterval = 5; // default
+                    if (count != null)
+                    {
+                        setInterval = Util.getLabelIntervalByCount(count.Count);
+                    }
+                    else setInterval = Util.getLabelInterval(DateTime.Parse(StartDate), DateTime.Parse(EndDate));
                     chart1.Series[0].ItemsSource = data;
                     chart1.HorizontalAxis.LabelInterval = setInterval;
                     chart2.Series[0].ItemsSource = data;

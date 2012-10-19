@@ -136,8 +136,14 @@ namespace Flurrystics
                     progressBar.IsIndeterminate = false;
 
                     targetChart.Series[0].ItemsSource = data;
-                        
-                    targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));
+                    List<ChartDataPoint> count = data.ToList();
+
+                    if (count != null)
+                    {
+                        targetChart.HorizontalAxis.LabelInterval = Util.getLabelIntervalByCount(count.Count);
+                    }
+                    else targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));
+                    
                     
                         // count max,min,latest,total for display purposes
                     double latest = 0, minim = 9999999999999, maxim = 0, totalCount = 0;
@@ -175,8 +181,10 @@ namespace Flurrystics
                 });
 
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
+            string callURL = "http://api.flurry.com/appMetrics/" + metrics + "?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate;
+            Debug.WriteLine("Calling URL:" + callURL);
             w.DownloadStringAsync(
-                new Uri("http://api.flurry.com/appMetrics/"+metrics+"?apiAccessCode="+apiKey+"&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
+                new Uri(callURL)
                 );
         }
 

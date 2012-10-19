@@ -50,9 +50,13 @@ namespace Flurrystics
         {
             radDatePicker1.Value = DateTime.Parse(StartDate);
             radDatePicker2.Value = DateTime.Parse(EndDate);
-            radDatePicker2.MinValue = DateTime.Parse(StartDate).AddDays(1);
-            radDatePicker2.MaxValue = DateTime.Now;
+
             radDatePicker1.MaxValue = DateTime.Parse(EndDate).AddDays(-1);
+            radDatePicker1.MinValue = DateTime.Parse(EndDate).AddDays(-1).AddYears(-1);
+
+            radDatePicker2.MinValue = DateTime.Parse(StartDate);
+            radDatePicker2.MaxValue = DateTime.Now;
+            
         }
 
         private void saveDates()
