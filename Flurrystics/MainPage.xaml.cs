@@ -14,41 +14,120 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Reactive;
 using System.Xml.Linq;
 using System.IO.IsolatedStorage;
+using System.IO;
 using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Threading;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Collections.ObjectModel;
 
 namespace Flurrystics
 {
     public partial class MainPage : PhoneApplicationPage
     {
 
-        string apiKey;
+        IsolatedStorageFile myFile = IsolatedStorageFile.GetUserStoreForApplication();
+        string sFile = "Data.txt";
+        ApiKeysContainer apiKeys = new ApiKeysContainer();
+        ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
 
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+            myFile = IsolatedStorageFile.GetUserStoreForApplication();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            try
+            LoadApiKeyData();
+            //MainPivot.ItemsSource = null;
+            PivotItems.Clear();
+            first = true;
+            foreach (string info in apiKeys.Names)
             {
-                apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
+                PivotItems.Add(new AppViewModel{ LineOne = info });
             }
-            catch (KeyNotFoundException)
-            {
-                // NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
-            }
-
-            // Set the data context of the listbox control to the sample data
-            //DataContext = App.ViewModel;
-            //this.Loaded += new RoutedEventHandler(MainPage_Loaded)
-            this.Perform(() => LoadUpXML(), 1000);
+            MainPivot.ItemsSource = PivotItems;
+            this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
         }
 
-        private void LoadUpXML()
+        private void LoadApiKeyData()
+        {
+            //myFile.DeleteFile(sFile);
+            if (!myFile.FileExists(sFile))
+            {
+                IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);
+                dataFile.Close();
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ApiKeysContainer));
+
+            //Reading and loading data
+            StreamReader reader = new StreamReader(new IsolatedStorageFileStream(sFile, FileMode.Open, myFile));
+
+            try
+            {
+                apiKeys = (ApiKeysContainer)serializer.Deserialize(reader);
+            }
+            catch (InvalidOperationException) // XML doesnt exists probably - redirect user to settings to add ONE
+            {
+                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-1", UriKind.Relative));
+            }
+
+            reader.Close();
+          
+        }
+
+        private void SaveApiKeyData()
+        {
+            //myFile.DeleteFile(sFile);
+            if (!myFile.FileExists(sFile))
+            {
+                IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);
+                dataFile.Close();
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ApiKeysContainer));
+
+            //Reading and loading data
+            StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(sFile, FileMode.OpenOrCreate, myFile));
+
+            serializer.Serialize(writer, apiKeys); // this is for save
+
+            // apiKeys = (ApiKeysContainer)serializer.Deserialize(writer); // this is for load
+
+            writer.Close();
+
+        }
+
+        private T FindFirstElementInVisualTree<T>(DependencyObject parentElement) where T : DependencyObject
+        {
+            var count = VisualTreeHelper.GetChildrenCount(parentElement);
+            if (count == 0)
+                return null;
+
+            for (int i = 0; i < count; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parentElement, i);
+
+                if (child != null && child is T)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    var result = FindFirstElementInVisualTree<T>(child);
+                    if (result != null)
+                        return result;
+
+                }
+            }
+            return null;
+        }
+
+        private void LoadUpXML(int pivotIndex)
         {
             App.lastRequest = Util.getCurrentTimestamp();
             var w = new WebClient();
@@ -65,15 +144,19 @@ namespace Flurrystics
                     }
                     catch (WebException) // load failed, probably wrong apiKey - goto settings
                     {
-                        NavigationService.Navigate(new Uri("/Settings.xaml?error=yes", UriKind.Relative));
+                        NavigationService.Navigate(new Uri("/Settings.xaml?error=yes&pivotIndex="+pivotIndex, UriKind.Relative));
                     }
 
                     if (loadedData != null)
                     {
 
                         //XDocument loadedData = XDocument.Load("getAllApplications.xml");
-                        PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
-                        item.Header = (string)loadedData.Root.Attribute("companyName");
+                        PivotItem pi = (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(pivotIndex); // got out pivot item
+                        //PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
+                        // pi.Header = (string)loadedData.Root.Attribute("companyName");
+                        string cName = (string)loadedData.Root.Attribute("companyName");
+                        PivotItems.ElementAt(pivotIndex).LineOne = cName;
+                        apiKeys.Names[pivotIndex] = cName;
                         var data = from query in loadedData.Descendants("application")
                                    orderby (string)query.Attribute("name")
                                    select new AppViewModel
@@ -84,9 +167,15 @@ namespace Flurrystics
                                        LineFive = getIconFileForPlatform(((String)query.Attribute("platform")).Trim()),
                                        LineFour = (string)query.Attribute("apiKey")
                                    };
-                        progressBar1.Visibility = System.Windows.Visibility.Collapsed;
-                        progressBar1.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
-                        MainListBox.ItemsSource = data;
+
+                        
+                        // now lets find out ListBox and ProgressBar
+                        ListBox l = FindFirstElementInVisualTree<ListBox>(pi);
+                        ProgressBar p = FindFirstElementInVisualTree<ProgressBar>(pi);
+
+                        p.Visibility = System.Windows.Visibility.Collapsed;
+                        p.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
+                        l.ItemsSource = data;
                     }
                 }
                 catch (NotSupportedException)
@@ -99,9 +188,15 @@ namespace Flurrystics
             if (Util.InternetIsAvailable()) // if Internet is available - go download and process our feed
             {
                 w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
-                w.DownloadStringAsync(
-                    new Uri("http://api.flurry.com/appInfo/getAllApplications?apiAccessCode=" + apiKey)
-                    );
+                try
+                {
+                    w.DownloadStringAsync(
+                        new Uri("http://api.flurry.com/appInfo/getAllApplications?apiAccessCode=" + apiKeys.Strings[MainPivot.SelectedIndex])
+                        );
+                }
+                catch (ArgumentOutOfRangeException)
+                { // probably nothing yet specified
+                }
 
             }
             else
@@ -135,7 +230,7 @@ namespace Flurrystics
         return output;
         }
 
-        private void Perform(Action myMethod, int delayInMilliseconds)
+        private void Perform(Action myMethod, int delayInMilliseconds, int constDelay)
         {
 
             long diff = Util.getCurrentTimestamp() - App.lastRequest;
@@ -147,51 +242,76 @@ namespace Flurrystics
             }
 
             BackgroundWorker worker = new BackgroundWorker();
-            worker.DoWork += (s, e) => Thread.Sleep(throttledDelay);
+            worker.DoWork += (s, e) => Thread.Sleep(throttledDelay + constDelay);
             worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
             worker.RunWorkerAsync();
 
         }
 
-
         // Handle selection changed on ListBox
         private void MainListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ListBox current = (ListBox)sender;
             // If selected index is -1 (no selection) do nothing
-            if (MainListBox.SelectedIndex == -1)
+            if (current.SelectedIndex == -1)
                 return;
 
             // Navigate to the new page
-            AppViewModel selected = (AppViewModel)MainListBox.Items[MainListBox.SelectedIndex];
-            NavigationService.Navigate(new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKey + "&appName=" + selected.LineOne, UriKind.Relative));
-                
-                // .SelectedIndex, UriKind.Relative));
-
+            AppViewModel selected = (AppViewModel)current.Items[current.SelectedIndex];
+            NavigationService.Navigate(new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne, UriKind.Relative));               
+            // .SelectedIndex, UriKind.Relative));
             // Reset selected index to -1 (no selection)
-            MainListBox.SelectedIndex = -1;
+            current.SelectedIndex = -1;
         }
 
         private void SettingsOption_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
-            //Do work for your application here.
+            NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex="+MainPivot.SelectedIndex, UriKind.Relative));
+        }
+
+        private void SettingsOptionAdd_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-1", UriKind.Relative));
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
-        
 
-        // Load data for the ViewModel Items
-        /*
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private bool first = true;
+        private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
+            if (!first)
             {
-                App.ViewModel.LoadData();
+                Pivot current = (Pivot)sender;
+                if (current.Items.Count > 0)
+                {
+                    this.Perform(() => LoadUpXML(current.SelectedIndex), 1000,0);
+                }
             }
-        }*/
+            else first = false;
+        }
+    }
+
+    [XmlRoot]
+    public class ApiKeysContainer
+    {
+        private List<string> strings = new List<string>();
+        public List<string> Strings { get { return strings; } set { strings = value; } }
+
+        private List<string> names = new List<string>();
+        public List<string> Names { get { return names; } set { names = value; } }
+    }
+
+    public class MyPivotItems
+    {
+        public string MyPivotItem
+        {
+            get;
+            set;
+        }
 
     }
+
 }

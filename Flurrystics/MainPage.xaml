@@ -25,7 +25,7 @@
             <ImageBrush ImageSource="Images/b2.png" />
         </Grid.Background>
         <!--Pivot Control-->
-        <controls:Pivot x:Name="MainPivot">
+        <controls:Pivot x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged" >
 
             <controls:Pivot.Title>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -36,44 +36,46 @@
 
             <controls:Pivot.HeaderTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" Margin="0,0,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
+                    <TextBlock Text="{Binding LineOne}" Margin="0,0,0,0" Style="{StaticResource PhoneTextTitle1Style}" />
                 </DataTemplate>
             </controls:Pivot.HeaderTemplate>
+               
+            <controls:Pivot.ItemTemplate>
+                <DataTemplate>
+                    <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
+                    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                        <ListBox x:Name="MainListBox" Margin="0,0,-12,0"  
+                                 SelectionChanged="MainListBox_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,10" Width="432" Height="80">
+                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                        <Image Source="{Binding LineFive}" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Right" Stretch="None" />
+                                        <StackPanel Orientation="Horizontal" Margin="12,40,0,0">
+                                            <TextBlock Text="Created: " TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                                            <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" />
+                                        </StackPanel>
 
-            <!--Pivot item one-->
-            <controls:PivotItem Header="loading...">
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
 
-                <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-                    <ListBox x:Name="MainListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}" SelectionChanged="MainListBox_SelectionChanged">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,0,0,10" Width="432" Height="80">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
-                                    <Image Source="{Binding LineFive}" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Right" Stretch="None" />
-                                    <StackPanel Orientation="Horizontal" Margin="12,40,0,0">
-                                        <TextBlock Text="Created: " TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
-                                        <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" />
-                                    </StackPanel>
+                        </ListBox>
 
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
+                        <toolkit:PerformanceProgressBar 
+                            x:Name="progressBar1"
+                            Width="400"
+                            Height="40"
+                            IsIndeterminate="True" 
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Visibility="Visible" 
+                            />
 
-                    </ListBox>
-
-              <toolkit:PerformanceProgressBar 
-                x:Name="progressBar1"
-                Width="400"
-                Height="40"
-                IsIndeterminate="True" 
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
-                Visibility="Visible" 
-                />
-
-                </Grid>
-            </controls:PivotItem>
+                    </Grid>
+                </DataTemplate>
+            </controls:Pivot.ItemTemplate>
+            
         </controls:Pivot>
     </Grid>
  
@@ -82,7 +84,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBarIconButton x:Name="SettingsOption" Click="SettingsOption_Click" IconUri="/Images/appbar.feature.settings.rest.png" Text="Settings" />
             <shell:ApplicationBarIconButton x:Name="DeleteOption" IconUri="/Images/appbar.delete.rest.png" Text="Delete" />
-            <shell:ApplicationBarIconButton x:Name="AddOption" IconUri="/Images/appbar.add.rest.png" Text="Add" />
+            <shell:ApplicationBarIconButton x:Name="AddOption" IconUri="/Images/appbar.add.rest.png" Text="Add" Click="SettingsOptionAdd_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="About" Click="ApplicationBarMenuItem_Click" />
             </shell:ApplicationBar.MenuItems>

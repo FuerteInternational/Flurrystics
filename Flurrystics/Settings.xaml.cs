@@ -13,33 +13,44 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.IO.IsolatedStorage;
 using System.Windows.Navigation;
+using System.Diagnostics;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace Flurrystics
 {
     public partial class Settings : PhoneApplicationPage
     {
-
-        string apiKey;
         string error;
+        int apiIndex;
+        IsolatedStorageFile myFile = IsolatedStorageFile.GetUserStoreForApplication();
+        string sFile = "Data.txt";
+        ApiKeysContainer apiKeys = new ApiKeysContainer();
 
         public Settings()
         {
             InitializeComponent();
-            try
-            {
-                apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
-            }
-            catch (KeyNotFoundException)
-            {
-                apiKey = "no-api-key";
-            }
-            apiKeyTextBox.Text = apiKey;
+            myFile = IsolatedStorageFile.GetUserStoreForApplication();
         }
 
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             NavigationContext.QueryString.TryGetValue("error", out error);
+            apiIndex = 0;
+
+                string pivotIndex;
+                NavigationContext.QueryString.TryGetValue("pivotIndex", out pivotIndex);
+                Debug.WriteLine("Settings:" + pivotIndex);
+                apiIndex = int.Parse(pivotIndex);
+
+            LoadApiKeyData();
+
+            if (apiIndex >= 0)
+            {
+                apiKeyTextBox.Text = apiKeys.Strings[apiIndex]; 
+            }
 
             if (error!=null) { ErrorBox.Visibility = System.Windows.Visibility.Visible; } else
                 ErrorBox.Visibility = System.Windows.Visibility.Collapsed;
@@ -47,8 +58,21 @@ namespace Flurrystics
 
         private void SettingsSave_Click(object sender, EventArgs e)
         {
-            IsolatedStorageSettings.ApplicationSettings["apikey"] = apiKeyTextBox.Text;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            //IsolatedStorageSettings.ApplicationSettings["apikey"] = apiKeyTextBox.Text;
+            //IsolatedStorageSettings.ApplicationSettings.Save();
+
+            if (apiIndex < 0) // add new account
+            {
+                apiKeys.Strings.Add(apiKeyTextBox.Text);
+                apiKeys.Names.Add("loading...");
+            }
+            else
+            {
+                apiKeys.Strings[apiIndex] = apiKeyTextBox.Text;
+            }
+
+            SaveApiKeyData();
+
             NavigationService.GoBack();
         }
 
@@ -65,6 +89,51 @@ namespace Flurrystics
             };
 
             task.Show();
+        }
+
+        private void LoadApiKeyData()
+        {
+            //myFile.DeleteFile(sFile);
+            if (!myFile.FileExists(sFile))
+            {
+                IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);
+                dataFile.Close();
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ApiKeysContainer));
+
+            //Reading and loading data
+            StreamReader reader = new StreamReader(new IsolatedStorageFileStream(sFile, FileMode.Open, myFile));
+            try
+            {
+                apiKeys = (ApiKeysContainer)serializer.Deserialize(reader);
+            }
+            catch (InvalidOperationException) { }
+
+            reader.Close();
+
+        }
+
+        private void SaveApiKeyData()
+        {
+            //myFile.DeleteFile(sFile);
+            if (!myFile.FileExists(sFile))
+            {
+                IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);
+                dataFile.Close();
+            }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(ApiKeysContainer));
+
+            //Reading and loading data
+            StreamWriter writer = new StreamWriter(new IsolatedStorageFileStream(sFile, FileMode.OpenOrCreate, myFile));
+
+            serializer.Serialize(writer, apiKeys); // this is for save
+
+            // apiKeys = (ApiKeysContainer)serializer.Deserialize(writer); // this is for load
+
+            writer.Close();
+
         }
 
     }
