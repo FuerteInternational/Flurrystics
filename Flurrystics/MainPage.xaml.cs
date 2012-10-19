@@ -163,7 +163,7 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)MainListBox.Items[MainListBox.SelectedIndex];
-            NavigationService.Navigate(new Uri("/AppMetrics.xaml?apikey=" + selected.LineFour + "&appName=" + selected.LineOne, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKey + "&appName=" + selected.LineOne, UriKind.Relative));
                 
                 // .SelectedIndex, UriKind.Relative));
 

@@ -40,6 +40,7 @@ namespace Flurrystics
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            /*
             try
             {
                 apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
@@ -48,6 +49,7 @@ namespace Flurrystics
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             }
+             * */
             try
             {
                 EndDate = (string)IsolatedStorageSettings.ApplicationSettings["EndDate"];
@@ -57,13 +59,17 @@ namespace Flurrystics
             {
                 EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
                 StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1).AddMonths(-1));
-            }            
+            }
 
-            NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
+            NavigationContext.QueryString.TryGetValue("apikey", out apiKey);
+            NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
-            SubTitle.Text = "FLURRYSTICS - " + appName + " - " + eventName;
+            String whatTitle = "FLURRYSTICS - " + appName + " - " + eventName;
+            SubTitle.Text = whatTitle;
+            Debug.WriteLine(whatTitle);
             ParamKeys.Clear();
+            NoParameters.Visibility = System.Windows.Visibility.Collapsed;
             this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 
         }

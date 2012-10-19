@@ -55,6 +55,7 @@ namespace Flurrystics
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Debug.WriteLine("OnNavigatedTo");
+            /*
             try
             {
                 apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
@@ -63,6 +64,7 @@ namespace Flurrystics
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
             }
+             * */
 
             try
             {
@@ -73,12 +75,14 @@ namespace Flurrystics
             {             
                 EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
                 StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1).AddMonths(-1));
-            }    
-            NavigationContext.QueryString.TryGetValue("apikey", out appapikey);
+            }
+            NavigationContext.QueryString.TryGetValue("apikey", out apiKey);
+            NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             SubTitle.Text = "FLURRYSTICS - " + appName;
 
             lastPivotItem = -1; // forcing to reset when returning from date settings
+            NoEvents.Visibility = System.Windows.Visibility.Collapsed;
             updatePivot();
             
         }
@@ -206,11 +210,13 @@ namespace Flurrystics
                     if (check.Count > 0)
                     {
                         EventsListBox.ItemsSource = data;
+                        EventsListBox.Visibility = System.Windows.Visibility.Visible;
                         NoEvents.Visibility = System.Windows.Visibility.Collapsed;
                         EventsMetricsListPicker.IsEnabled = true;
                     }
                     else // show no events available
                     {
+                        EventsListBox.Visibility = System.Windows.Visibility.Collapsed;
                         NoEvents.Visibility = System.Windows.Visibility.Visible;
                         EventsMetricsListPicker.IsEnabled = false;
                     }
@@ -280,7 +286,9 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)EventsListBox.Items[EventsListBox.SelectedIndex];
-            NavigationService.Navigate(new Uri("/EventMetrics.xaml?apikey=" + appapikey + "&appName=" + appName + "&eventName=" + selected.LineOne, UriKind.Relative));
+            String calling = "/EventMetrics.xaml?appapikey=" + appapikey + "&apikey="+apiKey+"&appName=" + appName + "&eventName=" + selected.LineOne;
+            Debug.WriteLine("calling: " + calling);
+            NavigationService.Navigate(new Uri(calling, UriKind.Relative));
 
             // .SelectedIndex, UriKind.Relative));
 
