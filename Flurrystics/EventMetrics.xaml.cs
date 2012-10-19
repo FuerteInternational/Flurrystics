@@ -69,6 +69,7 @@ namespace Flurrystics
             SubTitle.Text = whatTitle;
             Debug.WriteLine(whatTitle);
             ParamKeys.Clear();
+            first = true;
             NoParameters.Visibility = System.Windows.Visibility.Collapsed;
             this.Perform(() => LoadUpXMLEventMetrics(), 1000);
 

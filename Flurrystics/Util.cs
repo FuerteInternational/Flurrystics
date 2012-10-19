@@ -47,12 +47,15 @@ namespace Flurrystics
         public static int getLabelInterval(DateTime startD,DateTime endD) {
             TimeSpan t = endD - startD;
             int result = (int)t.TotalDays / 5;
+            if (result == 0) { result = 1; }
             return result;
         }
 
         public static int getLabelIntervalByCount(int c)
         {
-            return (c / 5);
+            int result = c / 5;
+            if (result == 0) { result = 1; }
+            return result;
         }
 
         public class ExitException : Exception { }

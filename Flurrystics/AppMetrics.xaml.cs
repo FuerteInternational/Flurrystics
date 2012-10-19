@@ -140,7 +140,7 @@ namespace Flurrystics
 
                     if (count != null)
                     {
-                        targetChart.HorizontalAxis.LabelInterval = Util.getLabelIntervalByCount(count.Count);
+                         targetChart.HorizontalAxis.LabelInterval = Util.getLabelIntervalByCount(count.Count);
                     }
                     else targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));
                     
