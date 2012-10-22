@@ -64,9 +64,35 @@
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadHubTile Name="tile1" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
-                        <telerikPrimitives:RadHubTile Name="tile2" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
-                        <telerikPrimitives:RadHubTile Name="tile3" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                        <telerikPrimitives:RadCustomHubTile 
+                            Name="tile1" 
+                            Width="130" 
+                            Height="130" 
+                            Title="Latest" 
+                            Background="{StaticResource flurry_green}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="number1" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile2" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="number2" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile3" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="number3" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
@@ -122,9 +148,35 @@
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadHubTile Name="tile4" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
-                        <telerikPrimitives:RadHubTile Name="tile5" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
-                        <telerikPrimitives:RadHubTile Name="tile6" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                        <telerikPrimitives:RadCustomHubTile 
+                            Name="tile4" 
+                            Width="130" 
+                            Height="130" 
+                            Title="Latest" 
+                            Background="{StaticResource flurry_green}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="number4" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile5" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="number5" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile6" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="number6" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
@@ -181,9 +233,35 @@
                 <Grid x:Name="ContentPanel3" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadHubTile Name="tile7" Width="130" Height="130" Title="Latest" Background="{StaticResource flurry_green}"/>
-                        <telerikPrimitives:RadHubTile Name="tile8" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}"/>
-                        <telerikPrimitives:RadHubTile Name="tile9" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}"/>
+                        <telerikPrimitives:RadCustomHubTile 
+                            Name="tile7" 
+                            Width="130" 
+                            Height="130" 
+                            Title="Latest" 
+                            Background="{StaticResource flurry_green}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="number7" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile8" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="number8" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
+                        <telerikPrimitives:RadCustomHubTile Name="tile9" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                            <telerikPrimitives:RadCustomHubTile.FrontContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="number9" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.FrontContent>
+                        </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">

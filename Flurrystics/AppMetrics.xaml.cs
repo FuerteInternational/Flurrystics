@@ -106,7 +106,7 @@ namespace Flurrystics
         }
 
         private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar, 
-                                        RadHubTile t1, RadHubTile t2, RadHubTile t3, TextBlock tb)
+                                        TextBlock t1, TextBlock t2, TextBlock t3, TextBlock tb)
         {
             App.lastRequest = Util.getCurrentTimestamp();
             String queryURL = StartDate + " - " + EndDate;
@@ -157,9 +157,9 @@ namespace Flurrystics
                             totalCount = totalCount + oneValue.Value;
                         }
 
-                    t1.Count = (int)latest;
-                    t2.Count = (int)minim;
-                    t3.Count = (int)maxim;
+                    t1.Text = latest.ToString();    
+                    t2.Text = minim.ToString();
+                    t3.Text = maxim.ToString();
                     switch (metrics)
                     {
                         case "MedianSessionLength":
@@ -251,28 +251,28 @@ namespace Flurrystics
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, tile1, tile2, tile3, total1), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, number1, number2, number3, total1), 1000);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, tile4, tile5, tile6, total2), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, number4, number5, number6, total2), 1000);
                     break;
                 case 2:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, tile7, tile8, tile9, total3), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, number7, number8, number9, total3), 1000);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, tile10, tile11, tile12, total4), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, number10, number11, number12, total4), 1000);
                     break;
                 case 4:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, tile13, tile14, tile15, total5), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, number13, number14, number15, total5), 1000);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, tile16, tile17, tile18, total6), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, number16, number17, number18, total6), 1000);
                     break;
                 case 6:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, tile19, tile20, tile21, total7), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, number19, number20, number21, total7), 1000);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, tile22, tile23, tile24, total8), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, number22, number23, number24, total8), 1000);
                     break;
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);

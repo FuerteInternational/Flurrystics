@@ -212,17 +212,17 @@ namespace Flurrystics
                         totalCount3 = totalCount3 + oneValue.Value3;
                     }
 
-                    tile1.Count = (int)latest;
-                    tile2.Count = (int)minim;
-                    tile3.Count = (int)maxim;
+                    number1.Text = latest.ToString();
+                    number2.Text = minim.ToString();
+                    number3.Text = maxim.ToString();
                     total1.Text = totalCount.ToString();
-                    tile4.Count = (int)latest2;
-                    tile5.Count = (int)minim2;
-                    tile6.Count = (int)maxim2;
+                    number4.Text = latest2.ToString();
+                    number5.Text = minim2.ToString();
+                    number6.Text = maxim2.ToString();
                     total2.Text = totalCount2.ToString();
-                    tile7.Count = (int)latest3;
-                    tile8.Count = (int)minim3;
-                    tile9.Count = (int)maxim3;
+                    number7.Text = latest3.ToString();
+                    number8.Text = minim3.ToString();
+                    number9.Text = maxim3.ToString();
                     total3.Text = totalCount3.ToString();
                     List<ChartDataPoint> count = data.ToList();
                     int setInterval = 5; // default
