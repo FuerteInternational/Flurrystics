@@ -404,7 +404,7 @@
                                HorizontalAlignment="Center"
                                Margin="0,200,0,0" Foreground="{StaticResource PhoneAccentBrush}" />
                     
-                    <ListBox x:Name="ParametersListBox" Margin="0,40,-12,0" ItemsSource="{Binding Items}" Height="469">
+                    <ListBox x:Name="ParametersListBox" Margin="0,40,-12,0" ItemsSource="{Binding Items}" Height="393">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="0,0,0,17" Width="432" Height="50">
