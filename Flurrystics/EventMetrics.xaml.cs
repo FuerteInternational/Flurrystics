@@ -125,9 +125,10 @@ namespace Flurrystics
                             Debug.WriteLine("Processing line: " + index);
                             index = index + 1;                            
                     }
-                    
 
-          if (ParamKeys.Count > 1)
+                    Debug.WriteLine("ParamKeys.Count=" + ParamKeys.Count);
+
+          if (ParamKeys.Count > 0)
                     {
                         ParametersMetricsListPicker.ItemsSource = ParamKeys;
                         ParametersMetricsListPicker.IsEnabled = true;
