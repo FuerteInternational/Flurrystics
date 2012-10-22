@@ -52,8 +52,24 @@ namespace Flurrystics
                 apiKeyTextBox.Text = apiKeys.Strings[apiIndex]; 
             }
 
-            if (error!=null) { ErrorBox.Visibility = System.Windows.Visibility.Visible; } else
+            if (error != null) { 
+                ErrorBox.Visibility = System.Windows.Visibility.Visible;
+                ErrorBox.Text = "Your Flurry API key seems incorrect or another error has occured, please double check it's validity.";
+            }
+            else if (apiIndex == -2)
+            {
+                ErrorBox.Visibility = System.Windows.Visibility.Visible;
+                ErrorBox.Text = "Please add new account, enter Flurry API key.";
+            }
+            else if (apiIndex == -3)
+            {
+                ErrorBox.Visibility = System.Windows.Visibility.Visible;
+                ErrorBox.Text = "Please add at least one account, enter Flurry API key.";
+            }
+            else
                 ErrorBox.Visibility = System.Windows.Visibility.Collapsed;
+
+
         }
 
         private void SettingsSave_Click(object sender, EventArgs e)

@@ -79,7 +79,7 @@ namespace Flurrystics
             }
             catch (InvalidOperationException) // XML doesnt exists probably - redirect user to settings to add ONE
             {
-                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-1", UriKind.Relative));
+                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
             }
 
             reader.Close();
@@ -279,7 +279,7 @@ namespace Flurrystics
 
         private void SettingsOptionAdd_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-1", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-2", UriKind.Relative));
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
