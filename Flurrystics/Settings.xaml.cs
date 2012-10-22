@@ -91,6 +91,18 @@ namespace Flurrystics
             task.Show();
         }
 
+        private void codeTextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Save cursor's position
+            int cursorLocation = apiKeyTextBox.SelectionStart;
+
+            // Uppercase text
+            apiKeyTextBox.Text = apiKeyTextBox.Text.ToUpper();
+
+            // Restore cursor's position
+            apiKeyTextBox.SelectionStart = cursorLocation;
+        }
+
         private void LoadApiKeyData()
         {
             //myFile.DeleteFile(sFile);

@@ -21,6 +21,7 @@ namespace Flurrystics
     {
 
         public static long lastRequest = 0; // timestamp of lastrequest through the app
+        public static long requestCount = 0;
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.

@@ -31,6 +31,7 @@ namespace Flurrystics
         string sFile = "Data.txt";
         ApiKeysContainer apiKeys = new ApiKeysContainer();
         ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
+        private int lastPivotItemCount = 0;
 
         // Constructor
         public MainPage()
@@ -50,6 +51,11 @@ namespace Flurrystics
                 PivotItems.Add(new AppViewModel{ LineOne = info });
             }
             MainPivot.ItemsSource = PivotItems;
+            if (lastPivotItemCount != PivotItems.Count)
+            {
+                lastPivotItemCount = PivotItems.Count;
+                MainPivot.SelectedIndex = lastPivotItemCount - 1;
+            }
             this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
         }
 
