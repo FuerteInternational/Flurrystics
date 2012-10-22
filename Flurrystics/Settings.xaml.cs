@@ -128,7 +128,7 @@ namespace Flurrystics
 
         private void SaveApiKeyData()
         {
-            //myFile.DeleteFile(sFile);
+            myFile.DeleteFile(sFile);
             if (!myFile.FileExists(sFile))
             {
                 IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);

@@ -88,7 +88,7 @@ namespace Flurrystics
 
         private void SaveApiKeyData()
         {
-            //myFile.DeleteFile(sFile);
+            myFile.DeleteFile(sFile);
             if (!myFile.FileExists(sFile))
             {
                 IsolatedStorageFileStream dataFile = myFile.CreateFile(sFile);
@@ -162,7 +162,7 @@ namespace Flurrystics
                         // pi.Header = (string)loadedData.Root.Attribute("companyName");
                         string cName = (string)loadedData.Root.Attribute("companyName");
                         PivotItems.ElementAt(pivotIndex).LineOne = cName;
-                        apiKeys.Names[pivotIndex] = cName;
+                        apiKeys.Names[pivotIndex] = cName; 
                         var data = from query in loadedData.Descendants("application")
                                    orderby (string)query.Attribute("name")
                                    select new AppViewModel
@@ -182,6 +182,8 @@ namespace Flurrystics
                         p.Visibility = System.Windows.Visibility.Collapsed;
                         p.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
                         l.ItemsSource = data;
+                        this.Perform(() => SaveApiKeyData(), 100, 100);
+                        //
                     }
                 }
                 catch (NotSupportedException)
