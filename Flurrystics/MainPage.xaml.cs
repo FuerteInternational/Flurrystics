@@ -300,6 +300,24 @@ namespace Flurrystics
             }
             else first = false;
         }
+
+        private void DeleteOption_Click(object sender, EventArgs e)
+        {
+            int selected = MainPivot.SelectedIndex;
+            //PivotItem selectedItem = (PivotItem)MainPivot.Items[selected];
+            MessageBoxResult m = MessageBox.Show("Are you sure you want to remove account: "+PivotItems[selected].LineOne, "Confirm flurry account removal", MessageBoxButton.OKCancel);
+
+            if (m == MessageBoxResult.OK)
+            { // yes - we gonna delete that account!
+                //ApiKeysContainer apiKeys = new ApiKeysContainer();
+                apiKeys.Strings.RemoveAt(selected);
+                apiKeys.Names.RemoveAt(selected);
+                //ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
+                PivotItems.RemoveAt(selected);
+                if (lastPivotItemCount > 0) { lastPivotItemCount--; }
+                SaveApiKeyData();
+            }            
+        }
     }
 
     [XmlRoot]

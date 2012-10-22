@@ -73,7 +73,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number1" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number1" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -81,7 +81,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number2" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number2" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -89,7 +89,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number3" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number3" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -159,7 +159,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number4" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number4" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -167,7 +167,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number5" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number5" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -175,7 +175,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number6" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number6" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -246,7 +246,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number7" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number7" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -254,7 +254,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number8" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number8" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -262,7 +262,7 @@
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number9" Text="88" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number9" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
                         </telerikPrimitives:RadCustomHubTile>
