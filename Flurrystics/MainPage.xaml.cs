@@ -43,20 +43,31 @@ namespace Flurrystics
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             LoadApiKeyData();
-            //MainPivot.ItemsSource = null;
+            MainPivot.ItemsSource = null;
             PivotItems.Clear();
             first = true;
             foreach (string info in apiKeys.Names)
             {
                 PivotItems.Add(new AppViewModel{ LineOne = info });
             }
-            MainPivot.ItemsSource = PivotItems;
-            if (lastPivotItemCount != PivotItems.Count)
+
+            if (!(PivotItems.Count > 0)) // if no api key present - send user to settings
             {
-                lastPivotItemCount = PivotItems.Count;
-                MainPivot.SelectedIndex = lastPivotItemCount - 1;
+                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
             }
-            this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
+            else
+            {
+
+                MainPivot.ItemsSource = PivotItems;
+                if (lastPivotItemCount != PivotItems.Count)
+                {
+                    lastPivotItemCount = PivotItems.Count;
+                    MainPivot.SelectedIndex = lastPivotItemCount - 1;
+                }
+                else MainPivot.SelectedIndex = MainPivot.SelectedIndex;
+
+                this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
+            }
         }
 
         private void LoadApiKeyData()
