@@ -56,6 +56,12 @@
                                             <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" />
                                         </StackPanel>
 
+                                        <toolkit:ContextMenuService.ContextMenu>
+                                            <toolkit:ContextMenu Name="homescreen">
+                                                <toolkit:MenuItem Header="Pin to homescreen" Click="MenuItem_Click" Foreground="Black" />
+                                            </toolkit:ContextMenu>
+                                        </toolkit:ContextMenuService.ContextMenu>
+
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

@@ -21,6 +21,7 @@ using System.Threading;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Collections.ObjectModel;
+using Microsoft.Phone.Shell;
 
 namespace Flurrystics
 {
@@ -329,6 +330,46 @@ namespace Flurrystics
                 SaveApiKeyData();
             }            
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e) // clicking on context menu item
+        {
+            PivotItem selectedPivotItem = MainPivot.ItemContainerGenerator.ContainerFromIndex(MainPivot.SelectedIndex) as PivotItem;
+            ListBox selectedListBox = FindFirstElementInVisualTree<ListBox>(selectedPivotItem);
+            ListBoxItem selectedListBoxItem = selectedListBox.ItemContainerGenerator.ContainerFromItem((sender as MenuItem).DataContext) as ListBoxItem;
+            //ListBoxItem contextMenuListItem = selectedListBox.ItemContainerGenerator.ContainerFromItem((sender as ContextMenu).DataContext) as ListBoxItem;
+            TextBlock selectedTitle = FindFirstElementInVisualTree<TextBlock>(selectedListBoxItem);
+            string tileParameter = selectedTitle.Text; // selectedListBoxItem.Name; // "Param=" + ((Button)sender).Name;//Use Button.Name to mark Tile 
+            int selectedIndex = selectedListBox.Items.IndexOf(selectedListBoxItem.DataContext);
+            ShellTile tile = CheckIfTileExist(tileParameter);// Check if Tile's title has been used 
+            if (tile == null)
+            {
+                StandardTileData secondaryTile = new StandardTileData
+                {
+                    Title = tileParameter,
+                    BackgroundImage = new Uri("Background.png", UriKind.Relative),
+                    //Count = 0,
+                    //BackContent = "Secondary Tile Test"
+
+                };
+                AppViewModel selected = (AppViewModel)selectedListBox.Items[selectedIndex];
+                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne, UriKind.Relative); 
+                ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+            } 
+
+        }
+
+        private ShellTile CheckIfTileExist(string tileUri)
+        {
+            ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
+                    tile => tile.NavigationUri.ToString().Contains(tileUri));
+            return shellTile;
+        }
+
+        private void homescreen_Opened(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 
     [XmlRoot]
