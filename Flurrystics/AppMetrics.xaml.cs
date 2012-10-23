@@ -35,7 +35,6 @@ namespace Flurrystics
         string StartDate, StartDate2;
         private int lastPivotItem = -1;
         private bool firstTime = true;
-        private TimeSpan timeRange;
         ObservableCollection<AppViewModel> EventMetricsNames = new ObservableCollection<AppViewModel>();
 
         public PivotPage1()
@@ -63,19 +62,20 @@ namespace Flurrystics
                 EndDate = (string)IsolatedStorageSettings.ApplicationSettings["EndDate"];
                 StartDate = (string)IsolatedStorageSettings.ApplicationSettings["StartDate"];
 
-                timeRange = DateTime.Parse(EndDate) - DateTime.Parse(StartDate);
-
-                //StartDate2 = StartDate; EndDate2 = EndDate;
-
-                StartDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(StartDate).AddDays(-timeRange.TotalDays));
-                EndDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(EndDate).AddDays(-timeRange.TotalDays));
-
             }
             catch (KeyNotFoundException) // setting default
             {             
                 EndDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
                 StartDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1).AddMonths(-1));
             }
+
+            TimeSpan timeRange = DateTime.Parse(EndDate) - DateTime.Parse(StartDate);
+
+            //StartDate2 = StartDate; EndDate2 = EndDate;
+
+            StartDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(StartDate).AddDays(-timeRange.TotalDays));
+            EndDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(EndDate).AddDays(-timeRange.TotalDays));
+
             NavigationContext.QueryString.TryGetValue("apikey", out apiKey);
             NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
@@ -126,17 +126,20 @@ namespace Flurrystics
             else  // reset compare chart
             {
                 TextBlock[] totals = { xtotal1, xtotal2, xtotal3, xtotal4, xtotal5, xtotal6, xtotal7, xtotal8 };
-                totals[MainPivot.SelectedIndex].Visibility = System.Windows.Visibility.Collapsed;
+                if (MainPivot.SelectedIndex < 8)
+                {
+                    totals[MainPivot.SelectedIndex].Visibility = System.Windows.Visibility.Collapsed;
+                }
                 targetChart.Series[1].ItemsSource = null;
                 tr1.Visibility = System.Windows.Visibility.Visible;
                 tr2.Visibility = System.Windows.Visibility.Collapsed;                
                 tr1.Text = "(" + DateTime.Parse(sDate).ToShortDateString() + " - " + DateTime.Parse(eDate).ToShortDateString() + ")";
+                VisualStateManager.GoToState(rt1, "NotFlipped", true);
+                VisualStateManager.GoToState(rt2, "NotFlipped", true);
+                VisualStateManager.GoToState(rt3, "NotFlipped", true);
                 rt1.IsFrozen = true;
                 rt2.IsFrozen = true;
                 rt3.IsFrozen = true;
-                VisualStateManager.GoToState(tile1, "Collapsed", true);
-                VisualStateManager.GoToState(tile2, "Collapsed", true);
-                VisualStateManager.GoToState(tile3, "Collapsed", true);
             }
 
             Debug.WriteLine("LoadUpXMLAppMetrics:"+queryURL);
@@ -324,7 +327,7 @@ namespace Flurrystics
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9, StartDate, EndDate), 1000);
                     break;
-                default:
+                default: // else = appmetrics
                     this.Perform(() => LoadUpXMLAppMetrics(AppMetricsStrings[s], targetCharts[s], progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate, EndDate, d1s[s], d2s[s], 0), 1000);
                     break;
             } // switch
@@ -474,13 +477,13 @@ namespace Flurrystics
             {
                 targetChart.Series[1].ItemsSource = null;
                 totals[s].Visibility = System.Windows.Visibility.Collapsed;
+                d2s[s].Visibility = System.Windows.Visibility.Collapsed;
+                VisualStateManager.GoToState(t1s[s], "NotFlipped", true);
+                VisualStateManager.GoToState(t2s[s], "NotFlipped", true);
+                VisualStateManager.GoToState(t3s[s], "NotFlipped", true);
                 t1s[s].IsFrozen = true;
                 t2s[s].IsFrozen = true;
                 t3s[s].IsFrozen = true;
-                d2s[s].Visibility = System.Windows.Visibility.Collapsed;  
-                VisualStateManager.GoToState(t1s[s], "Collapsed", true);
-                VisualStateManager.GoToState(t2s[s], "Collapsed", true);
-                VisualStateManager.GoToState(t3s[s], "Collapsed", true);
             }
         }
 

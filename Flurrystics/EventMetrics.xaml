@@ -69,56 +69,103 @@
                             Width="130" 
                             Height="130" 
                             Title="Latest" 
-                            Background="{StaticResource flurry_green}">
+                            Background="{StaticResource flurry_green}" UpdateInterval="00:00:03.2500000">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number1" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number1" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="change1" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. latest" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile2" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                        <telerikPrimitives:RadCustomHubTile Name="tile2" 
+                                                            UpdateInterval="00:00:03.5000000"
+                                                            Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number2" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number2" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="change2" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile3" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                        <telerikPrimitives:RadCustomHubTile Name="tile3" 
+                                                            UpdateInterval="00:00:03.7500000"
+                                                            Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number3" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number3" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="change3" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
-                        <TextBlock Text="Total:" Margin="0,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                        <TextBlock Name="total1" Text="" Margin="10,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+
+                            <TextBlock Name="total1" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
-                    </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
+                            <TextBlock Name="xtotal1" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                               />
 
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,8,10,0" HorizontalAlignment="Right">
+
+                            <TextBlock Name="date2" Text="(timeRange2)" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" 
+                                       Visibility="Visible" FontSize="12"
+                               Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                            <TextBlock Name="date1" Text="(timeRange1)" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource flurry_red}" 
+                                       Visibility="Collapsed" FontSize="12"
+                                       FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" EmptyContent="" MaxZoom="3,1" FontSize="16">
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
                         </telerikChart:RadCartesianChart.Behaviors>
-
                         <telerikChart:RadCartesianChart.Grid>
                             <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
-                                                             MajorLinesVisibility="Y"
-                                                             MajorYLinesRenderMode="All"                                                             
-                                                             />
+                                                             MajorLinesVisibility="Y" 
+                                                             MajorYLinesRenderMode="All">
+                            </telerikChart:CartesianChartGrid>
+
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
-
                             <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
@@ -131,14 +178,23 @@
                                 ItemsSource="{Binding}"
                                 ValueBinding="Value1"
                                 CategoryBinding="Label"         
-                                Stroke="{StaticResource flurry_green}" 
+                                Stroke="{StaticResource flurry_red}" 
                                 StrokeThickness="6">
 
                             </telerikChart:LineSeries>
+
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value1"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_dimred}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+
                         </telerikChart:RadCartesianChart.Series>
 
                     </telerikChart:RadCartesianChart>
-
 
                 </Grid>
             </controls:PivotItem>
@@ -155,43 +211,92 @@
                             Width="130" 
                             Height="130" 
                             Title="Latest" 
-                            Background="{StaticResource flurry_green}">
+                            Background="{StaticResource flurry_green}" UpdateInterval="00:00:03.2500000">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number4" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number4" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="change4" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. latest" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile5" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                        <telerikPrimitives:RadCustomHubTile Name="tile5" 
+                                                            UpdateInterval="00:00:03.5000000"
+                                                            Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number5" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number5" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="change5" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile6" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                        <telerikPrimitives:RadCustomHubTile Name="tile6" 
+                                                            UpdateInterval="00:00:03.7500000"
+                                                            Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number6" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number6" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="change6" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
-                        <TextBlock Text="Total:" Margin="0,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                        <TextBlock Name="total2" Text="" Margin="10,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
-                               />
-                    </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
+                            <TextBlock Name="total2" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                               />
+
+                            <TextBlock Name="xtotal2" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                               />
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,8,10,0" HorizontalAlignment="Right">
+
+                            <TextBlock Name="date2_2" Text="(timeRange2)" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" 
+                                       Visibility="Visible" FontSize="12"
+                               Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                            <TextBlock Name="date1_2" Text="(timeRange1)" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource flurry_red}" 
+                                       Visibility="Collapsed" FontSize="12"
+                                       FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" FontSize="16" EmptyContent="" MaxZoom="3,1">
 
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
@@ -204,7 +309,6 @@
                                                              />
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
-
                             <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
@@ -217,14 +321,22 @@
                                 ItemsSource="{Binding}"
                                 ValueBinding="Value2"
                                 CategoryBinding="Label"         
-                                Stroke="{StaticResource flurry_green}" 
+                                Stroke="{StaticResource flurry_red}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value2"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_dimred}" 
                                 StrokeThickness="6">
 
                             </telerikChart:LineSeries>
                         </telerikChart:RadCartesianChart.Series>
 
                     </telerikChart:RadCartesianChart>
-
 
                 </Grid>
 
@@ -242,43 +354,93 @@
                             Width="130" 
                             Height="130" 
                             Title="Latest" 
-                            Background="{StaticResource flurry_green}">
+                            Background="{StaticResource flurry_green}" UpdateInterval="00:00:03.2500000">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_green}"/>
-                                    <TextBlock Name="number7" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number7" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_green}"/>
+                                    <TextBlock Name="change7" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. latest" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile8" Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
+                        <telerikPrimitives:RadCustomHubTile Name="tile8" 
+                                                            UpdateInterval="00:00:03.5000000"
+                                                            Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
-                                    <TextBlock Name="number8" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number8" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_blue}"/>
+                                    <TextBlock Name="change8" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile9" Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
+                        <telerikPrimitives:RadCustomHubTile Name="tile9" 
+                                                            UpdateInterval="00:00:03.7500000"
+                                                            Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
-                                    <TextBlock Name="number9" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Name="number9" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.FrontContent>
+                            <telerikPrimitives:RadCustomHubTile.BackContent>
+                                <Grid>
+                                    <Border Background="{StaticResource flurry_orange}"/>
+                                    <TextBlock Name="change9" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                </Grid>
+                            </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10,150,0,0">
-                        <TextBlock Text="Total:" Margin="0,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                            <TextBlock Text="Total:" Margin="0,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                        <TextBlock Name="total3" Text="" Margin="10,0,0,0"
-                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" 
-                               />
-                    </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
+                            <TextBlock Name="total3" Text="" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                               />
+
+                            <TextBlock Name="xtotal3" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                               Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+                               />
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,8,10,0" HorizontalAlignment="Right">
+
+                            <TextBlock Name="date2_3" Text="(timeRange2)" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" 
+                                       Visibility="Visible" FontSize="12"
+                               Style="{StaticResource PhoneTextSmallStyle}" FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                            <TextBlock Name="date1_3" Text="(timeRange1)" Margin="10,0,0,0"
+                               Style="{StaticResource PhoneTextSmallStyle}" Foreground="{StaticResource flurry_red}" 
+                                       Visibility="Collapsed" FontSize="12"
+                                       FontFamily="{StaticResource PhoneFontFamilyLight}" 
+                               />
+
+                        </StackPanel>
+
+                    </Grid>
+
+                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" FontSize="16" EmptyContent="" MaxZoom="3,1">
 
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
@@ -304,7 +466,16 @@
                                 ItemsSource="{Binding}"
                                 ValueBinding="Value3"
                                 CategoryBinding="Label"         
-                                Stroke="{StaticResource flurry_green}" 
+                                Stroke="{StaticResource flurry_red}" 
+                                StrokeThickness="6">
+
+                            </telerikChart:LineSeries>
+
+                            <telerikChart:LineSeries 
+                                ItemsSource="{Binding}"
+                                ValueBinding="Value3"
+                                CategoryBinding="Label"         
+                                Stroke="{StaticResource flurry_dimred}" 
                                 StrokeThickness="6">
 
                             </telerikChart:LineSeries>
@@ -312,9 +483,9 @@
 
                     </telerikChart:RadCartesianChart>
 
-
                 </Grid>
             </controls:PivotItem>
+
 
             <!--Pivot item four-->
             <!-- DISABLED FOR NOW -->
@@ -428,7 +599,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="timeRangeOption" Click="timeRangeOption_Click" IconUri="/Images/flurryst_icon_bar_date.png" Text="Time Range"/>
-            <shell:ApplicationBarIconButton x:Name="compareOption" IconUri="/Images/flurryst_icon_bar_compare.png" Text="Compare"/>
+            <shell:ApplicationBarIconButton x:Name="compareOption" IconUri="/Images/flurryst_icon_bar_compare.png" Text="Compare" Click="compareOption_Click"/>
             <shell:ApplicationBarIconButton x:Name="pinOption" IconUri="/Images/flurryst_icon_bar_pin.png" Text="Pin"/>
             <shell:ApplicationBarIconButton x:Name="toggleOption" IconUri="/Images/flurryst_icon_bar_zoom.png" Text="Zoom toggle" Click="toggleOption_Click"/>
         </shell:ApplicationBar>

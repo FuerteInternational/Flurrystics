@@ -58,6 +58,7 @@
                             Width="130" 
                             Height="130" 
                             Title="Latest" 
+                            IsFrozen="True"
                             Background="{StaticResource flurry_green}" UpdateInterval="00:00:03.2500000">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
                                 <Grid>
@@ -73,7 +74,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile2" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile2" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -87,11 +88,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change2" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile3" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile3" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -104,7 +105,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change3" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -116,11 +117,11 @@
                                />
 
 
-                            <TextBlock Name="total1" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total1" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal1" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal1" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -205,7 +206,7 @@
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile4" 
                             Width="130" 
                             Height="130" 
@@ -225,7 +226,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile5" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile5" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -239,11 +240,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change5" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile6" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile6" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -256,7 +257,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change6" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -268,11 +269,11 @@
                                />
 
 
-                            <TextBlock Name="total2" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total2" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal2" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal2" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -358,7 +359,7 @@
                 <Grid x:Name="ContentPanel3" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile7" 
                             Width="130" 
                             Height="130" 
@@ -378,7 +379,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile8" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile8" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -392,11 +393,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change8" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile9" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile9" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -409,7 +410,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change9" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -422,11 +423,11 @@
                                />
 
 
-                            <TextBlock Name="total3" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total3" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal3" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal3" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -512,7 +513,7 @@
                 <Grid x:Name="ContentPanel4" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile10" 
                             Width="130" 
                             Height="130" 
@@ -532,7 +533,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile11" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile11" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -546,11 +547,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change11" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile12" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile12" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -563,7 +564,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change12" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -576,11 +577,11 @@
                                />
 
 
-                            <TextBlock Name="total4" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total4" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal4" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal4" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -667,7 +668,7 @@
                 <Grid x:Name="ContentPanel5" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile13" 
                             Width="130" 
                             Height="130" 
@@ -687,7 +688,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile14" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile14" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -701,11 +702,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change14" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile15" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile15" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -718,7 +719,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change15" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -731,11 +732,11 @@
                                />
 
 
-                            <TextBlock Name="total5" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total5" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal5" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal5" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -822,7 +823,7 @@
                 <Grid x:Name="ContentPanel6" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile16" 
                             Width="130" 
                             Height="130" 
@@ -842,7 +843,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile17" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile17" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -856,11 +857,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change17" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile18" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile18" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -873,7 +874,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change18" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -886,11 +887,11 @@
                                />
 
 
-                            <TextBlock Name="total6" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total6" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal6" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal6" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -977,7 +978,7 @@
                 <Grid x:Name="ContentPanel7" Grid.Row="1" Margin="12,0,12,0">
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile19" 
                             Width="130" 
                             Height="130" 
@@ -997,7 +998,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile20" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile20" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -1011,11 +1012,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change20" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile21" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile21" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -1028,7 +1029,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change21" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -1041,11 +1042,11 @@
                                />
 
 
-                            <TextBlock Name="total7" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total7" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal7" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal7" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -1132,7 +1133,7 @@
 
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <telerikPrimitives:RadCustomHubTile 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" 
                             Name="tile22" 
                             Width="130" 
                             Height="130" 
@@ -1152,7 +1153,7 @@
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile23" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile23" 
                                                             UpdateInterval="00:00:03.5000000"
                                                             Width="130" Height="130" Title="Min" Background="{StaticResource flurry_blue}">
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -1166,11 +1167,11 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_blue}"/>
                                     <TextBlock Name="change23" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
-                        <telerikPrimitives:RadCustomHubTile Name="tile24" 
+                        <telerikPrimitives:RadCustomHubTile IsFrozen="True" Name="tile24" 
                                                             UpdateInterval="00:00:03.7500000"
                                                             Width="130" Height="130" Title="Max" Background="{StaticResource flurry_orange}" >
                             <telerikPrimitives:RadCustomHubTile.FrontContent>
@@ -1183,7 +1184,7 @@
                                 <Grid>
                                     <Border Background="{StaticResource flurry_orange}"/>
                                     <TextBlock Name="change24" Text="" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <TextBlock Text="Prev. min" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="Prev. max" FontSize="20" Margin="10,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
                                 </Grid>
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
@@ -1196,11 +1197,11 @@
                                />
 
 
-                            <TextBlock Name="total8" Text="100" Margin="10,0,0,0"
+                            <TextBlock Name="total8" Text="" Margin="10,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource flurry_red}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
-                            <TextBlock Name="xtotal8" Text="150" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
+                            <TextBlock Name="xtotal8" Text="" Margin="10,0,0,0" Foreground="{StaticResource flurry_dimred}" Visibility="Collapsed"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
                                />
 
@@ -1289,6 +1290,7 @@
                      x:Name="EventsMetricsListPicker"
                                         Header="Select Event Metric"
                                         SelectionChanged="EventsMetricsListPicker_SelectionChanged"
+                    SelectedIndex="6"
                                         >
                         <telerikInput:RadListPicker.ItemTemplate>
                             <DataTemplate>
