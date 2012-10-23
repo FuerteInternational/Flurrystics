@@ -48,10 +48,12 @@
                                  SelectionChanged="MainListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0,0,0,10" Width="432" Height="80">
-                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
+                                    <StackPanel Margin="0,0,0,15" Width="432" >
+                                        <Grid>
+                                        <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                                         <Image Source="{Binding LineFive}" VerticalAlignment="Top" Margin="0,10,0,0" HorizontalAlignment="Right" Stretch="None" />
-                                        <StackPanel Orientation="Horizontal" Margin="12,40,0,0">
+                                        </Grid>
+                                        <StackPanel Orientation="Horizontal" Margin="12,0,0,0">
                                             <TextBlock Text="Created: " TextWrapping="Wrap" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                                             <TextBlock Text="{Binding LineThree}" TextWrapping="Wrap" />
                                         </StackPanel>
@@ -62,7 +64,7 @@
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
 
-                                    </Grid>
+                                    </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
 

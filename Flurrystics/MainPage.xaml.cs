@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
+using System.Diagnostics;
 
 namespace Flurrystics
 {
@@ -58,22 +59,23 @@ namespace Flurrystics
             }
             else
             {
-
                 MainPivot.ItemsSource = PivotItems;
                 if (lastPivotItemCount != PivotItems.Count) 
                 {
                     
                     if (lastPivotItemCount==0) { // on startup
+                        Debug.WriteLine("Setting first position in Pivot");
+                        lastPivotItemCount = PivotItems.Count;
                         MainPivot.SelectedIndex = 0;
                     }
                     else 
                         {
+                            Debug.WriteLine("Setting last position in Pivot");
                             lastPivotItemCount = PivotItems.Count;
                             MainPivot.SelectedIndex = lastPivotItemCount - 1;
                         }
                     
                 }
-                else MainPivot.SelectedIndex = MainPivot.SelectedIndex;
 
                 this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
             }
@@ -349,13 +351,13 @@ namespace Flurrystics
             string tileParameter = selectedTitle.Text; // selectedListBoxItem.Name; // "Param=" + ((Button)sender).Name;//Use Button.Name to mark Tile 
             int selectedIndex = selectedListBox.Items.IndexOf(selectedListBoxItem.DataContext);
             AppViewModel selected = (AppViewModel)selectedListBox.Items[selectedIndex];
-            ShellTile tile = CheckIfTileExist(selected.LineFour);// Check if Tile's title has been used 
+            ShellTile tile = CheckIfTileExist(selected.LineFour);// Check if Tile's title has been used  
             if (tile == null)
             {
                 StandardTileData secondaryTile = new StandardTileData
                 {
                     Title = tileParameter,
-                    BackgroundImage = new Uri("Background.png", UriKind.Relative),
+                    BackgroundImage = new Uri("Background2.png", UriKind.Relative),
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
 

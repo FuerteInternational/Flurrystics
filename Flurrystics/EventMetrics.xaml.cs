@@ -282,7 +282,7 @@ namespace Flurrystics
                 StandardTileData secondaryTile = new StandardTileData
                 {
                     Title = appName,
-                    BackgroundImage = new Uri("Background.png", UriKind.Relative),
+                    BackgroundImage = new Uri("Background2.png", UriKind.Relative),
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
 

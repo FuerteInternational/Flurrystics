@@ -105,7 +105,7 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                    <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
@@ -119,7 +119,7 @@
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
 
-                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
                         <telerikChart:RadCartesianChart.VerticalAxis>
@@ -191,7 +191,7 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                    <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
@@ -205,7 +205,7 @@
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
 
-                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
                         <telerikChart:RadCartesianChart.VerticalAxis>
@@ -278,7 +278,7 @@
                                />
                     </StackPanel>
 
-                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" MaxZoom="3,1" EmptyContent="">
+                    <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
@@ -292,7 +292,7 @@
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
 
-                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
                         <telerikChart:RadCartesianChart.VerticalAxis>
@@ -348,7 +348,7 @@
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
 
-                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="None" LabelInterval="5" />
+                            <telerikChart:DateTimeCategoricalAxis LabelFitMode="Rotate" LabelInterval="5" />
                         </telerikChart:RadCartesianChart.HorizontalAxis>
 
                         <telerikChart:RadCartesianChart.VerticalAxis>
