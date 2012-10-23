@@ -125,6 +125,8 @@ namespace Flurrystics
             }
             else  // reset compare chart
             {
+                TextBlock[] totals = { xtotal1, xtotal2, xtotal3, xtotal4, xtotal5, xtotal6, xtotal7, xtotal8 };
+                totals[MainPivot.SelectedIndex].Visibility = System.Windows.Visibility.Collapsed;
                 targetChart.Series[1].ItemsSource = null;
                 tr1.Visibility = System.Windows.Visibility.Visible;
                 tr2.Visibility = System.Windows.Visibility.Collapsed;                
@@ -299,35 +301,31 @@ namespace Flurrystics
         
         private void updatePivot()
         {
+
+            Telerik.Windows.Controls.RadCartesianChart[] targetCharts = { chart1, chart2, chart3, chart4, chart5, chart6, chart7, chart8 };
+            PerformanceProgressBar[] progressBars = { progressBar1, progressBar2, progressBar3, progressBar4, progressBar5, progressBar6, progressBar7, progressBar8 };
+            RadCustomHubTile[] t1s = { tile1, tile4, tile7, tile10, tile13, tile16, tile19, tile22 };
+            RadCustomHubTile[] t2s = { tile2, tile5, tile8, tile11, tile14, tile17, tile20, tile23 };
+            RadCustomHubTile[] t3s = { tile3, tile6, tile9, tile12, tile15, tile18, tile21, tile24 };
+            TextBlock[] c1s = { number1, number4, number7, number10, number13, number16, number19, number22 };
+            TextBlock[] c2s = { number2, number5, number8, number11, number14, number17, number20, number23 };
+            TextBlock[] c3s = { number3, number6, number9, number12, number15, number18, number21, number24 };
+            TextBlock[] totals = { total1, total2, total3, total4, total5, total6, total7, total8 };
+            TextBlock[] d1s = { date1, date1_2, date1_3, date1_4, date1_5, date1_6, date1_7, date1_8 };
+            TextBlock[] d2s = { date2, date2_2, date2_3, date2_4, date2_5, date2_6, date2_7, date2_8 };
+
+            int s = MainPivot.SelectedIndex;
+
+            string[] AppMetricsStrings = { "ActiveUsers", "ActiveUsersByWeek", "ActiveUsersByMonth", "NewUsers", "MedianSessionLength", "AvgSessionLength", "Sessions", "RetainedUsers" };
+
             if (lastPivotItem == MainPivot.SelectedIndex) { return; } // protection against calling this twice for the same thing
             switch (MainPivot.SelectedIndex)
             {
-                case 0:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, tile1,tile2,tile3,number1, number2, number3, total1, StartDate, EndDate,date1,date2, 0), 1000);
-                    break;
-                case 1:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, tile1, tile2, tile3, number4, number5, number6, total2, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 2:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, tile1, tile2, tile3, number7, number8, number9, total3, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 3:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, tile1, tile2, tile3, number10, number11, number12, total4, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 4:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, tile1, tile2, tile3, number13, number14, number15, total5, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 5:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, tile1, tile2, tile3, number16, number17, number18, total6, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 6:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, tile1, tile2, tile3, number19, number20, number21, total7, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
-                case 7:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, tile1, tile2, tile3, number22, number23, number24, total8, StartDate, EndDate, date1, date2, 0), 1000);
-                    break;
                 case 8: // Events
                     this.Perform(() => LoadUpXMLEvents(progressBar9, StartDate, EndDate), 1000);
+                    break;
+                default:
+                    this.Perform(() => LoadUpXMLAppMetrics(AppMetricsStrings[s], targetCharts[s], progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate, EndDate, d1s[s], d2s[s], 0), 1000);
                     break;
             } // switch
             lastPivotItem = MainPivot.SelectedIndex;
@@ -469,7 +467,6 @@ namespace Flurrystics
             int s = MainPivot.SelectedIndex;
 
             targetChart = targetCharts[s];
-            PerformanceProgressBar targetBar = progressBars[s];
 
             if (targetChart.Series[1].ItemsSource == null) {
                 this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", targetChart, progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate2, EndDate2, d1s[s], d2s[s], 1), 1000);
