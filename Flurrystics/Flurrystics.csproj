@@ -200,6 +200,12 @@
     <Content Include="Images\flurryst_iconjava.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\flurryst_iconpinit1.png" />
+    <Resource Include="Images\flurryst_iconpinit2.png" />
+    <Resource Include="Images\flurryst_iconpinit3.png" />
+    <Resource Include="Images\flurryst_iconpinit4.png" />
+    <Resource Include="Images\flurryst_iconpinit5.png" />
+    <Resource Include="Images\flurryst_iconpinit6.png" />
     <Content Include="Images\flurryst_iconwindows.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

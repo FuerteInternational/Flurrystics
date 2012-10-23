@@ -60,10 +60,18 @@ namespace Flurrystics
             {
 
                 MainPivot.ItemsSource = PivotItems;
-                if (lastPivotItemCount != PivotItems.Count)
+                if (lastPivotItemCount != PivotItems.Count) 
                 {
-                    lastPivotItemCount = PivotItems.Count;
-                    MainPivot.SelectedIndex = lastPivotItemCount - 1;
+                    
+                    if (lastPivotItemCount==0) { // on startup
+                        MainPivot.SelectedIndex = 0;
+                    }
+                    else 
+                        {
+                            lastPivotItemCount = PivotItems.Count;
+                            MainPivot.SelectedIndex = lastPivotItemCount - 1;
+                        }
+                    
                 }
                 else MainPivot.SelectedIndex = MainPivot.SelectedIndex;
 
