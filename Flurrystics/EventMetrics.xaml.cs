@@ -202,6 +202,7 @@ namespace Flurrystics
                     t3s[i].IsFrozen = false;
                     totals2[i].Visibility = System.Windows.Visibility.Visible;
                     d2s[i].Text = "(" + DateTime.Parse(sDate).ToShortDateString() + " - " + DateTime.Parse(eDate).ToShortDateString() + ")";
+                    d2s[i].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             else  // reset compare chart

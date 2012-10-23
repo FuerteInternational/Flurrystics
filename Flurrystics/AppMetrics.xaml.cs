@@ -466,13 +466,14 @@ namespace Flurrystics
             TextBlock[] totals = { xtotal1, xtotal2, xtotal3, xtotal4, xtotal5, xtotal6, xtotal7, xtotal8 };
             TextBlock[] d1s = { date1, date1_2, date1_3, date1_4, date1_5, date1_6, date1_7, date1_8 };
             TextBlock[] d2s = { date2, date2_2, date2_3, date2_4, date2_5, date2_6, date2_7, date2_8 };
+            string[] AppMetricsStrings = { "ActiveUsers", "ActiveUsersByWeek", "ActiveUsersByMonth", "NewUsers", "MedianSessionLength", "AvgSessionLength", "Sessions", "RetainedUsers" };
 
             int s = MainPivot.SelectedIndex;
 
             targetChart = targetCharts[s];
 
             if (targetChart.Series[1].ItemsSource == null) {
-                this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", targetChart, progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate2, EndDate2, d1s[s], d2s[s], 1), 1000);
+                this.Perform(() => LoadUpXMLAppMetrics(AppMetricsStrings[s], targetChart, progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate2, EndDate2, d1s[s], d2s[s], 1), 1000);
             } else
             {
                 targetChart.Series[1].ItemsSource = null;
