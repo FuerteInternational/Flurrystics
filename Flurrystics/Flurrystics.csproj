@@ -51,6 +51,9 @@
     <Reference Include="AmCharts.Windows.QuickCharts.WP">
       <HintPath>..\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
     </Reference>
+    <Reference Include="FlurryWP7SDK">
+      <HintPath>..\packages\FlurryWP7SDK.dll</HintPath>
+    </Reference>
     <Reference Include="JeffWilcox.PhoneThemeManager">
       <HintPath>..\packages\PhoneThemeManager.1.2\lib\sl4-windowsphone71\JeffWilcox.PhoneThemeManager.dll</HintPath>
     </Reference>

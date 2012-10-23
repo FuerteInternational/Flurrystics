@@ -2,6 +2,7 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="Flurrystics" Source="Flurrystics.dll" />
     <AssemblyPart x:Name="AmCharts.Windows.QuickCharts.WP" Source="AmCharts.Windows.QuickCharts.WP.dll" />
+    <AssemblyPart x:Name="FlurryWP7SDK" Source="FlurryWP7SDK.dll" />
     <AssemblyPart x:Name="JeffWilcox.PhoneThemeManager" Source="JeffWilcox.PhoneThemeManager.dll" />
     <AssemblyPart x:Name="Microsoft.Phone.Controls" Source="Microsoft.Phone.Controls.dll" />
     <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />

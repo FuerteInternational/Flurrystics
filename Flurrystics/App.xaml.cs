@@ -72,12 +72,14 @@ namespace Flurrystics
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            FlurryWP7SDK.Api.StartSession("9697X37ZJW956JD76Q3M");
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            FlurryWP7SDK.Api.StartSession("9697X37ZJW956JD76Q3M");
         }
 
         // Code to execute when the application is deactivated (sent to background)

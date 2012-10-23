@@ -44,6 +44,7 @@ namespace Flurrystics
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            FlurryWP7SDK.Api.LogEvent("MainPage");
             LoadApiKeyData();
             MainPivot.ItemsSource = null;
             PivotItems.Clear();

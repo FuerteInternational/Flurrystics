@@ -56,6 +56,7 @@ namespace Flurrystics
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            FlurryWP7SDK.Api.LogEvent("AppMetrics");
             Debug.WriteLine("OnNavigatedTo");
             /*
             try
