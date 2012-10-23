@@ -28,6 +28,7 @@ namespace Flurrystics
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
         string eventName = ""; // eventName
+        string platform = "";
         string EndDate;
         string StartDate;
         XDocument loadedData;
@@ -66,6 +67,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
+            NavigationContext.QueryString.TryGetValue("platform", out platform);
             String whatTitle = "FLURRYSTICS - " + appName + " - " + eventName;
             SubTitle.Text = whatTitle;
             Debug.WriteLine(whatTitle);
@@ -281,13 +283,13 @@ namespace Flurrystics
             {
                 StandardTileData secondaryTile = new StandardTileData
                 {
-                    Title = appName,
+                    Title = Util.shrinkString(appName),
                     BackgroundImage = new Uri("Background2.png", UriKind.Relative),
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
 
                 };
-                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName, UriKind.Relative);
+                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName +"&platform="+platform, UriKind.Relative);
                 ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
             }
             else

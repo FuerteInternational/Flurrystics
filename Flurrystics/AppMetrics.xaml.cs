@@ -29,6 +29,7 @@ namespace Flurrystics
         string apiKey;
         string appapikey = ""; // initial apikey of the app
         string appName = ""; // appName
+        string platform = ""; // platform
         string[] EventMetrics = { "usersLastDay", "usersLastWeek", "usersLastMonth", "avgUsersLastDay", "avgUsersLastWeek", "avgUsersLastMonth", "totalSessions", "totalCount" };
         string EndDate;
         string StartDate;
@@ -80,6 +81,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("apikey", out apiKey);
             NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
+            NavigationContext.QueryString.TryGetValue("platform", out platform);
             SubTitle.Text = "FLURRYSTICS - " + appName;
 
             lastPivotItem = -1; // forcing to reset when returning from date settings
@@ -295,7 +297,7 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)EventsListBox.Items[EventsListBox.SelectedIndex];
-            String calling = "/EventMetrics.xaml?appapikey=" + appapikey + "&apikey="+apiKey+"&appName=" + appName + "&eventName=" + selected.LineOne;
+            String calling = "/EventMetrics.xaml?appapikey=" + appapikey + "&apikey="+apiKey+"&appName=" + appName + "&eventName=" + selected.LineOne+"&platform="+platform;
             Debug.WriteLine("calling: " + calling);
             NavigationService.Navigate(new Uri(calling, UriKind.Relative));
 
@@ -342,13 +344,13 @@ namespace Flurrystics
             {
                 StandardTileData secondaryTile = new StandardTileData
                 {
-                    Title = appName,
+                    Title = Util.shrinkString(appName),
                     BackgroundImage = new Uri("Background2.png", UriKind.Relative),
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
 
                 };
-                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName, UriKind.Relative);
+                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName+"&platform="+platform, UriKind.Relative);
                 ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
             }
             else

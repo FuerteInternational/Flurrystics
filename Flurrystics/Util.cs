@@ -59,6 +59,16 @@ namespace Flurrystics
             return result;
         }
 
+        public static string shrinkString(String what)
+        {
+            String result = what;
+            if (what.Length > 14)
+            {
+                result = what.Substring(0, 14).Trim() + "...";
+            }
+            return result;
+        }
+
         public class ExitException : Exception { }
 
     }

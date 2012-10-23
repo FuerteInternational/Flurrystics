@@ -288,7 +288,7 @@ namespace Flurrystics
 
             // Navigate to the new page
             AppViewModel selected = (AppViewModel)current.Items[current.SelectedIndex];
-            NavigationService.Navigate(new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne, UriKind.Relative));               
+            NavigationService.Navigate(new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne+"&platform="+selected.LineTwo, UriKind.Relative));               
             // .SelectedIndex, UriKind.Relative));
             // Reset selected index to -1 (no selection)
             current.SelectedIndex = -1;
@@ -356,13 +356,15 @@ namespace Flurrystics
             {
                 StandardTileData secondaryTile = new StandardTileData
                 {
-                    Title = tileParameter,
+                    Title = Util.shrinkString(tileParameter),
                     BackgroundImage = new Uri("Background2.png", UriKind.Relative),
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
+                    //BackContent = "Platform: " + selected.LineTwo,
+                    //BackTitle = tileParameter
 
                 };                
-                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne, UriKind.Relative); 
+                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne+"&platform="+selected.LineTwo, UriKind.Relative); 
                 ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
             }
             else
