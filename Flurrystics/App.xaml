@@ -3,13 +3,17 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone">
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    >
 
     <!--Application Resources-->
     <Application.Resources>
         <SolidColorBrush x:Key="flurry_green" Color="#66b240"/>
         <SolidColorBrush x:Key="flurry_blue" Color="#15a5d8"/>
         <SolidColorBrush x:Key="flurry_orange" Color="#fcaf17"/>
+        <SolidColorBrush x:Key="flurry_red" Color="#de2029" />
+        <SolidColorBrush x:Key="flurry_dimred" Color="#878787" />
         <Style x:Key="MyButton" TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -21,6 +25,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
 
     </Application.Resources>
 

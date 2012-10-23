@@ -108,7 +108,7 @@
                     <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
-                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
                         </telerikChart:RadCartesianChart.Behaviors>
 
                         <telerikChart:RadCartesianChart.Grid>
@@ -194,7 +194,7 @@
                     <telerikChart:RadCartesianChart x:Name="chart2" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
-                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
                         </telerikChart:RadCartesianChart.Behaviors>
 
                         <telerikChart:RadCartesianChart.Grid>
@@ -281,7 +281,7 @@
                     <telerikChart:RadCartesianChart x:Name="chart3" Margin="0,200,10,0" FontSize="16" MaxZoom="3,1" EmptyContent="">
 
                         <telerikChart:RadCartesianChart.Behaviors>
-                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                            <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
                         </telerikChart:RadCartesianChart.Behaviors>
 
                         <telerikChart:RadCartesianChart.Grid>
@@ -430,6 +430,7 @@
             <shell:ApplicationBarIconButton x:Name="timeRangeOption" Click="timeRangeOption_Click" IconUri="/Images/flurryst_icon_bar_date.png" Text="Time Range"/>
             <shell:ApplicationBarIconButton x:Name="compareOption" IconUri="/Images/flurryst_icon_bar_compare.png" Text="Compare"/>
             <shell:ApplicationBarIconButton x:Name="pinOption" IconUri="/Images/flurryst_icon_bar_pin.png" Text="Pin"/>
+            <shell:ApplicationBarIconButton x:Name="toggleOption" IconUri="/Images/flurryst_icon_bar_zoom.png" Text="Zoom toggle" Click="toggleOption_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

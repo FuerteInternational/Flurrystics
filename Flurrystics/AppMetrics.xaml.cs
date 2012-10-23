@@ -31,10 +31,11 @@ namespace Flurrystics
         string appName = ""; // appName
         string platform = ""; // platform
         string[] EventMetrics = { "usersLastDay", "usersLastWeek", "usersLastMonth", "avgUsersLastDay", "avgUsersLastWeek", "avgUsersLastMonth", "totalSessions", "totalCount" };
-        string EndDate;
-        string StartDate;
+        string EndDate,EndDate2;
+        string StartDate, StartDate2;
         private int lastPivotItem = -1;
         private bool firstTime = true;
+        private TimeSpan timeRange;
         ObservableCollection<AppViewModel> EventMetricsNames = new ObservableCollection<AppViewModel>();
 
         public PivotPage1()
@@ -48,7 +49,6 @@ namespace Flurrystics
             EventMetricsNames.Add(new AppViewModel { LineOne = "Avg Users Last Month" });
             EventMetricsNames.Add(new AppViewModel { LineOne = "Total Counts" });
             EventMetricsNames.Add(new AppViewModel { LineOne = "Total Sessions" });
-
             EventsMetricsListPicker.ItemsSource = EventMetricsNames;      
 
         }
@@ -58,21 +58,18 @@ namespace Flurrystics
         {
             FlurryWP7SDK.Api.LogEvent("AppMetrics");
             Debug.WriteLine("OnNavigatedTo");
-            /*
-            try
-            {
-                apiKey = (string)IsolatedStorageSettings.ApplicationSettings["apikey"];
-            }
-            catch (KeyNotFoundException)
-            {
-                NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
-            }
-             * */
-
             try
             {
                 EndDate = (string)IsolatedStorageSettings.ApplicationSettings["EndDate"];
                 StartDate = (string)IsolatedStorageSettings.ApplicationSettings["StartDate"];
+
+                timeRange = DateTime.Parse(EndDate) - DateTime.Parse(StartDate);
+
+                //StartDate2 = StartDate; EndDate2 = EndDate;
+
+                StartDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(StartDate).AddDays(-timeRange.TotalDays));
+                EndDate2 = String.Format("{0:yyyy-MM-dd}", DateTime.Parse(EndDate).AddDays(-timeRange.TotalDays));
+
             }
             catch (KeyNotFoundException) // setting default
             {             
@@ -109,11 +106,36 @@ namespace Flurrystics
         
         }
 
-        private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar, 
-                                        TextBlock t1, TextBlock t2, TextBlock t3, TextBlock tb)
+        private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar,
+                                        RadCustomHubTile rt1, RadCustomHubTile rt2, RadCustomHubTile rt3,
+                                        TextBlock t1, TextBlock t2, TextBlock t3, TextBlock tb, 
+                                        String sDate, String eDate, TextBlock tr1, TextBlock tr2,
+                                        int targetSeries) 
         {
             App.lastRequest = Util.getCurrentTimestamp();
-            String queryURL = StartDate + " - " + EndDate;
+            String queryURL = sDate + " - " + eDate;
+
+            if (targetSeries > 0) { 
+                // progressBar.Visibility = System.Windows.Visibility.Visible;
+                rt1.IsFrozen = false;
+                rt2.IsFrozen = false;
+                rt3.IsFrozen = false;
+                tr2.Visibility = System.Windows.Visibility.Visible;
+                tr2.Text = "(" + DateTime.Parse(sDate).ToShortDateString() + " - " + DateTime.Parse(eDate).ToShortDateString() + ")";
+            }
+            else  // reset compare chart
+            {
+                targetChart.Series[1].ItemsSource = null;
+                tr1.Visibility = System.Windows.Visibility.Visible;
+                tr2.Visibility = System.Windows.Visibility.Collapsed;                
+                tr1.Text = "(" + DateTime.Parse(sDate).ToShortDateString() + " - " + DateTime.Parse(eDate).ToShortDateString() + ")";
+                rt1.IsFrozen = true;
+                rt2.IsFrozen = true;
+                rt3.IsFrozen = true;
+                VisualStateManager.GoToState(tile1, "Collapsed", true);
+                VisualStateManager.GoToState(tile2, "Collapsed", true);
+                VisualStateManager.GoToState(tile3, "Collapsed", true);
+            }
 
             Debug.WriteLine("LoadUpXMLAppMetrics:"+queryURL);
 
@@ -135,26 +157,51 @@ namespace Flurrystics
                                    Value = (double)query.Attribute("value"),
                                    Label = Util.stripOffYear(DateTime.Parse((string)query.Attribute("date")))
                                };
+                    
+                    // for processed data for comparison
+                    ObservableCollection<ChartDataPoint> newData = new ObservableCollection<ChartDataPoint>();
+
+                    if (targetSeries > 0) // if it's compare we have to fake time
+                    {
+                        var previousData = targetChart.Series[0].ItemsSource;
+                        IEnumerator<ChartDataPoint> enumerator = previousData.GetEnumerator() as System.Collections.Generic.IEnumerator<ChartDataPoint>;
+                        int p = 0;
+                        
+                        while (enumerator.MoveNext())
+                        {
+                            ChartDataPoint c = enumerator.Current;
+                            ChartDataPoint n = data.ElementAt(p) as ChartDataPoint;
+                            n.Label = c.Label;
+                            newData.Add(new ChartDataPoint { Value = n.Value, Label = c.Label });
+                            p++;
+                        }
+
+                    }
 
                     progressBar.Visibility = System.Windows.Visibility.Collapsed;
                     progressBar.IsIndeterminate = false;
 
-                    targetChart.Series[0].ItemsSource = data;
-                    List<ChartDataPoint> count = data.ToList();
+                        if (targetSeries>0) {
+                            targetChart.Series[targetSeries].ItemsSource = newData;
+                            targetChart.Series[targetSeries].DisplayName = StartDate2 + " - " + EndDate2; 
+                        } else {
+                            targetChart.Series[targetSeries].ItemsSource = data;
+                        }
+                    
+                    List<ChartDataPoint> count = data.ToList(); 
 
                     if (count != null)
                     {
                          targetChart.HorizontalAxis.LabelInterval = Util.getLabelIntervalByCount(count.Count);
                     }
-                    else targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));
-                    
+                    else targetChart.HorizontalAxis.LabelInterval = Util.getLabelInterval(DateTime.Parse(StartDate),DateTime.Parse(EndDate));                 
                     
                         // count max,min,latest,total for display purposes
                     double latest = 0, minim = 9999999999999, maxim = 0, totalCount = 0;
-                    IEnumerator<ChartDataPoint> enumerator = data.GetEnumerator();
-                    while (enumerator.MoveNext())
+                    IEnumerator<ChartDataPoint> Myenum = data.GetEnumerator();
+                    while (Myenum.MoveNext())
                         {
-                            ChartDataPoint oneValue = enumerator.Current;
+                            ChartDataPoint oneValue = Myenum.Current;
                             latest = oneValue.Value;
                             minim = Math.Min(minim, oneValue.Value);
                             maxim = Math.Max(maxim, oneValue.Value);
@@ -174,7 +221,8 @@ namespace Flurrystics
                             tb.Text = totalCount.ToString();
                             break;
                     }
-                    
+
+                    tb.Visibility = System.Windows.Visibility.Visible;                    
 
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
@@ -185,14 +233,14 @@ namespace Flurrystics
                 });
 
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
-            string callURL = "http://api.flurry.com/appMetrics/" + metrics + "?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate;
+            string callURL = "http://api.flurry.com/appMetrics/" + metrics + "?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + sDate + "&endDate=" + eDate;
             Debug.WriteLine("Calling URL:" + callURL);
             w.DownloadStringAsync(
                 new Uri(callURL)
                 );
         }
 
-        private void LoadUpXMLEvents(Microsoft.Phone.Controls.PerformanceProgressBar progressBar)
+        private void LoadUpXMLEvents(Microsoft.Phone.Controls.PerformanceProgressBar progressBar, String sDate, String eDate)
         {
             App.lastRequest = Util.getCurrentTimestamp();
             String queryURL = StartDate + " - " + EndDate;
@@ -244,7 +292,7 @@ namespace Flurrystics
             w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
             w.DownloadStringAsync(
                 // http://api.flurry.com/eventMetrics/Summary?apiAccessCode=DJBUBP9NE5YBQB5CQKH3&apiKey=HXCWZ1L3CWMVGQM68JPI&startDate=2012-09-01&endDate=2012-09-02
-                new Uri("http://api.flurry.com/eventMetrics/Summary?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + StartDate + "&endDate=" + EndDate)
+                new Uri("http://api.flurry.com/eventMetrics/Summary?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + sDate + "&endDate=" + eDate)
                 );
         }
 
@@ -255,31 +303,31 @@ namespace Flurrystics
             switch (MainPivot.SelectedIndex)
             {
                 case 0:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, number1, number2, number3, total1), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", chart1, progressBar1, tile1,tile2,tile3,number1, number2, number3, total1, StartDate, EndDate,date1,date2, 0), 1000);
                     break;
                 case 1:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, number4, number5, number6, total2), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByWeek", chart2, progressBar2, tile1, tile2, tile3, number4, number5, number6, total2, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 2:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, number7, number8, number9, total3), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("ActiveUsersByMonth", chart3, progressBar3, tile1, tile2, tile3, number7, number8, number9, total3, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 3:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, number10, number11, number12, total4), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("NewUsers", chart4, progressBar4, tile1, tile2, tile3, number10, number11, number12, total4, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 4:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, number13, number14, number15, total5), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("MedianSessionLength", chart5, progressBar5, tile1, tile2, tile3, number13, number14, number15, total5, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 5:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, number16, number17, number18, total6), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("AvgSessionLength", chart6, progressBar6, tile1, tile2, tile3, number16, number17, number18, total6, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 6:     //ActiveUsers
-                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, number19, number20, number21, total7), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("Sessions", chart7, progressBar7, tile1, tile2, tile3, number19, number20, number21, total7, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 7:     //ActiveUsersByWeek
-                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, number22, number23, number24, total8), 1000);
+                    this.Perform(() => LoadUpXMLAppMetrics("RetainedUsers", chart8, progressBar8, tile1, tile2, tile3, number22, number23, number24, total8, StartDate, EndDate, date1, date2, 0), 1000);
                     break;
                 case 8: // Events
-                    this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
+                    this.Perform(() => LoadUpXMLEvents(progressBar9, StartDate, EndDate), 1000);
                     break;
             } // switch
             lastPivotItem = MainPivot.SelectedIndex;
@@ -313,7 +361,7 @@ namespace Flurrystics
             if (!firstTime) // do not execute for the first time
             {
                 progressBar9.Visibility = System.Windows.Visibility.Visible;
-                this.Perform(() => LoadUpXMLEvents(progressBar9), 1000);
+                this.Perform(() => LoadUpXMLEvents(progressBar9, StartDate, EndDate), 1000);
             }
             else firstTime=false;
         }
@@ -366,6 +414,77 @@ namespace Flurrystics
             ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
                     tile => tile.NavigationUri.ToString().Contains(tileUri));
             return shellTile;
+        }
+
+        private void toggleOption_Click(object sender, EventArgs e)
+        {
+            ChartPanAndZoomBehavior b = chart1.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b2 = chart2.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b3 = chart3.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b4 = chart4.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b5 = chart5.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b6 = chart6.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b7 = chart7.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b8 = chart8.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            if (b.PanMode == ChartPanZoomMode.Horizontal)
+            {
+                b.PanMode = ChartPanZoomMode.None;
+                b.ZoomMode = ChartPanZoomMode.None;
+                ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IconUri = new Uri("/Images/flurryst_icon_bar_zoom.png", UriKind.Relative);
+            }
+            else
+            {
+                b.PanMode = ChartPanZoomMode.Horizontal;
+                b.ZoomMode = ChartPanZoomMode.Horizontal;
+                ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IconUri = new Uri("/Images/flurryst_icon_bar_zoomcancel.png", UriKind.Relative);
+            }
+
+            b2.ZoomMode = b.ZoomMode; b2.PanMode = b.PanMode;
+            b3.ZoomMode = b.ZoomMode; b3.PanMode = b.PanMode;
+            b4.ZoomMode = b.ZoomMode; b4.PanMode = b.PanMode;
+            b5.ZoomMode = b.ZoomMode; b5.PanMode = b.PanMode;
+            b6.ZoomMode = b.ZoomMode; b6.PanMode = b.PanMode;
+            b7.ZoomMode = b.ZoomMode; b7.PanMode = b.PanMode;
+            b8.ZoomMode = b.ZoomMode; b8.PanMode = b.PanMode;
+        }
+
+        private void compareOption_Click(object sender, EventArgs e)
+        {
+
+            if (MainPivot.SelectedIndex > 7) { return; } // do nothing for events - there's no compare
+
+            Telerik.Windows.Controls.RadCartesianChart targetChart;
+            Telerik.Windows.Controls.RadCartesianChart[] targetCharts = { chart1, chart2, chart3, chart4, chart5, chart6, chart7, chart8 };
+            PerformanceProgressBar[] progressBars = { progressBar1, progressBar2, progressBar3, progressBar4, progressBar5, progressBar6, progressBar7, progressBar8 };
+            RadCustomHubTile[] t1s = { tile1, tile4, tile7, tile10, tile13, tile16, tile19, tile22 };
+            RadCustomHubTile[] t2s = { tile2, tile5, tile8, tile11, tile14, tile17, tile20, tile23 };
+            RadCustomHubTile[] t3s = { tile3, tile6, tile9, tile12, tile15, tile18, tile21, tile24 };
+            TextBlock[] c1s = { change1, change4, change7, change10, change13, change16, change19, change22 };
+            TextBlock[] c2s = { change2, change5, change8, change11, change14, change17, change20, change23 };
+            TextBlock[] c3s = { change3, change6, change9, change12, change15, change18, change21, change24 };
+            TextBlock[] totals = { xtotal1, xtotal2, xtotal3, xtotal4, xtotal5, xtotal6, xtotal7, xtotal8 };
+            TextBlock[] d1s = { date1, date1_2, date1_3, date1_4, date1_5, date1_6, date1_7, date1_8 };
+            TextBlock[] d2s = { date2, date2_2, date2_3, date2_4, date2_5, date2_6, date2_7, date2_8 };
+
+            int s = MainPivot.SelectedIndex;
+
+            targetChart = targetCharts[s];
+            PerformanceProgressBar targetBar = progressBars[s];
+
+            if (targetChart.Series[1].ItemsSource == null) {
+                this.Perform(() => LoadUpXMLAppMetrics("ActiveUsers", targetChart, progressBars[s], t1s[s], t2s[s], t3s[s], c1s[s], c2s[s], c3s[s], totals[s], StartDate2, EndDate2, d1s[s], d2s[s], 1), 1000);
+            } else
+            {
+                targetChart.Series[1].ItemsSource = null;
+                totals[s].Visibility = System.Windows.Visibility.Collapsed;
+                t1s[s].IsFrozen = true;
+                t2s[s].IsFrozen = true;
+                t3s[s].IsFrozen = true;
+                d2s[s].Visibility = System.Windows.Visibility.Collapsed;  
+                VisualStateManager.GoToState(t1s[s], "Collapsed", true);
+                VisualStateManager.GoToState(t2s[s], "Collapsed", true);
+                VisualStateManager.GoToState(t3s[s], "Collapsed", true);
+            }
         }
 
     } // class

@@ -19,6 +19,10 @@ using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.Phone.Shell;
+using Telerik.Charting;
+using Telerik.Windows.Controls;
+using System.Diagnostics;
+using Microsoft.Phone.Shell;
 
 namespace Flurrystics
 {
@@ -305,6 +309,28 @@ namespace Flurrystics
             ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
                     tile => tile.NavigationUri.ToString().Contains(tileUri));
             return shellTile;
+        }
+
+        private void toggleOption_Click(object sender, EventArgs e)
+        {
+            ChartPanAndZoomBehavior b = chart1.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b2 = chart2.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            ChartPanAndZoomBehavior b3 = chart3.Behaviors.ElementAt(0) as ChartPanAndZoomBehavior;
+            if (b.PanMode == ChartPanZoomMode.Horizontal)
+            {
+                b.PanMode = ChartPanZoomMode.None;
+                b.ZoomMode = ChartPanZoomMode.None;
+                ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IconUri = new Uri("/Images/flurryst_icon_bar_zoom.png", UriKind.Relative);
+            }
+            else
+            {
+                b.PanMode = ChartPanZoomMode.Horizontal;
+                b.ZoomMode = ChartPanZoomMode.Horizontal;
+                ((ApplicationBarIconButton)ApplicationBar.Buttons[3]).IconUri = new Uri("/Images/flurryst_icon_bar_zoomcancel.png", UriKind.Relative);
+            }
+
+            b2.ZoomMode = b.ZoomMode; b2.PanMode = b.PanMode;
+            b3.ZoomMode = b.ZoomMode; b3.PanMode = b.PanMode;
         }
 
     } // class
