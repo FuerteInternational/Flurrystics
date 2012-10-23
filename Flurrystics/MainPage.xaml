@@ -57,8 +57,8 @@
                                         </StackPanel>
 
                                         <toolkit:ContextMenuService.ContextMenu>
-                                            <toolkit:ContextMenu Name="homescreen">
-                                                <toolkit:MenuItem Header="Pin to homescreen" Click="MenuItem_Click" Foreground="Black" />
+                                            <toolkit:ContextMenu Name="homescreen" IsZoomEnabled="False">
+                                                <toolkit:MenuItem Header="Pin to homescreen" Click="MenuItem_Click" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
 

@@ -18,6 +18,7 @@ using System.Threading;
 using System.IO.IsolatedStorage;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using Microsoft.Phone.Shell;
 
 namespace Flurrystics
 {
@@ -242,7 +243,7 @@ namespace Flurrystics
                     }
                         catch (NotSupportedException) // it's not XML - probably API overload
                     {
-                        //MessageBox.Show("Flurry API overload, please try again later.");
+                        MessageBox.Show("Flurry API overload, please try again later.");
                     }
 
                 });
@@ -269,6 +270,38 @@ namespace Flurrystics
         private void timeRangeOption_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/TimeRange.xaml", UriKind.Relative));
+        }
+
+        private void pinOption_Click(object sender, EventArgs e)
+        {
+
+            string tileParameter = appapikey;
+            ShellTile tile = CheckIfTileExist(tileParameter);// Check if Tile's title has been used 
+            if (tile == null)
+            {
+                StandardTileData secondaryTile = new StandardTileData
+                {
+                    Title = appName,
+                    BackgroundImage = new Uri("Background.png", UriKind.Relative),
+                    //Count = 0,
+                    //BackContent = "Secondary Tile Test"
+
+                };
+                Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName, UriKind.Relative);
+                ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+            }
+            else
+            {
+                MessageBox.Show("Tile " + appName + " already exists on homescreen.");
+            }
+
+        }
+
+        private ShellTile CheckIfTileExist(string tileUri)
+        {
+            ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
+                    tile => tile.NavigationUri.ToString().Contains(tileUri));
+            return shellTile;
         }
 
     } // class

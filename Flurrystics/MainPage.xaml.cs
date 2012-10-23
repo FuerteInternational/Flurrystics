@@ -348,7 +348,8 @@ namespace Flurrystics
             TextBlock selectedTitle = FindFirstElementInVisualTree<TextBlock>(selectedListBoxItem);
             string tileParameter = selectedTitle.Text; // selectedListBoxItem.Name; // "Param=" + ((Button)sender).Name;//Use Button.Name to mark Tile 
             int selectedIndex = selectedListBox.Items.IndexOf(selectedListBoxItem.DataContext);
-            ShellTile tile = CheckIfTileExist(tileParameter);// Check if Tile's title has been used 
+            AppViewModel selected = (AppViewModel)selectedListBox.Items[selectedIndex];
+            ShellTile tile = CheckIfTileExist(selected.LineFour);// Check if Tile's title has been used 
             if (tile == null)
             {
                 StandardTileData secondaryTile = new StandardTileData
@@ -358,11 +359,14 @@ namespace Flurrystics
                     //Count = 0,
                     //BackContent = "Secondary Tile Test"
 
-                };
-                AppViewModel selected = (AppViewModel)selectedListBox.Items[selectedIndex];
+                };                
                 Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne, UriKind.Relative); 
                 ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
-            } 
+            }
+            else
+            {
+                MessageBox.Show("Tile " + tileParameter + " already exists on homescreen.");
+            }
 
         }
 
@@ -371,11 +375,6 @@ namespace Flurrystics
             ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
                     tile => tile.NavigationUri.ToString().Contains(tileUri));
             return shellTile;
-        }
-
-        private void homescreen_Opened(object sender, RoutedEventArgs e)
-        {
-
         }
 
     }
