@@ -14,6 +14,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Telerik.Windows.Controls.Primitives;
 using Telerik.Windows.Controls;
+using Microsoft.Phone.Scheduler;
+using System.Diagnostics;
 
 namespace Flurrystics
 {
@@ -45,6 +47,8 @@ namespace Flurrystics
             InitializePhoneApplication();
 
             ThemeManager.ToLightTheme();
+
+            //StartPeriodicAgent();
 
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)

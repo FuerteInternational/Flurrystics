@@ -23,6 +23,7 @@ using System.Xml;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Shell;
 using System.Diagnostics;
+using Microsoft.Phone.Scheduler;
 
 namespace Flurrystics
 {
@@ -40,6 +41,7 @@ namespace Flurrystics
         {
             InitializeComponent();
             myFile = IsolatedStorageFile.GetUserStoreForApplication();
+            
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -80,6 +82,36 @@ namespace Flurrystics
 
                 this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
             }
+
+            StartPeriodicAgent();
+
+        }
+
+        private static void StartPeriodicAgent()
+        {
+            var periodicTask = new PeriodicTask("FlurrysticksTaskAgent")
+            {
+                // The description is required. This is the string that the user
+                // will see in the background services Settings page on the device.
+                Description = "Provides background updates for Flurrysticks live tiles."
+            };
+            // If the agent is already registered with the system,
+            // call the StopPeriodicAgent helper method. 
+            if (ScheduledActionService.Find(periodicTask.Name) != null)
+            {
+                Debug.WriteLine("Agent exists, stopping...");
+                StopPeriodicAgent();
+            }
+            ScheduledActionService.Add(periodicTask);
+            Debug.WriteLine("Adding periodicTask, starting...");
+            ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
+        }
+
+        private static void StopPeriodicAgent()
+        {
+
+            ScheduledActionService.Remove("FlurrysticksTaskAgent");
+
         }
 
         private void LoadApiKeyData()
@@ -329,7 +361,8 @@ namespace Flurrystics
         {
             int selected = MainPivot.SelectedIndex;
             //PivotItem selectedItem = (PivotItem)MainPivot.Items[selected];
-            MessageBoxResult m = MessageBox.Show("Are you sure you want to remove account: "+PivotItems[selected].LineOne, "Confirm flurry account removal", MessageBoxButton.OKCancel);
+            string deletedAccountName = PivotItems[selected].LineOne;
+            MessageBoxResult m = MessageBox.Show("Are you sure you want to remove account: "+deletedAccountName, "Confirm flurry account removal", MessageBoxButton.OKCancel);
 
             if (m == MessageBoxResult.OK)
             { // yes - we gonna delete that account!
@@ -340,6 +373,18 @@ namespace Flurrystics
                 PivotItems.RemoveAt(selected);
                 if (lastPivotItemCount > 0) { lastPivotItemCount--; }
                 SaveApiKeyData();
+
+                /*
+                // If the Main App is Running, Toast will not show
+                ShellToast popupMessage = new ShellToast()
+                {
+                    Title = "Flurrysticks",
+                    Content = "Account "+deletedAccountName+" removed."
+                    // NavigationUri = new Uri("/Views/DeepLink.xaml", UriKind.Relative)
+                };
+                popupMessage.Show();
+                */
+
             }            
         }
 

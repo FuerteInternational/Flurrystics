@@ -6,11 +6,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ScheduledTaskAgent1")]
+[assembly: AssemblyTitle("FlurrysticksTaskAgent")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ScheduledTaskAgent1")]
+[assembly: AssemblyProduct("FlurrysticksTaskAgent")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a969a07c-98a7-4431-a5ad-17afcb3bab69")]
+[assembly: Guid("fe2fcbaa-aa0b-4f1c-b6a6-de586074b1b0")]
 
 // Version information for an assembly consists of the following four values:
 //

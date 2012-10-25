@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{403919BF-AFE9-4C2D-A668-E790F11659B1}</ProjectGuid>
+    <ProjectGuid>{79E6713B-F4B6-411D-B70B-9A3EFDC157A8}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScheduledTaskAgent1</RootNamespace>
-    <AssemblyName>ScheduledTaskAgent1</AssemblyName>
+    <RootNamespace>FlurrysticksTaskAgent</RootNamespace>
+    <AssemblyName>FlurrysticksTaskAgent</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
