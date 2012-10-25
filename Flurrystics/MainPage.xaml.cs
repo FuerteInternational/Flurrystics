@@ -48,7 +48,7 @@ namespace Flurrystics
             LoadApiKeyData();
             MainPivot.ItemsSource = null;
             PivotItems.Clear();
-            first = true;
+            //first = true;
             foreach (string info in apiKeys.Names)
             {
                 PivotItems.Add(new AppViewModel{ LineOne = info });
@@ -158,6 +158,7 @@ namespace Flurrystics
 
         private void LoadUpXML(int pivotIndex)
         {
+            Debug.WriteLine("LoadUpXML: " + pivotIndex);
             App.lastRequest = Util.getCurrentTimestamp();
             var w = new WebClient();
             Observable
@@ -211,7 +212,7 @@ namespace Flurrystics
                 }
                 catch (NotSupportedException)
                 {
-                    MessageBox.Show("Flurry API overload, please try again later."); // should not happen - EVER
+                    MessageBox.Show("Flurry API overload, please try again later."); // should not happen - EVER (however it may happen if more clients (devices) access one APIkey)
                 }
 
             });
