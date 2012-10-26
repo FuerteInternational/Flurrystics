@@ -161,23 +161,6 @@ namespace FlurrysticksTaskAgent
             Debug.WriteLine("Calling URL:" + callURL);
             w.DownloadStringAsync(new Uri(callURL));
 
-            /*
-            Debug.WriteLine("updating tile...");
-            var newTileData2 = new StandardTileData
-            {
-                // TO-DO: call to fetch actual data
-                BackTitle = "MEGATEST",
-                //Count = rand.Next(0,99),
-                BackContent = "NOTHING"
-            };
-            tileToUpdate.Update(newTileData2);
-            
-            if (last) {
-                Debug.WriteLine("background tasks COMPLETE");
-                NotifyComplete(); 
-            }
-             */
-
         }
 
         /// <summary>

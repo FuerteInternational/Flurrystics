@@ -106,6 +106,83 @@ namespace Flurrystics
         
         }
 
+        private void LoadUpXMLAppMetricsForTile(string metrics, Uri targetUri, StandardTileData tileToUpdate)
+        {
+            string eDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-1));
+            string sDate = eDate;
+            //string sDate = String.Format("{0:yyyy-MM-dd}", DateTime.Now.AddDays(-2));
+            char[] splitChars1 = { '?' };
+            string[] parameters = targetUri.ToString().Split(splitChars1);
+
+            string queryParams = parameters[1]; // just take part after ?
+
+            char[] splitChars = { '&' }; // split query parameters by &
+            string[] p = queryParams.Split(splitChars);
+            //Debug.WriteLine("SplitCount:" + p.Count());
+            //Debug.WriteLine("param1:" + p[0]);
+            //Debug.WriteLine("param2:" + p[1]);
+
+            char[] splitChars2 = { '=' };
+
+            string[] p1 = p[0].Split(splitChars2);
+            string[] p2 = p[1].Split(splitChars2);
+
+            string appapikey = p1[1];
+            string apiKey = p2[1];
+            Debug.WriteLine("apiKey:" + apiKey);
+            Debug.WriteLine("appapikey:" + appapikey);
+
+            Debug.WriteLine("LoadUpXMLAppMetrics:" + sDate + " - " + eDate);
+
+            WebClient w = new WebClient();
+            Observable
+            .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
+            .Subscribe(r =>
+            {
+                try
+                {
+                    XDocument loadedData = XDocument.Parse(r.EventArgs.Result);
+                    //XDocument loadedData = XDocument.Load("getAllApplications.xml");
+
+                    // ListTitle.Text = (string)loadedData.Root.Attribute("metric");
+                    var data = from query in loadedData.Descendants("day")
+                               select new ChartDataPoint
+                               {
+                                   Value = (double)query.Attribute("value"),
+                                   Label = DateTime.Parse((string)query.Attribute("date")).ToShortDateString()
+                               };
+
+                    List<ChartDataPoint> count = data.ToList();
+
+                    int result = -1;
+
+                    if (count.Count > 0)
+                    {
+                        Debug.WriteLine("We got count for livetile!");
+                        result = int.Parse(count[0].Value.ToString());
+                        tileToUpdate.BackTitle = "Active Users";
+                        tileToUpdate.BackContent = "Yesterday: " + result;
+                    }
+                }
+                catch (NotSupportedException) // it's not XML - probably API overload
+                {
+                    ShellToast backgroundToast = new ShellToast();
+                    backgroundToast.Title = "Flurrysticks";
+                    backgroundToast.Content = "Flurry API overload";
+                    backgroundToast.Show();
+                }
+
+                ShellTile.Create(targetUri, tileToUpdate); // create Tile NO MATTER WHAT 
+
+            });
+
+            w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
+            string callURL = "http://api.flurry.com/appMetrics/" + metrics + "?apiAccessCode=" + apiKey + "&apiKey=" + appapikey + "&startDate=" + sDate + "&endDate=" + eDate;
+            Debug.WriteLine("Calling URL:" + callURL);
+            w.DownloadStringAsync(new Uri(callURL));
+
+        }
+
         private void LoadUpXMLAppMetrics(string metrics, Telerik.Windows.Controls.RadCartesianChart targetChart, Microsoft.Phone.Controls.PerformanceProgressBar progressBar,
                                         RadCustomHubTile rt1, RadCustomHubTile rt2, RadCustomHubTile rt3,
                                         TextBlock t1, TextBlock t2, TextBlock t3, TextBlock tb, 
@@ -401,7 +478,8 @@ namespace Flurrystics
 
                 };
                 Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + appapikey + "&apikey=" + apiKey + "&appName=" + appName+"&platform="+platform, UriKind.Relative);
-                ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+                //ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+                this.Perform(() => LoadUpXMLAppMetricsForTile("ActiveUsers", targetUri, secondaryTile), 0);
             }
             else
             {
