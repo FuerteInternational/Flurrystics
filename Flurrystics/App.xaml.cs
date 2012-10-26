@@ -48,7 +48,7 @@ namespace Flurrystics
 
             ThemeManager.ToLightTheme();
 
-            //StartPeriodicAgent();
+            StartPeriodicAgent();
 
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
@@ -69,6 +69,33 @@ namespace Flurrystics
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+        }
+
+        private static void StartPeriodicAgent()
+        {
+            var periodicTask = new PeriodicTask("FlurrysticksTaskAgent")
+            {
+                // The description is required. This is the string that the user
+                // will see in the background services Settings page on the device.
+                Description = "Provides background updates for Flurrysticks live tiles."
+            };
+            // If the agent is already registered with the system,
+            // call the StopPeriodicAgent helper method. 
+            if (ScheduledActionService.Find(periodicTask.Name) != null)
+            {
+                Debug.WriteLine("Agent exists, stopping...");
+                StopPeriodicAgent();
+            }
+            ScheduledActionService.Add(periodicTask);
+            Debug.WriteLine("Adding periodicTask, starting...");
+            //ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
+        }
+
+        private static void StopPeriodicAgent()
+        {
+
+            ScheduledActionService.Remove("FlurrysticksTaskAgent");
 
         }
 

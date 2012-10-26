@@ -56,12 +56,13 @@ namespace Flurrystics
                 PivotItems.Add(new AppViewModel{ LineOne = info });
             }
 
+           /*
             if (!(PivotItems.Count > 0)) // if no api key present - send user to settings
             {
                 NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
             }
             else
-            {
+            {*/
                 MainPivot.ItemsSource = PivotItems;
                 if (lastPivotItemCount != PivotItems.Count) 
                 {
@@ -81,36 +82,9 @@ namespace Flurrystics
                 }
 
                 this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
-            }
+            //}
 
-            StartPeriodicAgent();
-
-        }
-
-        private static void StartPeriodicAgent()
-        {
-            var periodicTask = new PeriodicTask("FlurrysticksTaskAgent")
-            {
-                // The description is required. This is the string that the user
-                // will see in the background services Settings page on the device.
-                Description = "Provides background updates for Flurrysticks live tiles."
-            };
-            // If the agent is already registered with the system,
-            // call the StopPeriodicAgent helper method. 
-            if (ScheduledActionService.Find(periodicTask.Name) != null)
-            {
-                Debug.WriteLine("Agent exists, stopping...");
-                StopPeriodicAgent();
-            }
-            ScheduledActionService.Add(periodicTask);
-            Debug.WriteLine("Adding periodicTask, starting...");
-            ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
-        }
-
-        private static void StopPeriodicAgent()
-        {
-
-            ScheduledActionService.Remove("FlurrysticksTaskAgent");
+            // StartPeriodicAgent();
 
         }
 
