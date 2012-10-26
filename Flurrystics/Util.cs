@@ -10,11 +10,30 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Shell;
+using Microsoft.Phone.Info;
 
 namespace Flurrystics
 {
     public static class Util
     {
+
+        public static bool Is512Mb
+        {
+            get
+            {
+                try
+                {
+                    long result = (long)DeviceExtendedProperties.GetValue("ApplicationWorkingSetLimit");
+                    return result > 94371840; // 94371840 (90mb) is the maximum a 256mb device will have
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    // The device has not received the OS update, which means the device is a 512-MB device.}
+                    return true;
+                }
+            }
+        }
+
 
         public static long getCurrentTimestamp()
         {

@@ -464,8 +464,14 @@ namespace Flurrystics
                 };                
                 Uri targetUri = new Uri("/AppMetrics.xaml?appapikey=" + selected.LineFour + "&apikey=" + apiKeys.Strings[MainPivot.SelectedIndex] + "&appName=" + selected.LineOne+"&platform="+selected.LineTwo, UriKind.Relative); 
                 //TO-DO: call create shelltile
-                this.Perform(() => LoadUpXMLAppMetricsForTile("ActiveUsers", targetUri, secondaryTile), 0, 0);
-                //ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+                if (Util.Is512Mb)
+                {
+                    this.Perform(() => LoadUpXMLAppMetricsForTile("ActiveUsers", targetUri, secondaryTile), 0, 0);
+                }
+                else // put standard shelltile for 256devices
+                {
+                    ShellTile.Create(targetUri, secondaryTile); // Pass tileParameter as QueryString 
+                }
             }
             else
             {
