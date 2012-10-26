@@ -159,7 +159,7 @@
                             <telerikChart:ChartPanAndZoomBehavior ZoomMode="None" PanMode="None"/>
                         </telerikChart:RadCartesianChart.Behaviors>
                         <telerikChart:RadCartesianChart.Grid>
-                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="Last"
                                                              MajorLinesVisibility="XY" 
                                                              MajorYLinesRenderMode="All">
                                 <telerikChart:CartesianChartGrid.MajorYLineStyle>
@@ -167,6 +167,11 @@
                                         <Setter Property="Shape.Stroke" Value="Black" />
                                     </Style>
                                 </telerikChart:CartesianChartGrid.MajorYLineStyle>
+                                <telerikChart:CartesianChartGrid.MajorXLineStyle>
+                                    <Style TargetType="Line">
+                                        <Setter Property="Shape.Stroke" Value="Black" />
+                                    </Style>
+                                </telerikChart:CartesianChartGrid.MajorXLineStyle>
                             </telerikChart:CartesianChartGrid>
 
                         </telerikChart:RadCartesianChart.Grid>
@@ -308,7 +313,7 @@
                         </telerikChart:RadCartesianChart.Behaviors>
 
                         <telerikChart:RadCartesianChart.Grid>
-                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="Last"
                                                              MajorLinesVisibility="XY"
                                                              MajorYLinesRenderMode="All"                                                             
                                                              >
@@ -317,6 +322,11 @@
                                         <Setter Property="Shape.Stroke" Value="Black" />
                                     </Style>
                                 </telerikChart:CartesianChartGrid.MajorYLineStyle>
+                                <telerikChart:CartesianChartGrid.MajorXLineStyle>
+                                    <Style TargetType="Line">
+                                        <Setter Property="Shape.Stroke" Value="Black" />
+                                    </Style>
+                                </telerikChart:CartesianChartGrid.MajorXLineStyle>
                             </telerikChart:CartesianChartGrid>
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
@@ -458,7 +468,7 @@
                         </telerikChart:RadCartesianChart.Behaviors>
 
                         <telerikChart:RadCartesianChart.Grid>
-                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="Last"
                                                              MajorLinesVisibility="XY"
                                                              MajorYLinesRenderMode="All"                                                             
                                                              >
@@ -467,6 +477,11 @@
                                         <Setter Property="Shape.Stroke" Value="Black" />
                                     </Style>
                                 </telerikChart:CartesianChartGrid.MajorYLineStyle>
+                                <telerikChart:CartesianChartGrid.MajorXLineStyle>
+                                    <Style TargetType="Line">
+                                        <Setter Property="Shape.Stroke" Value="Black" />
+                                    </Style>
+                                </telerikChart:CartesianChartGrid.MajorXLineStyle>
                             </telerikChart:CartesianChartGrid>
                         </telerikChart:RadCartesianChart.Grid>
                         <telerikChart:RadCartesianChart.HorizontalAxis>
@@ -529,7 +544,7 @@
 
                     <telerikChart:RadCartesianChart x:Name="chart1" Margin="0,200,10,0">
                         <telerikChart:RadCartesianChart.Grid>
-                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="InnerAndLast"
+                            <telerikChart:CartesianChartGrid MajorXLinesRenderMode="Last"
                                                              MajorLinesVisibility="XY"
                                                              MajorYLinesRenderMode="All"                                                             
                                                              />
