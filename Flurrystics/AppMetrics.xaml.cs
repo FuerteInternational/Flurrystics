@@ -566,6 +566,68 @@ namespace Flurrystics
             }
         }
 
+        private void PhoneApplicationPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+             // In landscape mode, the totals grid is moved to the right on the screen
+             // which puts it in row 1, column 1.
+            if ((e.Orientation & PageOrientation.Landscape) != 0)
+            {
+                double topMargin2 = 0; double topMargin = topMargin2 + 50;
+                tiles1.Visibility = System.Windows.Visibility.Collapsed;
+                grid1.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart1.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles2.Visibility = System.Windows.Visibility.Collapsed;
+                grid2.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart2.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles3.Visibility = System.Windows.Visibility.Collapsed;
+                grid3.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart3.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles4.Visibility = System.Windows.Visibility.Collapsed;
+                grid4.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart4.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles5.Visibility = System.Windows.Visibility.Collapsed;
+                grid5.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart5.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles6.Visibility = System.Windows.Visibility.Collapsed;
+                grid6.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart6.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles7.Visibility = System.Windows.Visibility.Collapsed;
+                grid7.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart7.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles8.Visibility = System.Windows.Visibility.Collapsed;
+                grid8.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart8.Margin = new Thickness(0, topMargin, 10, 0);
+            }
+            else
+            {
+                double topMargin2 = 150; double topMargin = topMargin2 + 50;
+                tiles1.Visibility = System.Windows.Visibility.Visible;
+                grid1.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart1.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles2.Visibility = System.Windows.Visibility.Visible;
+                grid2.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart2.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles3.Visibility = System.Windows.Visibility.Visible;
+                grid3.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart3.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles4.Visibility = System.Windows.Visibility.Visible;
+                grid4.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart4.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles5.Visibility = System.Windows.Visibility.Visible;
+                grid5.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart5.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles6.Visibility = System.Windows.Visibility.Visible;
+                grid6.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart6.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles7.Visibility = System.Windows.Visibility.Visible;
+                grid7.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart7.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles8.Visibility = System.Windows.Visibility.Visible;
+                grid8.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart8.Margin = new Thickness(0, topMargin, 10, 0);
+            }
+        }
+
     } // class
 
     public class ChartDataPoint
