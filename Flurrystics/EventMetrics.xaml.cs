@@ -561,6 +561,40 @@ namespace Flurrystics
             }
         }
 
+        private void PhoneApplicationPage_OrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+             // In landscape mode, the totals grid is moved to the right on the screen
+             // which puts it in row 1, column 1.
+            if ((e.Orientation & PageOrientation.Landscape) != 0)
+            {
+                double topMargin2 = 0; double topMargin = topMargin2 + 50;
+                tiles1.Visibility = System.Windows.Visibility.Collapsed;
+                grid1.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart1.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles2.Visibility = System.Windows.Visibility.Collapsed;
+                grid2.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart2.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles3.Visibility = System.Windows.Visibility.Collapsed;
+                grid3.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart3.Margin = new Thickness(0, topMargin, 10, 0);
+            }
+            else
+            {
+                double topMargin2 = 150; double topMargin = topMargin2 + 50;
+                tiles1.Visibility = System.Windows.Visibility.Visible;
+                grid1.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart1.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles2.Visibility = System.Windows.Visibility.Visible;
+                grid2.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart2.Margin = new Thickness(0, topMargin, 10, 0);
+                tiles3.Visibility = System.Windows.Visibility.Visible;
+                grid3.Margin = new Thickness(10, topMargin2, 0, 0);
+                chart3.Margin = new Thickness(0, topMargin, 10, 0);
+            }
+        }
+
+        
+
     } // class
 
     public class Data // all parameters w/ keys

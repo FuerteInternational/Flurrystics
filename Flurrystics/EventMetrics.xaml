@@ -20,7 +20,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait"  Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait" OrientationChanged="PhoneApplicationPage_OrientationChanged"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.BackgroundColor="Transparent"
     shell:SystemTray.Opacity="0"
@@ -63,7 +63,7 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <StackPanel Name="tiles1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
                         <telerikPrimitives:RadCustomHubTile 
                             Name="tile1" 
                             Width="130" 
@@ -120,7 +120,7 @@
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                    <Grid Name="grid1" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                             <TextBlock Text="Total:" Margin="0,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
@@ -215,7 +215,7 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel2" Grid.Row="1" Margin="12,0,12,0">
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <StackPanel Name="tiles2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
                         <telerikPrimitives:RadCustomHubTile 
                             Name="tile4" 
                             Width="130" 
@@ -272,7 +272,8 @@
                             </telerikPrimitives:RadCustomHubTile.BackContent>
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                    
+                    <Grid Name="grid2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                             <TextBlock Text="Total:" Margin="0,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
@@ -369,7 +370,7 @@
                 <!--ContentPanel contains details text. Place additional content here-->
                 <Grid x:Name="ContentPanel3" Grid.Row="1" Margin="12,0,12,0">
 
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <StackPanel Name="tiles3" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
                         <telerikPrimitives:RadCustomHubTile 
                             Name="tile7" 
                             Width="130" 
@@ -427,7 +428,7 @@
                         </telerikPrimitives:RadCustomHubTile>
                     </StackPanel>
 
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
+                    <Grid Name="grid3" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,150,0,0">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                             <TextBlock Text="Total:" Margin="0,0,0,0"
                                Style="{StaticResource PhoneTextLargeStyle}" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
