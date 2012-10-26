@@ -59,7 +59,7 @@ namespace FlurrysticksTaskAgent
         
         private void Perform(Action myMethod, int delayInMilliseconds)
         {
-            Debug.WriteLine("Perform " + myMethod.ToString());
+            Debug.WriteLine("Perform delay:" + delayInMilliseconds);
             BackgroundWorker worker = new BackgroundWorker();
             worker.DoWork += (s, e) => Thread.Sleep(delayInMilliseconds);
             worker.RunWorkerCompleted += (s, e) => myMethod.Invoke();
@@ -148,10 +148,13 @@ namespace FlurrysticksTaskAgent
                 }
                 catch (NotSupportedException) // it's not XML - probably API overload
                 {
+                    /*
                     ShellToast backgroundToast = new ShellToast();
                     backgroundToast.Title = "Flurrysticks";
                     backgroundToast.Content = "Flurry API overload";
                     backgroundToast.Show();
+                     * */
+                    Debug.WriteLine("Flurry API overload");
                 }
 
             });
@@ -193,12 +196,12 @@ namespace FlurrysticksTaskAgent
                 // var tileToFind = ShellTile.ActiveTiles.FirstOrDefault(x => x.NavigationUri.ToString() == "/");
                 IEnumerator<ShellTile> tilesEnum = ShellTile.ActiveTiles.GetEnumerator();
                 int howmany = ShellTile.ActiveTiles.Count() - 1; // decrease by 1 because of primary tile
+                int count = 0;
                 while (tilesEnum.MoveNext()) // loop to update each and every live tile
                 {
                     ShellTile currentTile = tilesEnum.Current;
                     Debug.WriteLine("processing tile: " + currentTile.NavigationUri.ToString());
                     var rand = new Random(0);
-                    int count = 0;
 
                     if (currentTile.NavigationUri.ToString() != "/") // ignore primare tile, only deal w/ secondary tiles
                     {
