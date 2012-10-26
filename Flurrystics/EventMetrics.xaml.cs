@@ -567,6 +567,7 @@ namespace Flurrystics
              // which puts it in row 1, column 1.
             if ((e.Orientation & PageOrientation.Landscape) != 0)
             {
+                MainPivot.Margin = new Thickness(20, 0, 0, 0);
                 double topMargin2 = 0; double topMargin = topMargin2 + 50;
                 tiles1.Visibility = System.Windows.Visibility.Collapsed;
                 grid1.Margin = new Thickness(10, topMargin2, 0, 0);
@@ -580,6 +581,7 @@ namespace Flurrystics
             }
             else
             {
+                MainPivot.Margin = new Thickness(0, 0, 0, 0);
                 double topMargin2 = 150; double topMargin = topMargin2 + 50;
                 tiles1.Visibility = System.Windows.Visibility.Visible;
                 grid1.Margin = new Thickness(10, topMargin2, 0, 0);

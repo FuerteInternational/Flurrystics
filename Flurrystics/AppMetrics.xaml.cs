@@ -570,8 +570,9 @@ namespace Flurrystics
         {
              // In landscape mode, the totals grid is moved to the right on the screen
              // which puts it in row 1, column 1.
-            if ((e.Orientation & PageOrientation.Landscape) != 0)
+            if ((e.Orientation & PageOrientation.Landscape) != 0) // landscape
             {
+                MainPivot.Margin = new Thickness(20, 0, 0, 0);
                 double topMargin2 = 0; double topMargin = topMargin2 + 50;
                 tiles1.Visibility = System.Windows.Visibility.Collapsed;
                 grid1.Margin = new Thickness(10, topMargin2, 0, 0);
@@ -598,8 +599,9 @@ namespace Flurrystics
                 grid8.Margin = new Thickness(10, topMargin2, 0, 0);
                 chart8.Margin = new Thickness(0, topMargin, 10, 0);
             }
-            else
+            else // portrait
             {
+                MainPivot.Margin = new Thickness(0, 0, 0, 0);
                 double topMargin2 = 150; double topMargin = topMargin2 + 50;
                 tiles1.Visibility = System.Windows.Visibility.Visible;
                 grid1.Margin = new Thickness(10, topMargin2, 0, 0);
