@@ -162,16 +162,19 @@ namespace Flurrystics
                     {
                         Debug.WriteLine("We got count for livetile!");
                         result = int.Parse(count[0].Value.ToString());
-                        tileToUpdate.BackTitle = "Active Users";
-                        tileToUpdate.BackContent = "Yesterday: " + result;
+                        tileToUpdate.BackTitle = tileToUpdate.Title;
+                        tileToUpdate.BackContent = "Yesterday: " + result + " Active Users";
                     }
                 }
                 catch (NotSupportedException) // it's not XML - probably API overload
                 {
+                    Debug.WriteLine("Flurry API overload");
+                    /*
                     ShellToast backgroundToast = new ShellToast();
                     backgroundToast.Title = "Flurrysticks";
                     backgroundToast.Content = "Flurry API overload";
                     backgroundToast.Show();
+                     * */
                 }
 
                 ShellTile.Create(targetUri, tileToUpdate); // create Tile NO MATTER WHAT 
