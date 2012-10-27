@@ -132,11 +132,12 @@ namespace FlurrysticksTaskAgent
                         Debug.WriteLine("We got count for livetile!");
                         result = int.Parse(count[0].Value.ToString());
                         var newTileData = new StandardTileData
-                        {
+                        {                        
+                            // BackTitle = tileToUpdate.Title,
                             // TO-DO: call to fetch actual data
-                            BackTitle = "Active Users",
+                            // BackTitle = ,
                             //Count = rand.Next(0,99),
-                            BackContent = "Yesterday: "+ result
+                            BackContent = "Yesterday: "+ result + " Active Users"
                         };
                         tileToUpdate.Update(newTileData);
                         if (last) {
