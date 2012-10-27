@@ -48,7 +48,10 @@ namespace Flurrystics
 
             ThemeManager.ToLightTheme();
 
-            StartPeriodicAgent();
+            if (Util.Is512Mb)
+            {
+                StartPeriodicAgent();
+            }
 
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
