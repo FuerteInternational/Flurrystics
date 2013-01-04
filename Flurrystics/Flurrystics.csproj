@@ -51,6 +51,9 @@
     <Reference Include="AmCharts.Windows.QuickCharts.WP">
       <HintPath>..\packages\amChartsQuickCharts.1.1\lib\sl3-wp\AmCharts.Windows.QuickCharts.WP.dll</HintPath>
     </Reference>
+    <Reference Include="BugSense">
+      <HintPath>..\packages\BugSense.WP7.0.9.9.1\lib\sl3-wp\BugSense.dll</HintPath>
+    </Reference>
     <Reference Include="FlurryWP7SDK">
       <HintPath>..\packages\FlurryWP7SDK.dll</HintPath>
     </Reference>

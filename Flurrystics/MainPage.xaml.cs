@@ -31,7 +31,7 @@ namespace Flurrystics
     {
 
         IsolatedStorageFile myFile = IsolatedStorageFile.GetUserStoreForApplication();
-        string sFile = "Data.txt";
+        string sFile = "Data.txt"; // 
         ApiKeysContainer apiKeys = new ApiKeysContainer();
         ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
         private int lastPivotItemCount = 0;

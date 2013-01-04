@@ -16,6 +16,7 @@ using Telerik.Windows.Controls.Primitives;
 using Telerik.Windows.Controls;
 using Microsoft.Phone.Scheduler;
 using System.Diagnostics;
+using BugSense;
 
 namespace Flurrystics
 {
@@ -37,8 +38,19 @@ namespace Flurrystics
         /// </summary>
         public App()
         {
+
+            BugSenseHandler.Instance.Init(this, "dde4e090");
+
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
+            // BugSenseHandler.Instance.UnhandledException += OnUnhandledException;
+            
+            /*
+            var options = BugSenseHandler.Instance.GetDefaultOptions();
+            options.Type = enNotificationType.MessageBox;
+            BugSenseHandler.Instance.Init(this, "dde4e090", options);
+            BugSenseHandler.Instance.UnhandledException += Instance_UnhandledException;
+            */
 
             // Standard Silverlight initialization
             InitializeComponent();
