@@ -246,6 +246,9 @@ namespace Flurrystics
         {
             Debug.WriteLine("LoadUpXML: " + pivotIndex);
             App.lastRequest = Util.getCurrentTimestamp();
+
+            // if (Util.InternetIsAvailable())  { // if Internet is available - go download and process our feed
+
             var w = new WebClient();
             Observable
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
@@ -266,9 +269,9 @@ namespace Flurrystics
                     if (loadedData != null)
                     {
 
-                        //XDocument loadedData = XDocument.Load("getAllApplications.xml");
+                        // XDocument loadedData = XDocument.Load("getAllApplications.xml");
                         PivotItem pi = (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(pivotIndex); // got out pivot item
-                        //PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
+                        // PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
                         // pi.Header = (string)loadedData.Root.Attribute("companyName");
                         string cName = (string)loadedData.Root.Attribute("companyName");
                         PivotItems.ElementAt(pivotIndex).LineOne = cName;
@@ -303,8 +306,6 @@ namespace Flurrystics
 
             });
 
-            if (Util.InternetIsAvailable()) // if Internet is available - go download and process our feed
-            {
                 w.Headers[HttpRequestHeader.Accept] = "application/xml"; // get us XMLs version!
                 try
                 {
@@ -316,11 +317,11 @@ namespace Flurrystics
                 { // probably nothing yet specified
                 }
 
+            /*
+            } else {
+                Debug.WriteLine("No Internet");
             }
-            else
-            {
-                throw new Util.ExitException();
-            }
+             */
         }
 
         private string getIconFileForPlatform(string input) {
@@ -384,7 +385,16 @@ namespace Flurrystics
 
         private void SettingsOption_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex="+MainPivot.SelectedIndex, UriKind.Relative));
+            if (PivotItems.Count() > 0)
+            {
+
+                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=" + MainPivot.SelectedIndex, UriKind.Relative));
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to edit. Please add some account first.");
+            }
         }
 
         private void SettingsOptionAdd_Click(object sender, EventArgs e)
@@ -413,33 +423,44 @@ namespace Flurrystics
 
         private void DeleteOption_Click(object sender, EventArgs e)
         {
-            int selected = MainPivot.SelectedIndex;
-            //PivotItem selectedItem = (PivotItem)MainPivot.Items[selected];
-            string deletedAccountName = PivotItems[selected].LineOne;
-            MessageBoxResult m = MessageBox.Show("Are you sure you want to remove account: "+deletedAccountName, "Confirm flurry account removal", MessageBoxButton.OKCancel);
 
-            if (m == MessageBoxResult.OK)
-            { // yes - we gonna delete that account!
-                //ApiKeysContainer apiKeys = new ApiKeysContainer();
-                apiKeys.Strings.RemoveAt(selected);
-                apiKeys.Names.RemoveAt(selected);
-                //ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
-                PivotItems.RemoveAt(selected);
-                if (lastPivotItemCount > 0) { lastPivotItemCount--; }
-                SaveApiKeyData();
+            if (PivotItems.Count() > 0)
+            {
 
-                /*
-                // If the Main App is Running, Toast will not show
-                ShellToast popupMessage = new ShellToast()
-                {
-                    Title = "Flurrysticks",
-                    Content = "Account "+deletedAccountName+" removed."
-                    // NavigationUri = new Uri("/Views/DeepLink.xaml", UriKind.Relative)
-                };
-                popupMessage.Show();
-                */
+                int selected = MainPivot.SelectedIndex;
+                //PivotItem selectedItem = (PivotItem)MainPivot.Items[selected];
+                string deletedAccountName = PivotItems[selected].LineOne;
+                MessageBoxResult m = MessageBox.Show("Are you sure you want to remove account: " + deletedAccountName, "Confirm flurry account removal", MessageBoxButton.OKCancel);
 
-            }            
+                if (m == MessageBoxResult.OK)
+                { // yes - we gonna delete that account!
+                    //ApiKeysContainer apiKeys = new ApiKeysContainer();
+                    apiKeys.Strings.RemoveAt(selected);
+                    apiKeys.Names.RemoveAt(selected);
+                    //ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
+                    PivotItems.RemoveAt(selected);
+                    if (lastPivotItemCount > 0) { lastPivotItemCount--; }
+                    SaveApiKeyData();
+
+                    /*
+                    // If the Main App is Running, Toast will not show
+                    ShellToast popupMessage = new ShellToast()
+                    {
+                        Title = "Flurrysticks",
+                        Content = "Account "+deletedAccountName+" removed."
+                        // NavigationUri = new Uri("/Views/DeepLink.xaml", UriKind.Relative)
+                    };
+                    popupMessage.Show();
+                    */
+
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to delete.  Please add some account first.");
+            }
+
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e) // clicking on context menu item

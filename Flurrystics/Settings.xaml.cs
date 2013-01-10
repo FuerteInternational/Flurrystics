@@ -55,7 +55,7 @@ namespace Flurrystics
 
             if (error != null) { 
                 ErrorBox.Visibility = System.Windows.Visibility.Visible;
-                ErrorBox.Text = "Your Flurry API key seems incorrect or another error has occured, please double check it's validity.";
+                ErrorBox.Text = "Your Flurry API key seems incorrect or Internet connection has been lost.";
             }
             else if (apiIndex == -2)
             {

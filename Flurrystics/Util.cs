@@ -53,6 +53,16 @@ namespace Flurrystics
             return true;
         }
 
+        public static bool InternetIsAvailableNoMessage()
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                // MessageBox.Show("Internet connection not available. Please try again later.");
+                return false;
+            }
+            return true;
+        }
+
         public static String stripOffYear(DateTime inDateTime) {
         
         String temp = inDateTime.ToShortDateString();
@@ -87,8 +97,6 @@ namespace Flurrystics
             }
             return result;
         }
-
-        public class ExitException : Exception { }
 
     }
 }

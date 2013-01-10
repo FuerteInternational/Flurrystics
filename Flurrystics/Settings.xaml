@@ -41,11 +41,11 @@
         <!--ContentPanel - place additional content here-->
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Margin="12,12,12,0" TextWrapping="Wrap" 
-                       Text="Your Flurry API key seems incorrect or another error has occured, please double check it's validity." 
+                       Text="Your Flurry API key seems incorrect or Internet connection has been lost." 
                        VerticalAlignment="Top" 
                        Foreground="{StaticResource PhoneAccentBrush}"
                        Visibility="Collapsed"
-                       Name="ErrorBox"
+                       Name="ErrorBox" 
                        />
             <TextBlock Margin="12,12,0,0" TextWrapping="Wrap" Text="Application Flurry API key:" VerticalAlignment="Top" />
             <TextBox TextChanged="codeTextChanged" Name="apiKeyTextBox" Margin="0,12,6,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="450" />
