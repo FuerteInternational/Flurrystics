@@ -104,7 +104,7 @@ namespace Flurrystics
             }
             ScheduledActionService.Add(periodicTask);
             Debug.WriteLine("Adding periodicTask, starting...");
-            ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
+            // ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
         }
 
         private static void StopPeriodicAgent()
