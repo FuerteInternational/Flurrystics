@@ -2175,6 +2175,11 @@
             Identifies the <see cref="P:Telerik.Windows.Controls.ChartSeries.ClipToPlotArea"/> property.
             </summary>
         </member>
+        <member name="F:Telerik.Windows.Controls.ChartSeries.DisplayNameProperty">
+            <summary>
+            Identifies the <see cref="P:Telerik.Windows.Controls.ChartSeries.DisplayName"/> property.
+            </summary>
+        </member>
         <member name="M:Telerik.Windows.Controls.ChartSeries.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Telerik.Windows.Controls.ChartSeries"/> class.
@@ -4489,6 +4494,11 @@
         <member name="M:Telerik.Windows.Controls.ChartTooltipBehavior.OnDetached">
             <summary>
             This method is called when this behavior is removed from the chart.
+            </summary>
+        </member>
+        <member name="M:Telerik.Windows.Controls.ChartTooltipBehavior.OnAttached">
+            <summary>
+            Called when the behavior is added to the chart control.
             </summary>
         </member>
         <member name="E:Telerik.Windows.Controls.ChartTooltipBehavior.ContextNeeded">

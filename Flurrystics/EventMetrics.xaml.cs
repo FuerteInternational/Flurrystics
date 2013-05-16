@@ -80,7 +80,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("eventName", out eventName);
             NavigationContext.QueryString.TryGetValue("platform", out platform);
-            String whatTitle = "FLURRYSTICS - " + appName + " - " + eventName;
+            String whatTitle = "APPLYTICS - " + appName + " - " + eventName;
             SubTitle.Text = whatTitle;
             Debug.WriteLine(whatTitle);
             ParamKeys.Clear();

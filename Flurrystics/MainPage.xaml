@@ -30,7 +30,7 @@
             <controls:Pivot.Title>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <Image Source="/Images/flurryst_icon_logo.png" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="None" />
-                    <TextBlock Text="Flurrystics" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
+                    <TextBlock Text="Applytics" Margin="5,0,0,8" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Bottom" FontFamily="{StaticResource PhoneFontFamilySemiBold}" />
                 </StackPanel>
             </controls:Pivot.Title>
 

@@ -80,7 +80,7 @@ namespace Flurrystics
             NavigationContext.QueryString.TryGetValue("appapikey", out appapikey);
             NavigationContext.QueryString.TryGetValue("appName", out appName);
             NavigationContext.QueryString.TryGetValue("platform", out platform);
-            SubTitle.Text = "FLURRYSTICS - " + appName;
+            SubTitle.Text = "APPLYTICS - " + appName;
 
             lastPivotItem = -1; // forcing to reset when returning from date settings
             NoEvents.Visibility = System.Windows.Visibility.Collapsed;

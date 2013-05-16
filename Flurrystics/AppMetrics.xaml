@@ -36,7 +36,7 @@
 
             <controls:Pivot.Title>
                     <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="SubTitle" Text="FLURRYSTICS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,20,0,0" VerticalAlignment="Bottom" />
+                    <TextBlock x:Name="SubTitle" Text="APPLYTICS" Style="{StaticResource PhoneTextNormalStyle}" Margin="0,20,0,0" VerticalAlignment="Bottom" />
                     </StackPanel>
             </controls:Pivot.Title>
          

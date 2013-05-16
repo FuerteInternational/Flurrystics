@@ -77,31 +77,31 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="Telerik.Windows.BackgroundAgentTools">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.BackgroundAgentTools.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.BackgroundAgentTools.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Behaviors">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Behaviors.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Chart">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Chart.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Controls.Chart.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Data">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Controls.Data.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.DataVisualization">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Input">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Input.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Controls.Input.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Primitives">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Controls.Primitives.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Controls.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Core">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Core.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Core.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Data">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q2 2012\Binaries\WindowsPhone\Telerik.Windows.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2013\Binaries\WindowsPhone\Telerik.Windows.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
