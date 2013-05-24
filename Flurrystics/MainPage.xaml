@@ -24,6 +24,14 @@
         <Grid.Background>
             <ImageBrush ImageSource="Images/b2.png" />
         </Grid.Background>
+        
+        <!-- Error panel -->
+        <StackPanel Name="errorPanel" Visibility="Collapsed" Margin="0,300,0,0">
+            <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Name="errorStatus" Text="Error status" TextAlignment="Center" Padding="20,0,20,10" />
+            <Button Name="RetryButton" Content="Retry" Width="250" Click="RetryButton_Click" />
+            <Button Name="SettingsButton" Content="Settings" Width="250"  Click="SettingsButton_Click"/>
+        </StackPanel>
+        
         <!--Pivot Control-->
         <controls:Pivot x:Name="MainPivot" SelectionChanged="MainPivot_SelectionChanged" >
 

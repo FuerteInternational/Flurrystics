@@ -50,19 +50,10 @@ namespace Flurrystics
             LoadApiKeyData();
             MainPivot.ItemsSource = null;
             PivotItems.Clear();
-            //first = true;
             foreach (string info in apiKeys.Names)
             {
                 PivotItems.Add(new AppViewModel{ LineOne = info });
             }
-
-           /*
-            if (!(PivotItems.Count > 0)) // if no api key present - send user to settings
-            {
-                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
-            }
-            else
-            {*/
                 MainPivot.ItemsSource = PivotItems;
                 if (lastPivotItemCount != PivotItems.Count) 
                 {
@@ -82,10 +73,9 @@ namespace Flurrystics
                 }
 
                 this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
-            //}
 
             // StartPeriodicAgent();
-
+                
         }
 
         private void LoadUpXMLAppMetricsForTile(string metrics, Uri targetUri, StandardTileData tileToUpdate)
@@ -188,11 +178,17 @@ namespace Flurrystics
             }
             catch (InvalidOperationException) // XML doesnt exists probably - redirect user to settings to add ONE
             {
-                NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
+                showErrorPanel(0,-3);
+                // NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-3", UriKind.Relative));
             }
 
             reader.Close();
-          
+
+            if (apiKeys.Names.Count==0)
+            {
+                showErrorPanel(0, -3);
+            }
+
         }
 
         private void SaveApiKeyData()
@@ -254,6 +250,8 @@ namespace Flurrystics
             .FromEvent<DownloadStringCompletedEventArgs>(w, "DownloadStringCompleted")
             .Subscribe(r =>
             {
+                PivotItem pi = null;
+                ProgressBar p = null;
                 XDocument loadedData = null;
                 try
                 {
@@ -263,14 +261,19 @@ namespace Flurrystics
                     }
                     catch (WebException) // load failed, probably wrong apiKey - goto settings
                     {
-                        NavigationService.Navigate(new Uri("/Settings.xaml?error=yes&pivotIndex="+pivotIndex, UriKind.Relative));
+                        pi = (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(pivotIndex); // got out pivot item
+                        p = FindFirstElementInVisualTree<ProgressBar>(pi);
+                        p.Visibility = System.Windows.Visibility.Collapsed;
+                        showErrorPanel(1, pivotIndex);
+                        //NavigationService.Navigate(new Uri("/Settings.xaml?error=yes&pivotIndex="+pivotIndex, UriKind.Relative));
                     }
 
                     if (loadedData != null)
                     {
 
                         // XDocument loadedData = XDocument.Load("getAllApplications.xml");
-                        PivotItem pi = (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(pivotIndex); // got out pivot item
+                        pi = (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(pivotIndex); // got out pivot item
+                        p = FindFirstElementInVisualTree<ProgressBar>(pi);
                         // PivotItem item =  (PivotItem)MainPivot.ItemContainerGenerator.ContainerFromIndex(0);
                         // pi.Header = (string)loadedData.Root.Attribute("companyName");
                         string cName = (string)loadedData.Root.Attribute("companyName");
@@ -290,11 +293,10 @@ namespace Flurrystics
                         
                         // now lets find out ListBox and ProgressBar
                         ListBox l = FindFirstElementInVisualTree<ListBox>(pi);
-                        ProgressBar p = FindFirstElementInVisualTree<ProgressBar>(pi);
-
                         p.Visibility = System.Windows.Visibility.Collapsed;
                         p.IsIndeterminate = false; // switch off so it doesn't hit performance when not visible (!)
                         l.ItemsSource = data;
+                        errorPanel.Visibility = System.Windows.Visibility.Collapsed;
                         this.Perform(() => SaveApiKeyData(), 100, 100);
                         //
                     }
@@ -302,6 +304,8 @@ namespace Flurrystics
                 catch (NotSupportedException)
                 {
                     MessageBox.Show("Flurry API overload, please try again later."); // should not happen - EVER (however it may happen if more clients (devices) access one APIkey)
+                    //p.Visibility = System.Windows.Visibility.Collapsed;
+                    //showErrorPanel(1, pivotIndex);
                 }
 
             });
@@ -387,9 +391,8 @@ namespace Flurrystics
         {
             if (PivotItems.Count() > 0)
             {
-
+                errorPanel.Visibility = System.Windows.Visibility.Collapsed;
                 NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=" + MainPivot.SelectedIndex, UriKind.Relative));
-
             }
             else
             {
@@ -399,6 +402,7 @@ namespace Flurrystics
 
         private void SettingsOptionAdd_Click(object sender, EventArgs e)
         {
+            errorPanel.Visibility = System.Windows.Visibility.Collapsed;
             NavigationService.Navigate(new Uri("/Settings.xaml?pivotIndex=-2", UriKind.Relative));
         }
 
@@ -440,7 +444,13 @@ namespace Flurrystics
                     //ObservableCollection<AppViewModel> PivotItems = new ObservableCollection<AppViewModel>();
                     PivotItems.RemoveAt(selected);
                     if (lastPivotItemCount > 0) { lastPivotItemCount--; }
+                    errorPanel.Visibility = System.Windows.Visibility.Collapsed;
                     SaveApiKeyData();
+
+                    if (lastPivotItemCount == 0)
+                    {
+                        showErrorPanel(0, -3);
+                    }
 
                     /*
                     // If the Main App is Running, Toast will not show
@@ -509,6 +519,42 @@ namespace Flurrystics
             ShellTile shellTile = ShellTile.ActiveTiles.FirstOrDefault(
                     tile => tile.NavigationUri.ToString().Contains(tileUri));
             return shellTile;
+        }
+
+        private int errorPivotIndex = -3;
+
+        private void showErrorPanel(int errorType, int pivotIndex)
+        {
+            if ((pivotIndex != MainPivot.SelectedIndex) && (MainPivot.Items.Count>0)) { return; } 
+
+            errorPanel.Visibility = System.Windows.Visibility.Visible;         
+            MainPivot.IsEnabled = false;
+            errorPivotIndex = pivotIndex;
+            switch (errorType)
+            {
+                case 0: // no account
+                    errorStatus.Text = "Please go to Settings and add at least one valid Flurry API key.";
+                    RetryButton.Visibility = System.Windows.Visibility.Collapsed;
+                    break;
+                case 1: // account error
+                    errorStatus.Text = "Not valid Flurry API key present or Internet connection has been lost.";
+                    RetryButton.Visibility = System.Windows.Visibility.Visible;
+                    break;
+            }
+        }
+
+        private void RetryButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Perform(() => LoadUpXML(MainPivot.SelectedIndex), 1000, 1000);
+            errorPanel.Visibility = System.Windows.Visibility.Collapsed;
+            MainPivot.IsEnabled = true;
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            errorPanel.Visibility = System.Windows.Visibility.Collapsed;
+            MainPivot.IsEnabled = true;
+            NavigationService.Navigate(new Uri("/Settings.xaml?error=yes&pivotIndex=" + errorPivotIndex, UriKind.Relative));
         }
 
     }

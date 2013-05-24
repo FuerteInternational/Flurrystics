@@ -66,10 +66,10 @@ namespace Flurrystics
             }
 
             // Show graphics profiling information while debugging.
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
+            //if (System.Diagnostics.Debugger.IsAttached)
+            //{
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = false;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = false;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -82,8 +82,8 @@ namespace Flurrystics
                 // application's PhoneApplicationService object to Disabled.
                 // Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
                 // and consume battery power when the user is not using the phone.
-                PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
-            }
+             //   PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Enabled;
+           // }
 
         }
 
@@ -93,7 +93,7 @@ namespace Flurrystics
             {
                 // The description is required. This is the string that the user
                 // will see in the background services Settings page on the device.
-                Description = "Provides background updates for Flurrysticks live tiles."
+                Description = "Provides background updates for Applytics live tiles." 
             };
             // If the agent is already registered with the system,
             // call the StopPeriodicAgent helper method. 
@@ -103,7 +103,7 @@ namespace Flurrystics
                 StopPeriodicAgent();
             }
             ScheduledActionService.Add(periodicTask);
-            Debug.WriteLine("Adding periodicTask, starting...");
+            Debug.WriteLine("Adding periodicTask, starting..."); 
             // ScheduledActionService.LaunchForTest("FlurrysticksTaskAgent", TimeSpan.FromSeconds(5));
         }
 
